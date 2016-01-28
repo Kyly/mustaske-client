@@ -4,7 +4,8 @@
   "dependencies": {
     "morgan": "~1.6.1",
     "gzippo": "~0.2.0",
-    "express": "~4.13.4"
+    "express": "~4.13.4",
+    "grunt-cli": "~0.1.13"
   },
   "repository": {},
   "devDependencies": {
