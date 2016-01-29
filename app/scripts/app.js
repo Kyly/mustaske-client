@@ -18,7 +18,12 @@ angular
     // 'ngTouch',
     'ngMaterial'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $mdThemingProvider) {
+    //$mdThemingProvider.theme('default')
+    //  .primaryPalette('light-blue')
+    //  .accentPalette('blue-gray');
+
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
