@@ -19,9 +19,14 @@ angular
     'ngMaterial'
   ])
   .config(function ($routeProvider, $mdThemingProvider) {
-    //$mdThemingProvider.theme('default')
-    //  .primaryPalette('light-blue')
-    //  .accentPalette('blue-gray');
+    var blueWhiteMap = $mdThemingProvider.extendPalette('blue', {
+      'A400': '000000'
+    });
+
+    $mdThemingProvider.definePalette('blueWhite', blueWhiteMap);
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blueWhite')
+      .accentPalette('blueWhite');
 
 
     $routeProvider
