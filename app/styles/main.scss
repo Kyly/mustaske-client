@@ -4,7 +4,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "font-awesome/scss/font-awesome.scss";
 // endbower
 
-//@import "bower_components/angular-material/angular-material.scss";
+@import "modules/angular-material.scss";
 @import "colors";
 @import "modules/layout";
 @import "modules/login-overlay";
