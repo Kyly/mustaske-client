@@ -1,4 +1,4 @@
-//(function(){
+(function() {
   'use strict';
   angular.module('mustaskeClientApp')
     .config(['$mdThemingProvider', function($mdThemingProvider) {
@@ -7,4 +7,4 @@
         .primaryPalette('grey')
         .accentPalette('orange');
     }]);
-//})();
+})();
