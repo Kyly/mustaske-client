@@ -14,12 +14,12 @@
     $routeProvider
       .when(
         '/recent-questions', {
-          templateUrl: 'views/top-questions.view.html',
+          templateUrl: 'views/recent-questions.view.html',
           controller: 'MainCtrl'
         })
       .when(
         '/top-questions', {
-          templateUrl: 'views/recent-questions.view.html',
+          templateUrl: 'views/top-questions.view.html',
           controller: 'AboutCtrl'
         })
       .when(

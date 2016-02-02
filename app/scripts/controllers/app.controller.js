@@ -5,17 +5,29 @@
 
   module.controller('AppController', ['$scope', '$location', '$log', AppController]);
 
+  var ctrl, logger;
   function AppController($scope, $location, $log)
   {
-    $scope.selectedIndex = 0;
-
-    $scope.$watch('selectedIndex', function(current, old) {
-      switch(current) {
-        case 0: $location.url("/top-questions"); break;
-        case 1: $location.url("/recent-questions"); break;
-        case 2: $location.url("/polls"); break;
-
+    logger = $log;
+    ctrl = this;
+    ctrl.selectedIndex = 0;
+    ctrl.pages = [
+      {
+        label: 'Recent Questions',
+        url: '/recent-questions'
+      },
+      {
+        label: 'Top Questions',
+        url: '/top-questions'
+      },
+      {
+        label: 'Polls',
+        url: '/polls'
       }
+    ];
+
+    $scope.$watch('ctrl.selectedIndex', function(current) {
+      $location.url(ctrl.pages[current].url);
     });
   }
 
