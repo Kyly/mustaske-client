@@ -14,19 +14,23 @@
     ctrl.pages = [
       {
         label: 'Recent Questions',
-        url: '/recent-questions'
+        url: '/recent-questions',
+        icon: 'fa fa-question-circle'
       },
       {
         label: 'Top Questions',
-        url: '/top-questions'
+        url: '/top-questions',
+        icon: 'fa fa-star'
       },
       {
         label: 'Polls',
-        url: '/polls'
+        url: '/polls',
+        icon: 'fa fa-bar-chart'
       }
     ];
 
     $scope.$watch('ctrl.selectedIndex', function(current) {
+      logger.debug('Changed location too', ctrl.pages[current].url);
       $location.url(ctrl.pages[current].url);
     });
   }

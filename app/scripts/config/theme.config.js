@@ -1,10 +1,29 @@
-(function() {
+(function ()
+{
   'use strict';
   angular.module('mustaskeClientApp')
-    .config(['$mdThemingProvider', function($mdThemingProvider) {
-      console.log('The config was run');
-      $mdThemingProvider.theme('default')
-        .primaryPalette('grey')
-        .accentPalette('orange');
-    }]);
+    .config(['$mdThemingProvider', '$mdIconProvider', Theme]);
+
+  var themingProvider, iconProvider;
+
+  function Theme($mdThemingProvider, $mdIconProvider)
+  {
+    themingProvider = $mdThemingProvider;
+    iconProvider = $mdIconProvider;
+
+    configureColors();
+    configureIcons();
+  }
+
+  function configureIcons()
+  {
+   iconProvider.fontSet('fa', 'fontawesome');
+  }
+
+  function configureColors()
+  {
+    themingProvider.theme('default')
+      .primaryPalette('grey')
+      .accentPalette('orange');
+  }
 })();
