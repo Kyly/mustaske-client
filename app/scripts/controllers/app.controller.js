@@ -26,6 +26,11 @@
         label: 'Polls',
         url: '/polls',
         icon: 'fa fa-bar-chart'
+      },
+      {
+        label: 'Settings',
+        url: '/settings',
+        icon: 'fa fa-cog'
       }
     ];
 

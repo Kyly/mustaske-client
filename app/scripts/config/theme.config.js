@@ -17,13 +17,14 @@
 
   function configureIcons()
   {
-   iconProvider.fontSet('fa', 'fontawesome');
+    iconProvider.fontSet('fa', 'fontawesome');
   }
 
   function configureColors()
   {
     themingProvider.theme('default')
-      .primaryPalette('grey')
-      .accentPalette('orange');
+      .primaryPalette('indigo')
+      .accentPalette('light-blue');
   }
+
 })();
