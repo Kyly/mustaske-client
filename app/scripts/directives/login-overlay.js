@@ -15,14 +15,28 @@
         return {
           templateUrl: 'views/login-overlay.tpl.html',
           restrict: 'E',
-          link: postLink
+          controller: OverlayController,
+          controllerAs: 'ctrl'
         };
       }
     );
 
-  function postLink()
-  {
-
+  var ctrl;
+  function OverlayController(){
+    ctrl=this;
+    ctrl.showRoom=true;
+    ctrl.overlayHide=true;
+    ctrl.toggleAlias=function(){
+      console.log('Welcome to this Function');
+      ctrl.showRoom = !(ctrl.showRoom);
+    };
+    ctrl.isLoggedIn=function(){
+      ctrl.overlayHide=false;
+    };
   }
+
+  OverlayController.prototype.toggleAlias= function() {
+    ctrl.showRoom=!(ctrl.showRoom);
+  };
 
 })();
