@@ -25,12 +25,10 @@
 .login-overlay {
   color: #FFF;
   height: 100%;
-  width: 100%;
+  //width: 100%;
   position: absolute;
   background-color: #20597F;
-  visibility: visible;
-  top: 0;
-  left: 0;
+  //visibility: visible;
   z-index: 9999;
 
   .img-login-logo {
@@ -45,4 +43,13 @@
   label {
     font-size: 1.5em;
   }
+}
+
+.login-overlay.ng-hide-add {
+  -webkit-animation: slideUpOut 2s;
+  display: block !important;
+}
+
+.login-overlay.ng-hide-remove {
+  -webkit-animation: slideDownIn 2s;
 }

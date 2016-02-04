@@ -3,10 +3,10 @@
   'use strict';
   var module = angular.module('mustaskeClientApp');
 
-  module.controller('AppController', ['$scope', '$location', '$log', AppController]);
+  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', AppController]);
 
   var ctrl, logger;
-  function AppController($scope, $location, $log)
+  function AppController($scope, $location, $log, $timeout)
   {
     logger = $log;
     ctrl = this;
@@ -36,7 +36,9 @@
 
     $scope.$watch('ctrl.selectedIndex', function(current) {
       logger.debug('Changed location too', ctrl.pages[current].url);
-      $location.url(ctrl.pages[current].url);
+      $timeout(function(){
+        $location.url(ctrl.pages[current].url);
+      });
     });
   }
 

@@ -1,6 +1,5 @@
-<div class="login-overlay container-fluid" layout="column" ng-show="ctrl.overlayHide">
-
-  <div class="text-center vcenter" layout="row" layout-margin="20" layout-align="center center">
+<div class="login-overlay animate" ng-hide="ctrl.overlayHide">
+  <div class="text-center vcenter" layout="row" layout-margin="20">
     <div>
       <div class="m-b-50">
         <div layout="row" layout-align="center" class="m-b-15">
@@ -21,8 +20,8 @@
               <input type="text" ng-model="color">
             </md-input-container>
             <div class="m-t-0">
-              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.toggleAlias()">Join</md-button>
-              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.toggleAlias()">Make</md-button>
+              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Join</md-button>
+              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Make</md-button>
             </div>
           </form>
         </div>
@@ -35,7 +34,7 @@
               <input type="text" ng-model="color">
             </md-input-container>
             <div class="m-t-0">
-              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.toggleAlias()">Cancel</md-button>
+              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Cancel</md-button>
               <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Submit</md-button>
             </div>
           </form>

@@ -22,21 +22,22 @@
     );
 
   var ctrl;
-  function OverlayController(){
-    ctrl=this;
-    ctrl.showRoom=true;
-    ctrl.overlayHide=true;
-    ctrl.toggleAlias=function(){
-      console.log('Welcome to this Function');
-      ctrl.showRoom = !(ctrl.showRoom);
-    };
-    ctrl.isLoggedIn=function(){
-      ctrl.overlayHide=false;
-    };
+
+  function OverlayController()
+  {
+    ctrl = this;
+    ctrl.showRoom = false;
+    ctrl.overlayHide = false;
   }
 
-  OverlayController.prototype.toggleAlias= function() {
-    ctrl.showRoom=!(ctrl.showRoom);
+  OverlayController.prototype.isLoggedIn = function ()
+  {
+    ctrl.overlayHide = true;
+  };
+
+  OverlayController.prototype.toggleAlias = function ()
+  {
+    ctrl.showRoom = !(ctrl.showRoom);
   };
 
 })();
