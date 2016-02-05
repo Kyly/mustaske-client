@@ -1,0 +1,14 @@
+<!doctype html> <html class="no-js"> <head> <meta charset="utf-8"> <title></title> <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/vendor.c0f1e34c.css"> <link rel="stylesheet" href="styles/main.8cd0adc2.css"> <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">-->  <body ng-app="mustaskeClientApp"> <!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]--> <!-- Add your site or application content here --> <login-overlay></login-overlay> <md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl" style="height:100vh"> <div flex style="height:100%"> <md-toolbar layout="row" flex class="md-primary" layout-padding="0"> <span class="md-title">Cse 170</span> </md-toolbar> <md-tabs md-stretch-tabs md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary" md-dynamic-height="true" md-swipe-content="true"> <md-tab ng-repeat="page in ctrl.pages" style="height:100%"> <md-tab-label><md-icon class="md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon></md-tab-label> <md-tab-body flex-fill style="height:100%"> <md-content id="content" layout="column" ng-view="" layout-padding="15" layout-margin="15" style="height: 100%"></md-content> </md-tab-body> </md-tab> </md-tabs> </div> </md-content> <!--<div class="footer">--> <!--<div class="container">--> <!--<p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>--> <!--</div>--> <!--</div>--> <!-- Google Analytics: change UA-XXXXX-X to be your site's ID --> <script>!function (A, n, g, u, l, a, r)
+  {
+    A.GoogleAnalyticsObject = l, A[l] = A[l] || function ()
+      {
+        (A[l].q = A[l].q || []).push(arguments)
+      }, A[l].l = +new Date, a = n.createElement(g),
+      r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+  }(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');</script> <script src="scripts/vendor.96425456.js"></script> <script src="scripts/scripts.23e28642.js"></script>  
