@@ -45,7 +45,6 @@
    },
    "scripts": {
      "test": "grunt test",
-     "start": "node web.js",
-     "postinstall": "grunt build"
+     "start": "node web.js"
    }
  }

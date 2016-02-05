@@ -29,15 +29,15 @@
 <md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl"
             style="height:100vh">
   <div flex style="height:100%">
-    <md-toolbar layout="row" flex class="md-primary" layout-padding="0">
-      <span class="md-title">Cse 170</span>
+    <md-toolbar layout="row" flex class="md-primary" layout-padding="1">
+      Cse 170
     </md-toolbar>
     <md-tabs md-stretch-tabs
              md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary" md-dynamic-height="true"
              md-swipe-content="true">
       <md-tab ng-repeat="page in ctrl.pages" style="height:100%">
         <md-tab-label>
-          <md-icon class="md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon>
+          <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon>
         </md-tab-label>
         <md-tab-body flex-fill style="height:100%">
           <md-content id="content" layout="column" ng-view="" layout-margin="10"></md-content>
@@ -46,7 +46,7 @@
     </md-tabs>
   </div>
 
-  <md-button class="md-fab md-accent add-question-fab" aria-label="Use Android">
+  <md-button class="md-fab md-warn md-hue-1 add-question-fab" aria-label="Use Android">
     <md-icon md-font-icon="fa fa-commenting-o"></md-icon>
   </md-button>
   <!--<md-fab-toolbar md-open="ctrl.isFabOpen" md-direction="left" class="md-fab-bottom-right">-->

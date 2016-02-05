@@ -13,12 +13,12 @@
         <div class="m-b-30"></div>
       </div>
 
-        <div ng-show="ctrl.showRoom">
+        <div>
           <p class="text-gray-lighter">Please enter the name of a room you want to join or create</p>
           <form id="login-info">
             <md-input-container class="login-input-container m-b-0 p-b-0" md-autofocus>
               <label>Room Name...</label>
-              <input type="text" ng-model="color">
+              <input type="text" class="md-accent" ng-model="color">
             </md-input-container>
             <div class="m-t-0">
               <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Join</md-button>
@@ -27,19 +27,19 @@
           </form>
         </div>
 
-        <div ng-hide="ctrl.showRoom">
-          <p class="text-gray-lighter">Please enter a name you would like to be known as</p>
-          <form id="alias-info">
-            <md-input-container class="login-input-container m-b-0 p-b-0" md-autofocus>
-              <label>User Name...</label>
-              <input type="text" ng-model="color">
-            </md-input-container>
-            <div class="m-t-0">
-              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Cancel</md-button>
-              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Submit</md-button>
-            </div>
-          </form>
-        </div>
+        <!--<div ng-hide="ctrl.showRoom">-->
+          <!--<p class="text-gray-lighter">Please enter a name you would like to be known as</p>-->
+          <!--<form id="alias-info">-->
+            <!--<md-input-container class="login-input-container m-b-0 p-b-0" md-autofocus>-->
+              <!--<label>User Name...</label>-->
+              <!--<input type="text" ng-model="color">-->
+            <!--</md-input-container>-->
+            <!--<div class="m-t-0">-->
+              <!--<md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Cancel</md-button>-->
+              <!--<md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.isLoggedIn()">Submit</md-button>-->
+            <!--</div>-->
+          <!--</form>-->
+        <!--</div>-->
 
     </div>
   </div>

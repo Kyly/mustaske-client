@@ -39,11 +39,23 @@
 
 .login-input-container {
   width: 85%;
+  font-size: 1em;
+  //
+  input[type="text"].md-input {
+    color: white;
+    border-color: inherit;
+  }
 
   label {
-    font-size: 1.5em;
+    //&.active {
+    //  color: lightgray;
+    //}
+
+    //color: $gray-lighter;
+    font-size: 1.2em;
   }
 }
+
 
 
 //.login-overlay.hide-overlay {
