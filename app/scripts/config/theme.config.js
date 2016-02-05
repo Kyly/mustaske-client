@@ -22,9 +22,15 @@
 
   function configureColors()
   {
+    var backGroundBlue = themingProvider.extendPalette('blue', {
+      '500': '20597F'
+    });
+    themingProvider.definePalette('backGround', backGroundBlue);
+
+
     themingProvider.theme('default')
-      .primaryPalette('indigo')
-      .accentPalette('light-blue');
+      .primaryPalette('backGround')
+      .accentPalette('grey');
   }
 
 })();
