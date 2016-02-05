@@ -1,29 +1,5 @@
-<md-card>
-  <md-card-content>
-    <p>Why do we need a question asking app?</p>
-  </md-card-content>
-  <md-card-actions layout="row">
-    <div flex="50">Action 2</div>
-    <div flex="50"><md-icon class="pull-right" md-font-set="fa" md-font-icon="fa-chevron-circle-down"></md-icon></div>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-content>
-    <h2>Card headline</h2>
-    <p>Why do we need a question asking app?</p>
-  </md-card-content>
-  <md-card-actions layout="row" layout-align="center">
-    <md-button>Action 1</md-button>
-    <md-button>Action 2</md-button>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-content>
-    <h2>Card headline</h2>
-    <p>Why do we need a question asking app?</p>
-  </md-card-content>
-  <md-card-actions layout="row" layout-align="center">
-    <md-button>Action 1</md-button>
-    <md-button>Action 2</md-button>
-  </md-card-actions>
-</md-card>
+<div layout="row" layout-padding="5">
+  <div flex="50"><span class="content-page-title">Recent Question</span></div>
+  <div flex="50"><span class="pull-right"><md-icon md-font-icon="fa fa-search"></md-icon></span></div>
+</div>
+<question-card x-question="question" ng-repeat="question in ctrl.questions"></question-card>

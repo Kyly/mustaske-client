@@ -15,18 +15,25 @@
       .when(
         '/recent-questions', {
           templateUrl: 'views/recent-questions.view.html',
-          controller: 'MainCtrl'
+          controller: 'RecentQuestionsController',
+          controllerAs: 'ctrl'
         })
       .when(
         '/top-questions', {
           templateUrl: 'views/top-questions.view.html',
-          controller: 'AboutCtrl'
+          controller: 'TopQuestionsController',
+          controllerAs: 'ctrl'
         })
       .when(
         '/polls', {
           templateUrl: 'views/polls.view.html',
           controller: 'AboutCtrl'
-        });
+        })
+      .when(
+      '/settings', {
+        templateUrl: 'views/settings.view.html',
+        controller: 'AboutCtrl'
+      });
   }
 
 })();

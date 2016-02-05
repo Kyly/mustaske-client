@@ -1,0 +1,19 @@
+<md-card class="question-card">
+  <md-card-content>
+    <p>{{question.getText()}}</p>
+  </md-card-content>
+  <md-card-actions layout="row">
+    <div flex="50">{{question.getVotes()}} votes</div>
+    <div flex="50" ng-click="datailToggle()">
+      <md-icon class="pull-right" md-font-icon="fa fa-chevron-circle-down"></md-icon>
+    </div>
+  </md-card-actions>
+  <md-card-footer layout="row" ng-hide="hide">
+    <div flex="50" class="text-center">
+      <md-icon md-font-icon="fa fa-user-times">&nbsp;Warn User</md-icon>
+    </div>
+    <div flex="50" class="text-center">
+      <md-icon md-font-icon="fa fa-trash-o">&nbsp;Dismiss Question</md-icon>
+    </div>
+  </md-card-footer>
+</md-card>

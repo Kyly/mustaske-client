@@ -11,6 +11,7 @@
     logger = $log;
     ctrl = this;
     ctrl.selectedIndex = 0;
+    ctrl.isFabOpen = false;
     ctrl.pages = [
       {
         label: 'Recent Questions',

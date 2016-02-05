@@ -13,15 +13,23 @@
   function QuestionCard()
   {
     return {
-      template: 'scripts/directives/question-card/question-card.tpl.html',
+      templateUrl: 'views/question-card.tpl.html',
       restrict: 'E',
       scope: {
-
+        question: '='
       },
-      link: function postLink(scope, element, attrs) {
-        element.text('this is the questionCard directive');
-      }
+      link: linkFn
     };
   }
+
+  function linkFn(scope)
+  {
+    scope.hide = true;
+    scope.datailToggle = function()
+    {
+      scope.hide = !scope.hide;
+    };
+  }
+
 
 })();

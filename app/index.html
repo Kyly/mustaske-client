@@ -25,23 +25,49 @@
 <![endif]-->
 <!-- Add your site or application content here -->
 
-<login-overlay></login-overlay >
-<md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl" style="height:100vh">
+<login-overlay></login-overlay>
+<md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl"
+            style="height:100vh">
   <div flex style="height:100%">
     <md-toolbar layout="row" flex class="md-primary" layout-padding="0">
       <span class="md-title">Cse 170</span>
     </md-toolbar>
     <md-tabs md-stretch-tabs
-             md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary"md-dynamic-height="true" md-swipe-content="true">
+             md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary" md-dynamic-height="true"
+             md-swipe-content="true">
       <md-tab ng-repeat="page in ctrl.pages" style="height:100%">
-        <md-tab-label><md-icon class="md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon></md-tab-label>
+        <md-tab-label>
+          <md-icon class="md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon>
+        </md-tab-label>
         <md-tab-body flex-fill style="height:100%">
-          <md-content id="content" layout="column" ng-view="" layout-padding="15" layout-margin="15" style="height: 100%;"></md-content>
+          <md-content id="content" layout="column" ng-view="" layout-margin="10"></md-content>
         </md-tab-body>
       </md-tab>
     </md-tabs>
   </div>
+
+  <md-button class="md-fab md-accent add-question-fab" aria-label="Use Android">
+    <md-icon md-font-icon="fa fa-commenting-o"></md-icon>
+  </md-button>
+  <!--<md-fab-toolbar md-open="ctrl.isFabOpen" md-direction="left" class="md-fab-bottom-right">-->
+    <!--<md-fab-trigger class="align-with-text">-->
+      <!--<md-button aria-label="menu" class="md-fab md-primary">-->
+        <!--<md-icon md-font-icon="fa fa-commenting-o"></md-icon>-->
+        <!--&lt;!&ndash;<md-icon md-svg-src="img/icons/menu.svg"></md-icon>&ndash;&gt;-->
+      <!--</md-button>-->
+    <!--</md-fab-trigger>-->
+
+    <!--<md-fab-actions>-->
+      <!--<md-button aria-label="Add User">-->
+        <!--<md-icon md-font-icon="fa fa-commenting-o"></md-icon>-->
+      <!--</md-button>-->
+      <!--<md-button aria-label="Add Group">-->
+        <!--<md-icon md-font-icon="fa fa-commenting-o"></md-icon>-->
+      <!--</md-button>-->
+    <!--</md-fab-actions>-->
+  <!--</md-fab-toolbar>-->
 </md-content>
+
 
 <!--<div class="footer">-->
 <!--<div class="container">-->
@@ -90,8 +116,12 @@
 <script src="scripts/controllers/app.controller.js"></script>
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/about.js"></script>
-<script src="scripts/directives/login-overlay.js"></script>
-<script src="scripts/directives/question-card/question-card.js"></script>
+<script src="scripts/directives/login-overlay.directive.js"></script>
+<script src="scripts/directives/question-card.directive.js"></script>
+<script src="scripts/services/socket.service.js"></script>
+<script src="scripts/factory/question.factory.js"></script>
+<script src="scripts/controllers/recent-questions.controller.js"></script>
+<script src="scripts/controllers/top-questions.controller.js"></script>
 <!-- endbuild -->
 </body>
 </html>
