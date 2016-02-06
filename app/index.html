@@ -26,26 +26,22 @@
 <!-- Add your site or application content here -->
 
 <login-overlay></login-overlay>
-<md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl"
-            style="height:100vh">
-  <div flex style="height:100%">
-    <md-toolbar layout="row" flex class="md-primary" layout-padding="1">
-      Cse 170
-    </md-toolbar>
-    <md-tabs md-stretch-tabs
-             md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary" md-dynamic-height="true"
+<md-toolbar layout="row" flex class="md-primary" layout-padding="1">
+  Cse 170
+</md-toolbar>
+<md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl" flex layout-fill>
+    <md-tabs md-stretch-tabs layout="column" flex layout-fill
+             md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary"
              md-swipe-content="true">
-      <md-tab ng-repeat="page in ctrl.pages" style="height:100%">
+      <md-tab ng-repeat="page in ctrl.pages">
         <md-tab-label>
           <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon>
         </md-tab-label>
-        <md-tab-body flex-fill style="height:100%">
-          <md-content id="content" layout="column" ng-view="" layout-margin="10"></md-content>
+        <md-tab-body flex layout-fill ng-view="" layout-margin="10">
+          <md-content id="content" ng-view="" flex layout-fill></md-content>
         </md-tab-body>
       </md-tab>
     </md-tabs>
-  </div>
-
   <md-button class="md-fab md-warn md-hue-1 add-question-fab" aria-label="Use Android">
     <md-icon md-font-icon="fa fa-commenting-o"></md-icon>
   </md-button>
