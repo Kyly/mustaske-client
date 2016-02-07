@@ -10,11 +10,12 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .service('SocketService', ['QuestionDef', SocketService]);
+    .service('SocketService', ['QuestionDef', 'socketFactory', SocketService]);
 
-  var ctrl, Question;
-  function SocketService(QuestionDef)
+  var ctrl, Question, socket;
+  function SocketService(QuestionDef, socketFactory)
   {
+
     Question = QuestionDef;
     ctrl = this;
     ctrl.questions = [
@@ -22,6 +23,13 @@
       new Question({ text: 'I\'m not a popular question?', votes: 3}),
       new Question({ text: 'How do you do things?', votes: 50})
     ];
+
+    initSocket(socketFactory);
+  }
+
+  function initSocket(socketFactory)
+  {
+
   }
 
 
@@ -39,4 +47,10 @@
 
     return ctrl.topQuestions;
   };
+
+  SocketService.prototype.emitNewQuestion = function(question)
+  {
+    /* TODO Tie into actual socket */
+  };
+
 })();

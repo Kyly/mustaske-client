@@ -17,7 +17,10 @@
       'ngRoute',
       'ngSanitize',
       // 'ngTouch',
-      'ngMaterial'
+      'ngMaterial',
+      'ngMessages',
+      'googlechart',
+      'btford.socket-io'
     ]);
 
 })();

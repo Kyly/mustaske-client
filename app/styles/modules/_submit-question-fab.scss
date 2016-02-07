@@ -1,0 +1,8 @@
+$fab-die: 45px;
+.md-fab.md-button.submit-question-fab {
+  line-height: $fab-die;
+  width: $fab-die;
+  height: $fab-die;
+  font-size: 1.4em;
+  //transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+}
