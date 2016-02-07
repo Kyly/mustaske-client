@@ -8,9 +8,9 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
-  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css"/>
+  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css"/>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -29,48 +29,22 @@
 <md-toolbar layout="row" flex class="md-primary" layout-padding="1">
   Cse 170
 </md-toolbar>
-<md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl" flex layout-fill>
-    <md-tabs md-stretch-tabs layout="column" flex layout-fill
-             md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary"
-             md-swipe-content="true">
-      <md-tab ng-repeat="page in ctrl.pages">
-        <md-tab-label>
-          <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon>
-        </md-tab-label>
-        <md-tab-body flex layout-fill ng-view="" layout-margin="10">
-          <md-content id="content" ng-view="" flex layout-fill></md-content>
-        </md-tab-body>
-      </md-tab>
-    </md-tabs>
-  <md-button class="md-fab md-warn md-hue-1 add-question-fab" aria-label="Use Android">
-    <md-icon md-font-icon="fa fa-commenting-o"></md-icon>
-  </md-button>
-  <!--<md-fab-toolbar md-open="ctrl.isFabOpen" md-direction="left" class="md-fab-bottom-right">-->
-    <!--<md-fab-trigger class="align-with-text">-->
-      <!--<md-button aria-label="menu" class="md-fab md-primary">-->
-        <!--<md-icon md-font-icon="fa fa-commenting-o"></md-icon>-->
-        <!--&lt;!&ndash;<md-icon md-svg-src="img/icons/menu.svg"></md-icon>&ndash;&gt;-->
-      <!--</md-button>-->
-    <!--</md-fab-trigger>-->
-
-    <!--<md-fab-actions>-->
-      <!--<md-button aria-label="Add User">-->
-        <!--<md-icon md-font-icon="fa fa-commenting-o"></md-icon>-->
-      <!--</md-button>-->
-      <!--<md-button aria-label="Add Group">-->
-        <!--<md-icon md-font-icon="fa fa-commenting-o"></md-icon>-->
-      <!--</md-button>-->
-    <!--</md-fab-actions>-->
-  <!--</md-fab-toolbar>-->
+<md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as ctrl"
+            flex layout-fill>
+  <md-tabs md-stretch-tabs layout="column" flex layout-fill
+           md-selected="ctrl.selectedIndex" class="tabs-main-navigation md-primary"
+           md-swipe-content="true">
+    <md-tab ng-repeat="page in ctrl.pages">
+      <md-tab-label>
+        <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon>
+      </md-tab-label>
+      <md-tab-body flex layout-fill ng-view="" layout-margin="10">
+        <md-content id="content" ng-view="" flex layout-fill></md-content>
+      </md-tab-body>
+    </md-tab>
+  </md-tabs>
+  <question-input-fab></question-input-fab>
 </md-content>
-
-
-<!--<div class="footer">-->
-<!--<div class="container">-->
-<!--<p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>-->
-<!--</div>-->
-<!--</div>-->
-
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 <script>
@@ -114,6 +88,7 @@
 <script src="scripts/controllers/about.js"></script>
 <script src="scripts/directives/login-overlay.directive.js"></script>
 <script src="scripts/directives/question-card.directive.js"></script>
+<script src="scripts/directives/question-input-fab.directive.js"></script>
 <script src="scripts/services/socket.service.js"></script>
 <script src="scripts/factory/question.factory.js"></script>
 <script src="scripts/controllers/recent-questions.controller.js"></script>
