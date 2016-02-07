@@ -19,6 +19,7 @@
       // 'ngTouch',
       'ngMaterial',
       'ngMessages',
+      'googlechart',
       'btford.socket-io'
     ]);
 
