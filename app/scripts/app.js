@@ -19,7 +19,7 @@
       // 'ngTouch',
       'ngMaterial',
       'ngMessages',
-      googlechart
+      'googlechart'
     ]);
 
 })();
