@@ -34,7 +34,7 @@
     {
       event.preventDefault();
     }
-  }
+  };
 
 
 })();

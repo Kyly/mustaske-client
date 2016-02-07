@@ -34,8 +34,8 @@
           controller: 'QuestionInputController',
           controllerAs: 'ctrl',
           clickOutsideToClose: false
-        }).then(function(result) {logger.debug(result)});
-    }
+        }).then(function(result) {logger.debug(result);});
+    };
   }
 
 

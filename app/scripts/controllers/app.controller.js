@@ -36,7 +36,7 @@
     ];
 
     $scope.$watch('appCtrl.selectedIndex', function(current) {
-      logger.debug("Current: ", current);
+      logger.debug('Current: ', current);
       logger.debug('Changed location too', ctrl.pages[current].url);
       $timeout(function(){
         $location.url(ctrl.pages[current].url);
