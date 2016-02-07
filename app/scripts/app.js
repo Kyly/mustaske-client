@@ -17,7 +17,8 @@
       'ngRoute',
       'ngSanitize',
       // 'ngTouch',
-      'ngMaterial'
+      'ngMaterial',
+      'ngMessages'
     ]);
 
 })();

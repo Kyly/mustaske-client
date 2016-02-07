@@ -38,4 +38,10 @@
 
     return ctrl.topQuestions;
   };
+
+  SocketService.prototype.emitNewQuestion = function(question)
+  {
+    /* TODO Tie into actual socket */
+  };
+
 })();
