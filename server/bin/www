@@ -1,0 +1,166 @@
+#!/usr/bin/env node
+
+/**
+ * TODO file header...
+ */
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('supapp:server');
+var http = require('http');
+var Controller = require('../modules/controller');
+//controller object that will handle calls to Business Layer
+var controller = new Controller();
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Set up io and io actions. IO actions must match those outlined in the
+ * IO document. Functions that are called from an 'on' event, reside in the
+ * modules/controller.js file and must be named the same as the IO action,
+ * but in camelCase. Also, the first parameter in all these functions must be
+ * 'socket' which is a reference to the socket object that made the 'emit'.
+ */
+
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function (socket) {
+  // controller.initialConnect(socket);
+
+  socket.on('disconnect', function() {
+    controller.disconnect(socket);
+  });
+
+  socket.on('join room', function(roomId) {
+    controller.joinRoom(io, socket, roomId);
+  });
+
+  socket.on('create room', function(roomName) {
+    controller.createRoom(io, socket, roomName);
+  });
+
+  socket.on('leave room', function(roomId) {
+    controller.leaveRoom(io, socket, roomId);
+  });
+
+  socket.on('new question', function(question) {
+    controller.newQuestion(io, socket, question);
+  });
+
+  socket.on('upvote question', function(questionId) {
+    controller.upvoteQuestion(io, socket, questionId);
+  });
+
+  socket.on('downvote question', function(questionId) {
+    controller.downvoteQuestion(io, socket, questionId);
+  });
+
+  socket.on('dismiss question', function(questionId) {
+    controller.dismissQuestion(io, socket, questionId);
+  });
+
+  socket.on('top questions', function(question, n) {
+    controller.topQuestions(io, socket, n);
+  });
+
+  socket.on('all questions', function() {
+    controller.allQuestions(socket);
+  });
+
+  socket.on('warn user', function(questionInfo) {
+    controller.warnUser(io, socket, questionInfo);
+  });
+
+  socket.on('ban user', function(questionInfo) {
+    controller.banUser(io, socket, questionInfo);
+  });
+
+  socket.on('vote poll', function(voteInfo) {
+    controller.votePoll(io, socket, voteInfo);
+  });
+
+  socket.on('set active poll', function(activeInfo) {
+    controller.setActivePoll(io, socket, activeInfo);
+  });
+  
+});
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
