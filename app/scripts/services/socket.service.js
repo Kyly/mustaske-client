@@ -1,13 +1,14 @@
+/**
+ * @ngdoc service
+ * @name mustaskeClientApp.socket
+ * @description
+ * # socket
+ * Service in the mustaskeClientApp.
+ */
+
 (function(){
   'use strict';
 
-  /**
-   * @ngdoc service
-   * @name mustaskeClientApp.socket
-   * @description
-   * # socket
-   * Service in the mustaskeClientApp.
-   */
   angular.module('mustaskeClientApp')
     .service('SocketService', ['QuestionDef', SocketService]);
 
