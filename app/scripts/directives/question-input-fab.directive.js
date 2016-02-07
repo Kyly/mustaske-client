@@ -1,17 +1,21 @@
-(function(){
+/**
+ * @ngdoc directive
+ * @name mustaskeClientApp.directive:questionInputFab
+ * @description
+ * # questionInputFab
+ */
+(function ()
+{
   'use strict';
 
-  /**
-   * @ngdoc directive
-   * @name mustaskeClientApp.directive:questionCard
-   * @description
-   * # questionCard
-   */
   angular.module('mustaskeClientApp')
-    .directive('questionInputFab', [QuestionCard]);
+    .directive('questionInputFab', ['$log', '$mdBottomSheet', QuestionInputFab]);
 
-  function QuestionCard()
+  var mdBottomSheet, logger;
+  function QuestionInputFab($log, $mdBottomSheet)
   {
+    logger = $log;
+    mdBottomSheet = $mdBottomSheet;
     return {
       templateUrl: 'views/question-input-fab.tpl.html',
       restrict: 'E',
@@ -22,6 +26,16 @@
 
   function linkFn(scope)
   {
+    scope.openOpenBottomSheet = function ()
+    {
+      mdBottomSheet.show(
+        {
+          templateUrl: 'views/question-input-bottom-sheet.tpl.html',
+          controller: 'QuestionInputController',
+          controllerAs: 'ctrl',
+          clickOutsideToClose: false
+        }).then(function(result) {logger.debug(result)});
+    }
   }
 
 
