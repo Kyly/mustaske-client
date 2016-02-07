@@ -14,8 +14,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-console.log("" + __dirname + "/../dist");
-app.use(gzippo.staticGzip("" + __dirname + "/../dist"));
+if (app.get('env') === 'development') {
+  app.use('/tmp', gzippo.staticGzip(__dirname + '/../.tmp'));
+    app.use(
+      '/bower_components',
+      gzippo.staticGzip(__dirname + '/../bower_components')
+    );
+
+    app.use(
+      '/styles',
+      gzippo.staticGzip(__dirname + '/../.tmp/styles')
+    );
+
+    app.use('/', gzippo.staticGzip(__dirname + '/../app'));
+
+} else {
+  app.use(gzippo.staticGzip("" + __dirname + "/../dist"));
+}
 
 app.use('/', routes);
 // app.use('/users', users);

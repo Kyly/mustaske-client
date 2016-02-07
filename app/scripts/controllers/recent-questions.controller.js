@@ -9,17 +9,23 @@
    * Controller of the mustaskeClientApp
    */
   angular.module('mustaskeClientApp')
-    .controller('RecentQuestionsController', ['$log', 'SocketService', RecentQuestionsController]);
+    .controller('RecentQuestionsController', ['$log', 'SocketService', 'Socket', RecentQuestionsController]);
 
-  var ctrl, socketService, logger;
-  function RecentQuestionsController($log, SocketService)
+  var ctrl, socketService, logger, socket;
+  function RecentQuestionsController($log, SocketService, Socket)
   {
+    logger = $log;
     ctrl = this;
     ctrl.topIndex = 0;
-    logger = $log;
     socketService = SocketService;
     ctrl.questions = socketService.getRecentQuestions();
     logger.debug('Questions: ', ctrl.questions);
+
+    initSockets();
+  }
+
+  function initSockets()
+  {
   }
 
 
