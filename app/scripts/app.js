@@ -18,7 +18,8 @@
       'ngSanitize',
       // 'ngTouch',
       'ngMaterial',
-      'ngMessages'
+      'ngMessages',
+      googlechart
     ]);
 
 })();
