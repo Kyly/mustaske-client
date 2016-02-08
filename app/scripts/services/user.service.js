@@ -22,7 +22,12 @@
     ctrl = this;
     user = {};
     room = {};
-    user.type = 'audience';
+    ctrl.types = {
+      AUDIENCE: 'audience',
+      OWNER: 'owner'
+    };
+
+    user.type = ctrl.types.AUDIENCE;
   }
 
   UserService.prototype.setRoomData = function (data)

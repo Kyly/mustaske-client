@@ -1,24 +1,24 @@
+/**
+ * @ngdoc function
+ * @name mustaskeClientApp.controller:RecentQuesitonsController
+ * @description
+ * # RecentQuesitonsController
+ * Controller of the mustaskeClientApp
+ */
 (function(){
   'use strict';
 
-  /**
-   * @ngdoc function
-   * @name mustaskeClientApp.controller:RecentQuesitonsControllerCtrl
-   * @description
-   * # RecentQuesitonsControllerCtrl
-   * Controller of the mustaskeClientApp
-   */
   angular.module('mustaskeClientApp')
-    .controller('RecentQuestionsController', ['$log', 'SocketService', 'Socket', RecentQuestionsController]);
+    .controller('RecentQuestionsController', ['$log', 'RoomService', RecentQuestionsController]);
 
-  var ctrl, socketService, logger, socket;
-  function RecentQuestionsController($log, SocketService, Socket)
+  var ctrl, roomService, logger;
+  function RecentQuestionsController($log, RoomService)
   {
     logger = $log;
     ctrl = this;
     ctrl.topIndex = 0;
-    socketService = SocketService;
-    //ctrl.questions = socketService.getRecentQuestions();
+    roomService = RoomService;
+    ctrl.questions = roomService.getQuestions();
     logger.debug('Questions: ', ctrl.questions);
   }
 

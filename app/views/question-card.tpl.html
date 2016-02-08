@@ -1,9 +1,8 @@
-<md-card class="question-card">
-  <md-card-content>
-    <p>{{question.getText()}}</p>
+<md-card class="question-card" id="{{question_id}}">
+  <md-card-content ng-bind-html="question.question_text">
   </md-card-content>
   <md-card-actions layout="row">
-    <div flex="50">{{question.getVotes()}} votes</div>
+    <div flex="50">{{question.votes || 0}} votes</div>
     <div flex="50" ng-click="datailToggle()">
       <md-icon class="pull-right" md-font-icon="fa fa-chevron-circle-down"></md-icon>
     </div>

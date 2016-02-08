@@ -10,16 +10,18 @@
 {
   'use strict';
   var module = angular.module('mustaskeClientApp');
-  module.controller('OverlayController', ['$log', '$rootScope', 'UserService', 'Socket', 'SocketService', OverlayController]);
+  module.controller(
+    'OverlayController',
+    ['$log', '$rootScope', 'UserService', 'SocketService', 'RoomService', OverlayController]);
 
-  var ctrl, logger, userService, socket, socketService, rootScope;
+  var ctrl, logger, userService, socketService, rootScope, roomService;
 
-  function OverlayController($log, $rootScope, UserService, Socket, SocketService)
+  function OverlayController($log, $rootScope, UserService, SocketService, RoomService)
   {
-    socket = Socket;
     rootScope = $rootScope;
     socketService = SocketService;
     userService = UserService;
+    roomService = RoomService;
     logger = $log;
 
     ctrl = this;
@@ -30,17 +32,40 @@
 
   OverlayController.prototype.joinRoom = function ()
   {
-
+    socketService.joinRoom(ctrl.roomName).then(joinRoomSuccess, joinRoomFailure);
   };
+
+  function joinRoomFailure(data)
+  {
+    logger.debug('Failed to join room: ', data);
+  }
+
+  function joinRoomSuccess(data)
+  {
+    userService.setRoomData(data);
+    roomService.setRoomData(data);
+
+    logger.debug(userService.getType());
+    logger.debug(userService.getRoomName());
+    rootScope.roomName = userService.getRoomName();
+    ctrl.overlayHide = true;
+  }
 
   OverlayController.prototype.createRoom = function ()
   {
-    socketService.createRoom(ctrl.roomName).then(createRoomSuccess);
+    socketService.createRoom(ctrl.roomName).then(createRoomSuccess, createRoomFailure);
   };
+
+  function createRoomFailure(data)
+  {
+    logger.debug('Failed to join room: ', data);
+  }
 
   function createRoomSuccess(data)
   {
     userService.setRoomData(data);
+    roomService.setRoomData(data);
+
     userService.setUserType('owner');
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());

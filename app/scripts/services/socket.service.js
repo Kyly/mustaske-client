@@ -22,6 +22,12 @@
     Q = $q;
 
     ctrl = this;
+
+    ctrl.events = {
+      JOIN_ROOM: 'join room',
+      CREATE_ROOM: 'create room',
+      NEW_QUESTION: 'new question'
+    }
   }
 
   /**
@@ -40,7 +46,8 @@
   SocketService.prototype.joinRoom = function (roomId)
   {
     logger.debug('SocketService#joinRoom:roomId:', roomId);
-    socket.emit('join room', roomId);
+    socket.emit(ctrl.events.JOIN_ROOM, roomId);
+    return response(ctrl.events.JOIN_ROOM);
   };
 
   /**
@@ -58,8 +65,8 @@
   SocketService.prototype.createRoom = function (roomName)
   {
     logger.debug('SocketService#createRoom:roomName:', roomName);
-    socket.emit('create room', roomName);
-    return response('create room');
+    socket.emit(ctrl.events.CREATE_ROOM, roomName);
+    return response(ctrl.events.CREATE_ROOM);
   };
 
   function response(event)
@@ -68,7 +75,7 @@
     socket.on(
       event, function (data)
       {
-        logger.debug('SocketService#createRoom:response', data);
+        logger.debug('SocketService:response', event, data);
         if (data)
         {
           deferred.resolve(data);
@@ -83,9 +90,20 @@
     return deferred.promise;
   }
 
-  SocketService.prototype.newQuestion = function ()
+  /**
+   * @name newQuestion
+   * @description This is called when the user decides to post a new question.
+   * @param {Object} question {room_id: string, question_text: string }
+   * @return {Object} question
+   * @example false if it fails, data = {
+   *    question_id : string,
+   *    question_text : string,
+   * }
+   */
+  SocketService.prototype.newQuestion = function (question)
   {
-
+    logger.debug('SocketService#newQuestion:question:', question);
+    socket.emit(ctrl.events.NEW_QUESTION, question);
   };
 
   SocketService.prototype.upVoteQuesiton = function ()
