@@ -10,13 +10,15 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .service('UserService', [UserService]);
+    .service('UserService', ['$log', UserService]);
 
-  var ctrl, user;
-  function UserService()
+  var ctrl, user, logger;
+  function UserService($log)
   {
     ctrl = this;
     user = {};
+    user.type = 'audience';
+    logger = $log;
   }
 
   UserService.prototype.setUser = function(newUser)
