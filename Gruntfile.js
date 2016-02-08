@@ -79,7 +79,7 @@ module.exports = function (grunt)
         },
         dev: {
           options: {
-            script: '<%= yeoman.app %>/server/bin/www',
+            script: '<%= yeoman.app %>/../server/bin/www',
             'node_env': 'development'
           }
         }
@@ -483,13 +483,25 @@ module.exports = function (grunt)
     });
 
   grunt.registerTask(
+    'eserve', 'Compile then start a connect web server', function (target)
+    {
+      grunt.task.run(
+        [
+          'clean:server',
+          'wiredep',
+          'concurrent:server',
+          'autoprefixer:server',
+          'express:dev',
+          'watch'
+        ]);
+    });
+
+  grunt.registerTask(
     'server', 'DEPRECATED TASK. Use the "serve" task instead', function (target)
     {
       grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
       grunt.task.run(['serve:' + target]);
     });
-
-  grunt.registerTask('expserve', [ 'express:dev', 'watch' ]);
 
   grunt.registerTask(
     'test', [
