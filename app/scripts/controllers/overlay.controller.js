@@ -1,62 +1,62 @@
+/**
+ * @ngdoc function
+ * @name mustaskeClientApp.controller:OverlayController
+ * @description
+ * # OverlayController
+ * Controller of the mustaskeClientApp.
+ * Handles create/join from login overlay.
+ */
 (function ()
 {
   'use strict';
   var module = angular.module('mustaskeClientApp');
-  module.controller('OverlayController', ['$log', 'UserService', OverlayController]);
+  module.controller('OverlayController', ['$log', '$rootScope', 'UserService', 'Socket', 'SocketService', OverlayController]);
 
-  var ctrl, logger, userService;
+  var ctrl, logger, userService, socket, socketService, rootScope;
 
-  function OverlayController($log, UserService)
+  function OverlayController($log, $rootScope, UserService, Socket, SocketService)
   {
+    socket = Socket;
+    rootScope = $rootScope;
+    socketService = SocketService;
+    userService = UserService;
+    logger = $log;
+
     ctrl = this;
     ctrl.showRoom = false;
     ctrl.overlayHide = false;
     ctrl.roomName = '';
-    userService = UserService;
-    logger = $log;
   }
 
-  OverlayController.prototype.joinRoom = function()
+  OverlayController.prototype.joinRoom = function ()
   {
-    userService.setRoomName(ctrl.roomName);
-    ctrl.overlayHide = true;
 
-    logger.debug(userService.getType());
-    logger.debug(userService.getRoomName());
   };
 
-  OverlayController.prototype.createRoom = function()
+  OverlayController.prototype.createRoom = function ()
   {
-    userService.setRoomName(ctrl.roomName);
+    socketService.createRoom(ctrl.roomName).then(createRoomSuccess);
+  };
+
+  function createRoomSuccess(data)
+  {
+    userService.setRoomData(data);
     userService.setUserType('owner');
-    ctrl.overlayHide = true;
-
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
-  };
+    rootScope.roomName = userService.getRoomName();
+    ctrl.overlayHide = true;
+  }
 
-  OverlayController.prototype.toggleAlias = function()
+  OverlayController.prototype.toggleAlias = function ()
   {
     ctrl.showRoom = !(ctrl.showRoom);
   };
 
-  function broadcastRoomName($rootScope)
-  {
-    $rootScope.$broadcast('roomNameSet', userService.setRoomName());
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
+  //function broadcastRoomName()
+  //{
+  //  rootScope.$broadcast('room name', userService.getRoomName());
+  //}
 
 
 })();

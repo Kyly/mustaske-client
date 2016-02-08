@@ -1,33 +1,23 @@
+/**
+ * @ngdoc directive
+ * @name mustaskeClientApp.directive:topbar
+ * @description
+ * # topbar
+ */
 (function ()
 {
   'use strict';
-
-  /**
-   * @ngdoc directive
-   * @name mustaskeClientApp.directive:loginOverlay
-   * @description
-   * # loginOverlay
-   */
   angular.module('mustaskeClientApp')
     .directive(
-      'topbar', ['$log', 'UserService', Topbar]);
+      'topbar', [Topbar]);
 
-  var logger, userService;
-
-  function Topbar($log, UserService)
+  function Topbar()
   {
-      logger = $log;
-      userService = UserService;
-
-      return {
-        templateUrl: 'views/topbar.tpl.html',
-        restrict: 'E',
-        link: linkFn
-      };
+    return {
+      templateUrl: 'views/topbar.tpl.html',
+      restrict: 'E'
+    };
   }
 
-  function linkFn($rootScope){
-    $rootScope.$on('roomNameSet');
-  }
 })();
 

@@ -3,14 +3,14 @@
   'use strict';
   var module = angular.module('mustaskeClientApp');
 
-  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', 'Socket', AppController]);
+  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', 'Socket', 'UserService', AppController]);
 
   var ctrl, logger, socket;
   function AppController($scope, $location, $log, $timeout, Socket)
   {
     socket = Socket;
-    createRoom();
     logger = $log;
+
     ctrl = this;
     ctrl.selectedIndex = 0;
     ctrl.isFabOpen = false;
@@ -43,14 +43,6 @@
       $timeout(function(){
         $location.url(ctrl.pages[current].url);
       });
-    });
-  }
-
-  function createRoom()
-  {
-    socket.emit('create room', 'Team Fuck Yeah');
-    socket.on('create room',function(data){
-      logger.debug('Room Data', data);
     });
   }
 

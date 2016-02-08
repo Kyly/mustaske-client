@@ -18,14 +18,8 @@
     ctrl = this;
     ctrl.topIndex = 0;
     socketService = SocketService;
-    ctrl.questions = socketService.getRecentQuestions();
+    //ctrl.questions = socketService.getRecentQuestions();
     logger.debug('Questions: ', ctrl.questions);
-
-    initSockets();
-  }
-
-  function initSockets()
-  {
   }
 
 

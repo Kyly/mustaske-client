@@ -10,6 +10,8 @@
 
   'use strict';
 
+  /* jshint ignore:start */ /* This code confuses the linter :| */
+
   angular.module('mustaskeClientApp')
     .factory('Socket', ['$log', 'socketFactory', Socket]);
 
@@ -19,17 +21,18 @@
   {
     logger = $log;
     var ioSocket = io.connect();
-
     logger.debug('check 1', ioSocket.connected);
+
     ioSocket.on('connect', function() {
       logger.debug('check 2', ioSocket.connected);
     });
-
     return socketFactory(
       {
         ioSocket: ioSocket
       }
     );
+
   }
+  /* jshint ignore:end */
 
 })();
