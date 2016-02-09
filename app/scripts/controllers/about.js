@@ -1,74 +1,80 @@
 (function ()
 {
   'use strict';
+  var module = angular.module('mustaskeClientApp');
 
-  /**
-   * @ngdoc function
-   * @name mustaskeClientApp.controller:AboutCtrl
-   * @description
-   * # AboutCtrl
-   * Controller of the mustaskeClientApp
-   */
-
-  angular.module('mustaskeClientApp')
-    .controller('AboutCtrl', ['UserService', AboutCtrl]);
-  var ctrl, userService;
-
-  function AboutCtrl(UserService)
+  module.controller('AboutController', ['$interval','$scope', AboutController]);
+  var ctrl, interval,scope;
+  function AboutController($interval,$scope)
   {
+    interval=$interval;
+    scope= $scope;
     ctrl = this;
-    ctrl.hide = false;
-    //get buttons for polls
-    ctrl.answer = 'A';
+    ctrl.isOwner=true;
+    ctrl.buttons=['A','B','C','D','E'];
+    ctrl.answer;
+    ctrl.counter=0;
+    ctrl.isPollStarted=false;
+    generateChart();
+  }
 
-    //get owner for ng-if
-    userService = UserService;
-    ctrl.isOwner = userService.isRoomOwner();
+  AboutController.prototype.setAnswer=function(button){
+    this.answer=button;
+    console.log(button);
+  };
 
-    //the charts existing part
+  function generateChart(){
     ctrl.chartObject = {};
-    ctrl.chartObject.type = 'ColumnChart';
-    ctrl.chartObject.data = {
-      'cols': [
-        {id: 't', label: '', type: 'string'},
-        {id: 's', label: '', type: 'number'}
-      ], 'rows': [
-        {
-          c: [
-            {v: 'A'},
-            {v: 3},
-          ]
-        },
-        {
-          c: [
-            {v: 'B'},
-            {v: 1},
-          ]
-        },
-        {
-          c: [
-            {v: 'C'},
-            {v: 2},
-          ]
-        },
-        {
-          c: [
-            {v: 'D'},
-            {v: 2},
-          ]
-        },
-        {
-          c: [
-            {v: 'E'},
-            {v: 2},
-          ]
-        }
-      ]
-    };
+
+    ctrl.chartObject.type = "ColumnChart";
+
+    ctrl.answerB = [
+      {v: "B"},
+      {v: 3},
+    ];
+
+    ctrl.chartObject.data = {"cols": [
+      {id: "t", label: "Answer", type: "string"},
+      {id: "s", label: "Students", type: "number"}
+    ], "rows": [
+      {c: [
+        {v: "A"},
+        {v: 3},
+      ]},
+      {c: ctrl.answerB},
+      {c: [
+        {v: "C"},
+        {v: 1},
+      ]},
+      {c: [
+        {v: "D"},
+        {v: 2},
+      ]},
+      {c: [
+        {v: "E"},
+        {v: 2},
+      ]}
+    ]};
+
     ctrl.chartObject.options = {
       'title': 'Poll Results'
     };
-  }
 
+
+  };
+
+  AboutController.prototype.startPoll=function(){
+    var myThis=this;
+    this.isPollStarted=true;
+    interval(function () {
+      myThis.counter++;
+      //console.log('hello');
+    },1000)
+
+  };
+  AboutController.prototype.stopPoll=function(){
+    console.log('called');
+    this.isPollStarted=false;
+  };
 
 })();
