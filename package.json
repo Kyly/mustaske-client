@@ -22,12 +22,11 @@
     "jquery": "~2.1.4",
     "readable-id": "0.0.2",
     "marked": "~0.3.3",
-    "human-readable-ids": "~1.0.1"
+    "human-readable-ids": "~1.0.1",
+    "grunt-cli": "~0.1.13",
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
     "grunt-autoprefixer": "^2.0.0",
-    "grunt-cli": "~0.1.13",
     "grunt-concurrent": "^1.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-compass": "^1.0.4",
