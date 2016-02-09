@@ -1,7 +1,26 @@
 <md-card class="question-card" id="{{question_id}}">
   <md-card-content ng-bind-html="question.question_text">
   </md-card-content>
-  <md-card-actions layout="row">
+  <md-card-actions ng-if="!isRoomOwner" layout="row">
+    <div flex="60">
+      <div layout="row">
+        <div flex layout-align="center center" layout="column">
+          <md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-o-up"></md-icon>
+        </div>
+        <div flex="auto" layout-align="center center" class="md-body-2" layout="column">
+          <div layout="row">
+            <span class="m-r-5"
+              ng-class="{'md-accent hue-2': (!question.votes || question.votes >= 0), 'md-warn': (question.votes < 0)}">{{question.votes || 0}}</span>
+            <span class="md-accent"> votes</span>
+          </div>
+        </div>
+        <div flex layout-align="center center" layout="column">
+          <md-icon md-font-icon="fa fa-thumbs-o-down" class="page-tab-icon"></md-icon>
+        </div>
+      </div>
+    </div>
+  </md-card-actions>
+  <md-card-actions ng-if="isRoomOwner" layout="row">
     <div flex="50">{{question.votes || 0}} votes</div>
     <div flex="50" ng-click="datailToggle()">
       <md-icon class="pull-right" md-font-icon="fa fa-chevron-circle-down"></md-icon>

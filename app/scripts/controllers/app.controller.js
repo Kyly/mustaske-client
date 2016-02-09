@@ -42,7 +42,7 @@
       logger.debug('Changed location too', ctrl.pages[current].url);
       $timeout(function(){
         $location.url(ctrl.pages[current].url);
-      }, 1000);
+      });
     });
   }
 

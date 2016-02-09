@@ -5,20 +5,24 @@
    * @ngdoc function
    * @name mustaskeClientApp.controller:RecentQuesitonsControllerCtrl
    * @description
-   * # TopQuestionsController
+   * # TopQuestionsControllere
    * Controller of the mustaskeClientApp
    */
   angular.module('mustaskeClientApp')
-    .controller('TopQuestionsController', ['$log', 'SocketService', TopQuestionsController]);
+    .controller('TopQuestionsController', ['$log', 'SocketService', 'RoomService', TopQuestionsController]);
 
-  var ctrl, socketService, logger;
-  function TopQuestionsController($log, SocketService)
+  var ctrl, socketService, roomService, logger;
+  function TopQuestionsController($log, SocketService, RoomService)
   {
+    logger = $log;
+    roomService = RoomService;
+    socketService = SocketService;
+
     ctrl = this;
     ctrl.topIndex = 0;
-    logger = $log;
-    socketService = SocketService;
-    ctrl.topQuestions = socketService.getTopQuestions();
+    ctrl.topQuestions = roomService.getTopQuestions();
+    logger.debug('Top Questions: ', ctrl.topQuestions);
+
   }
 
 

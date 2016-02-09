@@ -8,10 +8,13 @@
    * # questionCard
    */
   angular.module('mustaskeClientApp')
-    .directive('questionCard', [QuestionCard]);
+    .directive('questionCard', ['$log', 'UserService', QuestionCard]);
 
-  function QuestionCard()
+  var logger, userService;
+  function QuestionCard($log, UserService)
   {
+    logger = $log;
+    userService = UserService;
     return {
       templateUrl: 'views/question-card.tpl.html',
       restrict: 'E',
@@ -29,6 +32,8 @@
     {
       scope.hide = !scope.hide;
     };
+
+    scope.isRoomOwner = userService.isRoomOwner();
   }
 
 
