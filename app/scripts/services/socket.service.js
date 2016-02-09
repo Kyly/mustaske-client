@@ -111,6 +111,7 @@
   SocketService.prototype.upVoteQuestion = function (questionId)
   {
     var roomId = roomService.getRoomId();
+    logger.debug('SocketService#upVoteQuestion:questionId:', questionId, roomId);
     socket.emit(ctrl.events.UP_VOTE_QUESTION, {room_id: roomId, question_id: questionId});
 
     return response(ctrl.events.UP_VOTE_QUESTION);

@@ -64,4 +64,9 @@
     return room.room_id;
   };
 
+  RoomService.prototype.getRoomName = function ()
+  {
+    return room.room_name;
+  };
+
 })();
