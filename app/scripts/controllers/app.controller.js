@@ -3,13 +3,14 @@
   'use strict';
   var module = angular.module('mustaskeClientApp');
 
-  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', 'Socket', AppController]);
+  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', 'SocketService', 'RoomService', AppController]);
 
-  var ctrl, logger, socket;
-  function AppController($scope, $location, $log, $timeout, Socket)
+  var ctrl, logger, socketService, roomService;
+  function AppController($scope, $location, $log, $timeout, SocketService, RoomService)
   {
     logger = $log;
-    socket = Socket;
+    socketService = SocketService;
+    roomService = RoomService;
 
     ctrl = this;
     ctrl.selectedIndex = 0;
@@ -44,6 +45,18 @@
         $location.url(ctrl.pages[current].url);
       });
     });
+
+    initSockets()
+  }
+
+  function initSockets()
+  {
+    socketService.io().on(
+      socketService.events.NEW_QUESTION, function (question)
+      {
+        roomService.addQuestion(question);
+      });
+
   }
 
 })();
