@@ -11,22 +11,24 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .service('SocketService', ['$log', '$q', 'Socket', SocketService]);
+    .service('SocketService', ['$log', '$q', 'Socket', 'RoomService', SocketService]);
 
-  var ctrl, socket, logger, Q;
+  var ctrl, socket, logger, Q, roomService;
 
-  function SocketService($log, $q, Socket)
+  function SocketService($log, $q, Socket, RoomService)
   {
     logger = $log;
     socket = Socket;
     Q = $q;
+    roomService = RoomService;
 
     ctrl = this;
 
     ctrl.events = {
       JOIN_ROOM: 'join room',
       CREATE_ROOM: 'create room',
-      NEW_QUESTION: 'new question'
+      NEW_QUESTION: 'new question',
+      UP_VOTE_QUESTION: 'upvote question'
     }
   }
 
@@ -106,9 +108,12 @@
     socket.emit(ctrl.events.NEW_QUESTION, question);
   };
 
-  SocketService.prototype.upVoteQuesiton = function ()
+  SocketService.prototype.upVoteQuestion = function (questionId)
   {
+    var roomId = roomService.getRoomId();
+    socket.emit(ctrl.events.UP_VOTE_QUESTION, {room_id: roomId, question_id: questionId});
 
+    return response(ctrl.events.UP_VOTE_QUESTION);
   };
 
   SocketService.prototype.downVoteQuestion = function ()
@@ -119,22 +124,6 @@
   SocketService.prototype.dismissQuestion = function ()
   {
 
-  };
-
-  SocketService.prototype.getAllQuestions = function ()
-  {
-    return ctrl.questions;
-  };
-
-
-  SocketService.prototype.getTopQuestions = function ()
-  {
-    //ctrl.topQuestions = [
-    //  new Question({text: 'Here is some sample question?', votes: 100}),
-    //  new Question({text: 'How do you do things?', votes: 50})
-    //];
-    //
-    //return ctrl.topQuestions;
   };
 
   SocketService.prototype.warnUser = function ()

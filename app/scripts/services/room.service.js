@@ -11,15 +11,12 @@
 
   'use strict';
   angular.module('mustaskeClientApp')
-    .service('RoomService', ['$log', 'Socket', 'SocketService', RoomService]);
+    .service('RoomService', ['$log', RoomService]);
 
-  var room, logger, socket, socketService, ctrl;
-
-  function RoomService($log, Socket, SocketService)
+  var room, logger, ctrl;
+  function RoomService($log)
   {
     logger = $log;
-    socket = Socket;
-    socketService = SocketService;
     ctrl = this;
 
     room = {
@@ -28,17 +25,6 @@
       questions : [],
       top_questions : []
     };
-
-    initSockets();
-  }
-
-  function initSockets()
-  {
-    socket.on(
-      socketService.events.NEW_QUESTION, function (question)
-      {
-        ctrl.getQuestions().push(question);
-      });
 
   }
 

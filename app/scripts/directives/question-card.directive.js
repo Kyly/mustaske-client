@@ -8,13 +8,15 @@
    * # questionCard
    */
   angular.module('mustaskeClientApp')
-    .directive('questionCard', ['$log', 'UserService', QuestionCard]);
+    .directive('questionCard', ['$log', 'UserService', 'SocketService', QuestionCard]);
 
-  var logger, userService;
-  function QuestionCard($log, UserService)
+  var logger, userService, socketService;
+  function QuestionCard($log, UserService, SocketService)
   {
     logger = $log;
     userService = UserService;
+    socketService = SocketService;
+
     return {
       templateUrl: 'views/question-card.tpl.html',
       restrict: 'E',
@@ -28,13 +30,29 @@
   function linkFn(scope)
   {
     scope.hide = true;
-    scope.datailToggle = function()
+    scope.upVoted = false;
+
+    scope.detailToggle = function()
     {
       scope.hide = !scope.hide;
     };
 
-    scope.isRoomOwner = userService.isRoomOwner();
-  }
+    scope.upVote = function (questionId)
+    {
+      socketService.upVoteQuestion(questionId).then(upVoteSuccess, upVoteFailure);
+    };
 
+    scope.isRoomOwner = userService.isRoomOwner();
+
+    function upVoteSuccess()
+    {
+      scope.upVoted = true;
+    }
+
+    function upVoteFailure()
+    {
+      scope.upVoted = false;
+    }
+  }
 
 })();
