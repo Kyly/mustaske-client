@@ -1,3 +1,4 @@
+<!--
 <div ng-if="ctrl.isOwner">
   <div layout="row" layout-padding="5">
     <div layout="row" layout-xs="column">
@@ -14,27 +15,27 @@
     <div google-chart chart="ctrl.chartObject"></div>
   </div>
 </div>
-
+-->
+<!--Student Clicker-->
 <div ng-if="!ctrl.isOwner">
   <div style="text-align: center" layout-padding="5px">
-    <div layout="row">
-      <md-button class="md-raised" style="width: 100%">A</md-button>
-    </div>
-    <div layout="row">
-      <md-button class="md-raised" style="width: 100%">B</md-button>
-    </div>
-    <div layout="row">
-      <md-button class="md-raised" style="width: 100%">C</md-button>
-    </div>
-    <div layout="row">
-      <md-button class="md-raised" style="width: 100%">D</md-button>
-    </div>
-    <div layout="row">
-      <md-button class="md-raised" style="width: 100%">E</md-button>
-    </div>
-    <div layout="row">
-      <p>Your Selected Answer Was: {{ctrl.answer}}</p>
+    <div ng-repeat="button in ctrl.buttons">
+      <md-button class="md-raised answer-button" style="width: 100%" ng-click="ctrl.answer=button;ctrl.setAnswer(button)">{{button}}</md-button>
     </div>
   </div>
+  <div>
+    You selected <span ng-bind='ctrl.answer'></span>
+  </div>
 </div>
-
+<!--Prof Clicker-->
+<div ng-if="ctrl.isOwner">
+  <div class="container">
+    <H3>Polls</H3>
+    <div class="column">
+      <div ng-hide="ctrl.isPollStarted" ng-click="ctrl.startPoll();ctrl.isPollStarted=true"><md-icon md-font-icon="fa fa-play" aria-label="fa-play"></md-icon>Start</div>
+      <div ng-show="ctrl.isPollStarted">{{ctrl.counter}}</div>
+      <div ng-click="ctrl.stopPoll();ctrl.isPollStarted=false"><md-icon md-font-icon="fa fa-stop" aria-label="fa-stop"></md-icon>Stop</div>
+    </div>
+    <div google-chart chart="ctrl.chartObject" style="height:100%; width:100%;"></div>
+  </div>
+</div>

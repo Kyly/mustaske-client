@@ -27,12 +27,13 @@
       .when(
         '/polls', {
           templateUrl: 'views/polls.view.html',
-          controller: 'AboutCtrl'
+          controller: 'AboutController',
+          controllerAs: 'ctrl'
         })
       .when(
       '/settings', {
         templateUrl: 'views/settings.view.html',
-        controller: 'AboutCtrl'
+        controller: 'AboutController'
       });
   }
 
