@@ -3,10 +3,9 @@ language: node_js
 node_js:
   - '0.12'
 before_install:
-  - 'npm install -g bower grunt-cli'
-install:
-  - 'npm install'
-before_script:
-  - 'bower install'
+  - 'npm install -g grunt-cli'
+  - 'gem install compass'
+install: npm install
+before_script: grunt build
 notifications:
   slack: teamfuckyeah:myFEHiMWAknnEmBDjCj7AJn3
