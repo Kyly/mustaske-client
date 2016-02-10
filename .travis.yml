@@ -3,8 +3,7 @@ language: node_js
 node_js:
   - '0.12'
 before_script:
-  - 'npm install -g yo generator-angular bower grunt-cli'
-  - 'yo angular'
+  - 'npm install -g bower grunt-cli'
   - 'bower install'
 notifications:
   slack: teamfuckyeah:myFEHiMWAknnEmBDjCj7AJn3
