@@ -2,8 +2,11 @@ sudo: false
 language: node_js
 node_js:
   - '0.12'
-before_script:
+before_install:
   - 'npm install -g bower grunt-cli'
+install:
+  -'npm install'
+before_script:
   - 'bower install'
 notifications:
   slack: teamfuckyeah:myFEHiMWAknnEmBDjCj7AJn3
