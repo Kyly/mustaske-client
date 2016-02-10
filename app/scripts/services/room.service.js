@@ -46,7 +46,7 @@
 
   RoomService.prototype.addQuestion = function (question)
   {
-    room.questions.push(question);
+    room.questions.unshift(question);
   };
 
   RoomService.prototype.getTopQuestions = function ()
@@ -67,6 +67,16 @@
   RoomService.prototype.getRoomName = function ()
   {
     return room.room_name;
+  };
+
+  RoomService.prototype.updateVote = function (questionData)
+  {
+    angular.forEach(room.questions, function(question) {
+      if (question.question_id === questionData.question_id)
+      {
+        question.question_score = questionData.question_score;
+      }
+    });
   };
 
 })();

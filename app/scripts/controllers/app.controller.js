@@ -46,7 +46,7 @@
       });
     });
 
-    initSockets()
+    initSockets();
   }
 
   function initSockets()
@@ -55,6 +55,18 @@
       socketService.events.NEW_QUESTION, function (question)
       {
         roomService.addQuestion(question);
+      });
+
+    socketService.io().on(
+      socketService.events.UP_VOTE_QUESTION, function (questionVoteInfo)
+      {
+        roomService.updateVote(questionVoteInfo);
+      });
+
+    socketService.io().on(
+      socketService.events.DOWN_VOTE_QUESTION, function (questionVoteInfo)
+      {
+        roomService.updateVote(questionVoteInfo);
       });
 
   }

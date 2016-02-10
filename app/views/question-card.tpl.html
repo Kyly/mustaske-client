@@ -1,31 +1,29 @@
-<md-card class="question-card" id="{{question_id}}">
+<md-card class="question-card" id="{{question.question_id}}">
   <md-card-content ng-bind-html="question.question_text">
   </md-card-content>
   <!-- Start audience controls -->
   <md-card-actions ng-if="!isRoomOwner" layout="row">
-    <div flex="60">
+    <div flex="50">
       <div layout="row">
-
-        <div flex layout-align="center center" layout="column" ng-hide="upVoted">
-          <a href="#" ng-click="upVote()">
-            <md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-o-up"></md-icon>
-          </a>
-        </div>
-        <div flex layout-align="center center" layout="column" ng-hide="!upVoted">
-          <a href="#" ng-click="upVote()">
-            <md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-up"></md-icon>
+        <div flex layout-align="center center" layout="column">
+          <a href="#" ng-click="upVote(question)">
+            <span ng-show="!question.hasVotedUp"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-o-up"></md-icon></span>
+            <span ng-show="question.hasVotedUp"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-up"></md-icon></span>
           </a>
         </div>
 
         <div flex="auto" layout-align="center center" class="md-body-2" layout="column">
           <div layout="row">
             <span class="m-r-5"
-                  ng-class="{'text-gray-lighter': (!question.votes || question.votes >= 0), 'text-warning': (question.votes < 0)}">{{question.votes || 0}}</span>
+                  ng-class="{'text-gray-lighter': (!question.question_score|| question.question_score >= 0), 'text-warning': (question.question_score < 0)}">{{question.question_score || 0}}</span>
             <span class="text-gray-lighter"> votes</span>
           </div>
         </div>
         <div flex layout-align="center center" layout="column">
-          <md-icon md-font-icon="fa fa-thumbs-o-down" class="page-tab-icon"></md-icon>
+          <a href="#" ng-click="downVote(question)">
+            <span ng-show="!question.hasVotedDown"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-o-down"></md-icon></span>
+            <span ng-show="question.hasVotedDown"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-down"></md-icon></span>
+          </a>
         </div>
       </div>
     </div>
@@ -33,7 +31,7 @@
   <!-- End audience controls -->
   <!-- Start owner controls -->
   <md-card-actions ng-if="isRoomOwner" layout="row" layout-padding="5">
-    <div flex="50">{{question.votes || 0}} votes</div>
+    <div flex="50">{{question.question_score || 0}} votes</div>
     <div flex="50" ng-click="detailToggle()">
       <md-icon class="text-gray-lighter" md-font-icon="fa fa-chevron-circle-down" layout="column" layout-align="end end"></md-icon>
     </div>
