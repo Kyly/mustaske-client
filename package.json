@@ -60,7 +60,6 @@
   },
   "scripts": {
     "test": "grunt test",
-    "start": "node ./server/bin/www",
-    "postinstall": "bower install && grunt build"
+    "start": "node ./server/bin/www"
   }
 }
