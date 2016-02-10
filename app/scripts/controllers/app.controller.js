@@ -46,7 +46,7 @@
       });
     });
 
-    initSockets()
+    initSockets();
   }
 
   function initSockets()

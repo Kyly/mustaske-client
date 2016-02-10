@@ -29,7 +29,7 @@
       CREATE_ROOM: 'create room',
       NEW_QUESTION: 'new question',
       UP_VOTE_QUESTION: 'upvote question'
-    }
+    };
   }
 
   /**
