@@ -9,7 +9,7 @@
         <p>Room ID</p>
       </div>
       <div flex="auto" layout="column" layout-align="none end">
-        <p>ROOM-NAME-90</p>
+        <p style="font-weight: bold">{{ctrl.roomId}}</p>
       </div>
       <div class="small hint text-gray-accent" flex="100">
         <p>*Share this Room ID for others to join your room</p>
@@ -17,10 +17,10 @@
     <!-- </div> -->
   </div>
 
-  <div layout="row">
-    <div layout="column">
-      <md-icon md-font-icon="fa fa-sign-out">
-        Delete Room</md-icon>
-    </div>
+  <div layout="row" layout-wrap>
+    <!-- <div layout="column"> -->
+      <md-icon md-font-icon="fa fa-sign-out" flex="auto" style="padding-top: 1px"></md-icon>
+      <p ng-click="ctrl.deleteRoom()" flex="95">Delete Room</p>
+    <!-- </div> -->
   </div>
 </md-content>

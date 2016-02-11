@@ -33,7 +33,8 @@
       .when(
       '/settings', {
         templateUrl: 'views/settings.view.html',
-        controller: 'AboutController'
+        controller: 'SettingsController',
+          controllerAs: 'ctrl'
       });
   }
 
