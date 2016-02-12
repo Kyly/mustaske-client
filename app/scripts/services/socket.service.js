@@ -148,5 +148,9 @@
     return socket;
   };
 
+  SocketService.prototype.deleteRoom = function ()
+  {
+    logger.debug('SocketService#deleteRoom:');
+  }
 
 })();
