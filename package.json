@@ -61,7 +61,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node ./server/bin/www",
-    "postinstall": "./node_modules/bower/bin/bower install && grunt build"
+    "start": "node ./server/bin/www"
   }
 }
