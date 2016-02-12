@@ -6,10 +6,10 @@
     <div flex="50">
       <div layout="row">
         <div flex layout-align="center center" layout="column">
-          <a href="#" ng-click="upVote(question)">
+          <span ng-click="upVote(question)">
             <span ng-show="!question.hasVotedUp"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-o-up"></md-icon></span>
             <span ng-show="question.hasVotedUp"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-up"></md-icon></span>
-          </a>
+          </span>
         </div>
 
         <div flex="auto" layout-align="center center" class="md-body-2" layout="column">
@@ -20,10 +20,10 @@
           </div>
         </div>
         <div flex layout-align="center center" layout="column">
-          <a href="#" ng-click="downVote(question)">
+          <span ng-click="downVote(question)">
             <span ng-show="!question.hasVotedDown"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-o-down"></md-icon></span>
             <span ng-show="question.hasVotedDown"><md-icon class="page-tab-icon" md-font-icon="fa fa-thumbs-down"></md-icon></span>
-          </a>
+          </span>
         </div>
       </div>
     </div>
