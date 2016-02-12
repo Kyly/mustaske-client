@@ -1,8 +1,8 @@
 node_modules
-# dist
+ dist
 .tmp
 .sass-cache
 bower_components
 .idea
-# Gruntfile.js
+ Gruntfile.js
 .DS_Store
