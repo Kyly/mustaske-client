@@ -34,7 +34,7 @@
           controller: 'ClickerInputController',
           controllerAs: 'ctrl',
           clickOutsideToClose: false
-        })
+        });
     };
   }
 
