@@ -25,10 +25,11 @@
 <![endif]-->
 <!-- Add your site or application content here -->
 
-<login-overlay></login-overlay>
-<topbar></topbar>
 <md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as appCtrl"
             flex layout-fill>
+
+  <login-overlay></login-overlay>
+  <topbar></topbar>
   <md-tabs md-stretch-tabs layout="column" flex layout-fill
            md-selected="appCtrl.selectedIndex" class="tabs-main-navigation md-primary"
            md-swipe-content="true">
