@@ -4,4 +4,5 @@ node_modules
 .sass-cache
 bower_components
 .idea
+# Gruntfile.js
 .DS_Store
