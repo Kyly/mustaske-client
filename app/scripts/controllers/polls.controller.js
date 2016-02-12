@@ -10,10 +10,10 @@
     interval=$interval;
     scope= $scope;
     ctrl = this;
-    ctrl.isOwner=true;
+    ctrl.isOwner=false;
     ctrl.buttons=['A','B','C','D','E'];
     ctrl.counter=0;
-    ctrl.isPollStarted=false;
+    ctrl.isPollStarted=true;
     generateChart();
   }
 
