@@ -59,6 +59,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node ./server/bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "grunt --env production",
+    "start": "node server.js",
+    "postinstall": "bash ./post_install.sh"
   }
 }
