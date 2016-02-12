@@ -28,7 +28,8 @@
       JOIN_ROOM: 'join room',
       CREATE_ROOM: 'create room',
       NEW_QUESTION: 'new question',
-      UP_VOTE_QUESTION: 'upvote question'
+      UP_VOTE_QUESTION: 'upvote question',
+      DOWN_VOTE_QUESTION: 'downvote question'
     };
   }
 
@@ -111,14 +112,15 @@
   SocketService.prototype.upVoteQuestion = function (questionId)
   {
     var roomId = roomService.getRoomId();
+    logger.debug('SocketService#upVoteQuestion:questionId:', questionId, roomId);
     socket.emit(ctrl.events.UP_VOTE_QUESTION, {room_id: roomId, question_id: questionId});
-
-    return response(ctrl.events.UP_VOTE_QUESTION);
   };
 
-  SocketService.prototype.downVoteQuestion = function ()
+  SocketService.prototype.downVoteQuestion = function (questionId)
   {
-
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#upVoteQuestion:questionId:', questionId, roomId);
+    socket.emit(ctrl.events.DOWN_VOTE_QUESTION, {room_id: roomId, question_id: questionId});
   };
 
   SocketService.prototype.dismissQuestion = function ()
@@ -146,11 +148,5 @@
     return socket;
   };
 
-  SocketService.prototype.deleteRoom = function(roomId)
-  {
-    logger.debug('SocketService#deleteRoom:roomId:', roomId);
-    socket.emit('leave room', roomId);
-   // return response('Goodbye');
-  };
 
 })();
