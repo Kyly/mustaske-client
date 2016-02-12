@@ -30,7 +30,6 @@
     socket.deleteRoom(ctrl.roomId);
   };
 
-
 /**
   SettingsController.prototype.deleteRoom = function(roomId)
   {
@@ -71,4 +70,5 @@
 
   };
 **/
+
 })();
