@@ -69,7 +69,8 @@
     userService.setUserType('owner');
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
-    rootScope.roomName = userService.getRoomName();
+    rootScope.roomName = roomService.getRoomName();
+    rootScope.roomId = roomService.getRoomId();
     ctrl.overlayHide = true;
   }
 
