@@ -31,10 +31,11 @@
           controllerAs: 'ctrl'
         })
       .when(
-      '/settings', {
-        templateUrl: 'views/settings.view.html',
-        controller: 'AboutController'
-      });
+        '/settings', {
+          templateUrl: 'views/settings.view.html',
+          controller: 'SettingsController',
+          controllerAs: 'ctrl'
+        });
   }
 
 })();
