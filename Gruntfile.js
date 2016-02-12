@@ -513,7 +513,7 @@ module.exports = function (grunt)
       //'karma'
     ]);
 
-  grunt.registerTask('heroku', ['build']);
+  //grunt.registerTask('heroku', ['build']);
 
   grunt.registerTask(
     'build', [
