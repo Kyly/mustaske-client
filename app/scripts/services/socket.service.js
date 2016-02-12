@@ -152,7 +152,6 @@
   {
     logger.debug('SocketService#deleteRoom:roomId:', roomId);
     socket.emit('leave room', roomId);
-    return response('Goodbye');
   };
 
 })();

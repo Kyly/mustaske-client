@@ -27,7 +27,20 @@
     ctrl = this;
     ctrl.showRoom = false;
     ctrl.overlayHide = false;
+    ctrl.isLeaving = false;
     ctrl.roomName = '';
+
+    initSocket();
+  }
+
+  function initSocket()
+  {
+    socketService.io().on('leave room', function() {
+      ctrl.isLeaving = true;
+      ctrl.roomName = '';
+      logger.debug('Leave room');
+      ctrl.overlayHide = false;
+    });
   }
 
   OverlayController.prototype.joinRoom = function ()
