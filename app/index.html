@@ -25,10 +25,11 @@
 <![endif]-->
 <!-- Add your site or application content here -->
 
-<login-overlay></login-overlay>
-<topbar></topbar>
 <md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as appCtrl"
             flex layout-fill>
+
+  <login-overlay></login-overlay>
+  <topbar></topbar>
   <md-tabs md-stretch-tabs layout="column" flex layout-fill
            md-selected="appCtrl.selectedIndex" class="tabs-main-navigation md-primary"
            md-swipe-content="true">
@@ -91,6 +92,7 @@
 <!-- config -->
 <script src="scripts/config/routes.config.js"></script>
 <script src="scripts/config/theme.config.js"></script>
+<script src="scripts/config/intercepter.config.js"></script>
 <!-- directives -->
 <script src="scripts/directives/login-overlay.directive.js"></script>
 <script src="scripts/directives/question-card.directive.js"></script>
@@ -106,11 +108,12 @@
 <!-- controllers -->
 <script src="scripts/controllers/overlay.controller.js"></script>
 <script src="scripts/controllers/app.controller.js"></script>
-<script src="scripts/controllers/about.js"></script>
+<script src="scripts/controllers/polls.controller.js"></script>
 <script src="scripts/controllers/recent-questions.controller.js"></script>
 <script src="scripts/controllers/top-questions.controller.js"></script>
 <script src="scripts/controllers/question-input.controller.js"></script>
 <script src="scripts/controllers/settings.controller.js"></script>
+<script src="scripts/controllers/clicker-input.controller.js"></script>
 
 <!-- endbuild -->
 </body>

@@ -12,13 +12,14 @@
   var module = angular.module('mustaskeClientApp');
   module.controller(
     'OverlayController',
-    ['$log', '$rootScope', 'UserService', 'SocketService', 'RoomService', OverlayController]);
+    ['$log', '$scope', '$rootScope', 'UserService', 'SocketService', 'RoomService', OverlayController]);
 
-  var ctrl, logger, userService, socketService, rootScope, roomService;
+  var ctrl, logger, userService, socketService, scope, rootScope, roomService;
 
-  function OverlayController($log, $rootScope, UserService, SocketService, RoomService)
+  function OverlayController($log, $scope, $rootScope, UserService, SocketService, RoomService)
   {
     rootScope = $rootScope;
+    scope = $scope;
     socketService = SocketService;
     userService = UserService;
     roomService = RoomService;
@@ -27,7 +28,21 @@
     ctrl = this;
     ctrl.showRoom = false;
     ctrl.overlayHide = false;
+    ctrl.isLeaving = false;
     ctrl.roomName = '';
+
+    initSocket();
+  }
+
+  function initSocket()
+  {
+    socketService.io().on('leave room', function() {
+      scope.appCtrl.selectedIndex = 0;
+      ctrl.isLeaving = true;
+      ctrl.roomName = '';
+      logger.debug('Leave room');
+      ctrl.overlayHide = false;
+    });
   }
 
   OverlayController.prototype.joinRoom = function ()
