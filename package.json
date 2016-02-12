@@ -23,6 +23,8 @@
     "readable-id": "0.0.2",
     "marked": "~0.3.3",
     "human-readable-ids": "~1.0.1",
+    "grunt-karma": "*",
+    "grunt-contrib-compass": "^1.0.4",
     "grunt-cli": "~0.1.13"
   },
   "devDependencies": {
