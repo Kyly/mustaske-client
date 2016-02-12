@@ -146,11 +146,11 @@
     return socket;
   };
 
-  function deleteRoom(roomId)
+  SocketService.prototype.deleteRoom = function(roomId)
   {
     logger.debug('SocketService#deleteRoom:roomId:', roomId);
     socket.emit('leave room', roomId);
-    return response('Goodbye');
-  }
+   // return response('Goodbye');
+  };
 
 })();

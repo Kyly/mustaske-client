@@ -19,8 +19,8 @@
 
   <div layout="row" layout-wrap>
     <!-- <div layout="column"> -->
-      <md-icon md-font-icon="fa fa-sign-out" flex="auto" style="padding-top: 1px"></md-icon>
-      <p ng-click="ctrl.deleteRoom()" flex="95">Delete Room</p>
+      <md-icon md-font-icon="fa fa-sign-out" flex="auto"></md-icon>
+      <a href ng-click='ctrl.removeRoom()' flex="95" style="padding-bottom: 10px;">{{ctrl.message}}</a>
     <!-- </div> -->
   </div>
 </md-content>
