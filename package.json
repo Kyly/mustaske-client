@@ -59,7 +59,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node ./server/bin/www",
-    "postinstall": "grunt build"
+    "start": "node ./server/bin/www"
   }
 }
