@@ -9,5 +9,6 @@ install: npm install
 before_script:
  - 'bower install'
  - 'grunt build'
+ - 'grunt jshint:all'
 notifications:
   slack: teamfuckyeah:myFEHiMWAknnEmBDjCj7AJn3
