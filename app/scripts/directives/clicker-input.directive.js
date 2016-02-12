@@ -12,6 +12,7 @@
     .directive('clickerInput', ['$mdBottomSheet', ClickerInput]);
 
   var mdBottomSheet;
+
   function ClickerInput($mdBottomSheet)
   {
     mdBottomSheet = $mdBottomSheet;
@@ -34,7 +35,7 @@
           controller: 'ClickerInputController',
           controllerAs: 'ctrl',
           clickOutsideToClose: false
-        })
+        });
     };
   }
 

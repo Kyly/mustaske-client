@@ -30,6 +30,7 @@
   function linkFn(scope)
   {
     scope.hide = true;
+
     var voteControls = {
       isUpVoted: true
     };
