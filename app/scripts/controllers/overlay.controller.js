@@ -30,6 +30,9 @@
     ctrl.overlayHide = false;
     ctrl.isLeaving = false;
     ctrl.roomName = '';
+    ctrl.input = {
+      pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
+    };
 
     initSocket();
   }
