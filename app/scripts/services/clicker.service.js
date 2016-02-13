@@ -10,13 +10,13 @@
   {
     ctrl=this;
     mdbottomsheet=$mdBottomSheet;
-    ctrl.answer="";
+    ctrl.answer='';
     ctrl.isPollStarted=false;
   }
 
   ClickerService.prototype.openVote = function ()
   {
-    console.log("hi");
+    console.log('hi');
     mdbottomsheet.show(
       {
         templateUrl: 'views/clicker-input-bottom-sheet.tpl.html',
@@ -37,11 +37,11 @@
   //answers
   ClickerService.prototype.setAnswer=function(answer){
     ctrl.answer=answer;
-    console.log("answer is: "+ctrl.answer);
+    console.log('answer is: '+ctrl.answer);
   };
 
   ClickerService.prototype.getAnswer=function(){
     return ctrl.answer;
-  }
+  };
 
 })();
