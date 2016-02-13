@@ -1,11 +1,1 @@
-<!--Student Clicker
-<div ng-if="!ctrl.isOwner">
-  <div style="text-align: center" layout-padding="5px">
-    <div ng-repeat="button in ctrl.buttons">
-      <md-button class="md-raised answer-button" style="width: 100%" ng-click="ctrl.setAnswer(button)">{{button}}</md-button>
-    </div>
-  </div>
-  <div>
-    You selected {{ctrl.answer}}
-  </div>
-</div>--> <div ng-if="!ctrl.isOwner"> <table class="table table-condensed"> <thead> <th># <th>Answer  <tbody> <tr ng-repeat="button in ctrl.buttons track by $index"> <td>Q{{$index+1}} <td>{{button}}   </table> <div layout-align="center" layout="row"> <clicker-input ng-if="ctrl.isPollStarted"></clicker-input> </div> </div> <!--Prof Clicker--> <div ng-if="ctrl.isOwner"> <div class="container"> <h3>Polls</h3> <div class="column"> <div ng-hide="ctrl.isPollStarted" ng-click="ctrl.startPoll()"><md-icon md-font-icon="fa fa-play" aria-label="fa-play"></md-icon>Start</div> <div ng-show="ctrl.isPollStarted">{{ctrl.counter}}</div> <div ng-click="ctrl.stopPoll()"><md-icon md-font-icon="fa fa-stop" aria-label="fa-stop"></md-icon>Stop</div> </div> <div google-chart chart="ctrl.chartObject" style="height:100%; width:100%"></div> </div> </div>
+<div ng-if="!ctrl.isOwner" ng-click="ctrl.startVote()"> <div layout="column" layout-align="center center"> <p style="font-size: large">Polls</p> <img src="http://www.lettercult.com/alphabattleA/angie_letter_a.jpg" width="100%" height="400em"> <p>Tap anywhere to open poll</p> </div> </div> <!--Prof Clicker--> <div ng-if="ctrl.isOwner"> <div layout="column" layout-margin="3em"> <h3>Polls</h3> <div layout="column" layout-margin="2em"> <div ng-hide="ctrl.isPollStarted" ng-click="ctrl.startPoll()"> <md-icon md-font-icon="fa fa-play"><span layout-padding="5em">Start</span></md-icon> </div> <div ng-show="ctrl.isPollStarted">{{ctrl.counter}}</div> <div ng-click="ctrl.stopPoll()"> <md-icon md-font-icon="fa fa-stop"><span layout-padding="5em">Stop</span></md-icon> </div> </div> <div layout="column" style="margin-top: -1em" ng-if="ctrl.isPollStarted"> <h4 layout-margin="10em">Poll Results</h4> <nvd3 style="margin-left: -2em" options="ctrl.graphOptions" data="ctrl.graphData"></nvd3> </div> </div> <md-button ng-click="">addAnswer</md-button> </div>
