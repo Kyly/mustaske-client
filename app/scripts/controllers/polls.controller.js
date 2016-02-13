@@ -3,64 +3,25 @@
   'use strict';
   var module = angular.module('mustaskeClientApp');
 
-  module.controller('AboutController', ['$interval','$scope', AboutController]);
-  var ctrl, interval,scope;
-  function AboutController($interval,$scope)
+  module.controller('AboutController', ['$interval','$scope', 'ClickerService', 'UserService',AboutController]);
+  var ctrl, interval,scope, clickerService,userService;
+  function AboutController($interval,$scope, ClickerService,UserService)
   {
     interval=$interval;
     scope= $scope;
+    clickerService=ClickerService;
+    userService=UserService;
     ctrl = this;
-    ctrl.isOwner=false;
+    ctrl.isOwner=userService.isRoomOwner();
     ctrl.buttons=['A','B','C','D','E'];
     ctrl.counter=0;
-    ctrl.isPollStarted=true;
-    generateChart();
+    ctrl.isPollStarted=clickerService.getPollStatus();
   }
 
   AboutController.prototype.setAnswer=function(button){
     this.answer=button;
     console.log(button);
   };
-
-  function generateChart(){
-    ctrl.chartObject = {};
-
-    ctrl.chartObject.type = 'ColumnChart';
-
-    ctrl.answerB = [
-      {v: 'B'},
-      {v: 3},
-    ];
-
-    ctrl.chartObject.data = {'cols': [
-      {id: 't', label: 'Answer', type: 'string'},
-      {id: 's', label: 'Students', type: 'number'}
-    ], 'rows': [
-      {c: [
-        {v: 'A'},
-        {v: 3},
-      ]},
-      {c: ctrl.answerB},
-      {c: [
-        {v: 'C'},
-        {v: 1},
-      ]},
-      {c: [
-        {v: 'D'},
-        {v: 2},
-      ]},
-      {c: [
-        {v: 'E'},
-        {v: 2},
-      ]}
-    ]};
-
-    ctrl.chartObject.options = {
-      'title': 'Poll Results'
-    };
-
-
-  }
 
   AboutController.prototype.startPoll=function(){
     var myThis=this;
@@ -71,9 +32,25 @@
     },1000);
 
   };
+
+  //------------------------------------------
   AboutController.prototype.stopPoll=function(){
     console.log('called');
+    this.counter=0;
     this.isPollStarted=false;
   };
+  //--------------------------------
+  AboutController.prototype.startVote=function(){
+    clickerService.openVote();
+  };
+
+  AboutController.prototype.getAnswer=function(){
+    ctrl.answer=clickerService.getAnswer();
+  };
+
+  AboutController.prototype.getAnswer=function(){
+    ctrl.answer=clickerService.getAnswer();
+  }
 
 })();
+
