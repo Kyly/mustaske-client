@@ -36,15 +36,20 @@
   //------------------------------------------
   AboutController.prototype.stopPoll=function(){
     console.log('called');
+    this.counter=0;
     this.isPollStarted=false;
   };
   //--------------------------------
   AboutController.prototype.startVote=function(){
-    clickerservice.openVote();
+    clickerService.openVote();
   };
 
   AboutController.prototype.getAnswer=function(){
-    ctrl.answer=clickerservice.getAnswer();
+    ctrl.answer=clickerService.getAnswer();
+  };
+
+  AboutController.prototype.getAnswer=function(){
+    ctrl.answer=clickerService.getAnswer();
   }
 
 })();

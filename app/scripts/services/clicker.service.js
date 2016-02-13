@@ -1,10 +1,3 @@
-/**
- * @ngdoc service
- * @description
- * # socket
- * Service in the mustaskeClientApp.
- */
-
 (function ()
 {
   'use strict';
