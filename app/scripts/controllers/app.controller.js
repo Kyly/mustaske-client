@@ -3,19 +3,19 @@
   'use strict';
   var module = angular.module('mustaskeClientApp');
 
-  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', 'SocketService', 'RoomService', AppController]);
+  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', 'SocketService', 'RoomService', 'UserService', AppController]);
 
-  var ctrl, logger, socketService, roomService;
-  function AppController($scope, $location, $log, $timeout, SocketService, RoomService)
+  var ctrl, logger, socketService, roomService, userService;
+  function AppController($scope, $location, $log, $timeout, SocketService, RoomService, UserService)
   {
     logger = $log;
     socketService = SocketService;
     roomService = RoomService;
+    userService = UserService;
 
     ctrl = this;
     ctrl.selectedIndex = 0;
     ctrl.isFabOpen = false;
-    ctrl.isRoomOwner = roomService.isRoomOwner();
     ctrl.pages = [
       {
         label: 'Recent Questions',

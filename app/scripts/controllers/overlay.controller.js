@@ -83,10 +83,11 @@
   {
     userService.setRoomData(data);
     roomService.setRoomData(data);
-
     userService.setUserType('owner');
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
+
+    rootScope.isRoomOwner = userService.isRoomOwner();
     rootScope.roomName = roomService.getRoomName();
     rootScope.roomId = roomService.getRoomId();
     ctrl.overlayHide = true;
