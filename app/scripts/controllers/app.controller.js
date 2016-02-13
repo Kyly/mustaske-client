@@ -15,6 +15,7 @@
     ctrl = this;
     ctrl.selectedIndex = 0;
     ctrl.isFabOpen = false;
+    ctrl.isRoomOwner = roomService.isRoomOwner();
     ctrl.pages = [
       {
         label: 'Recent Questions',
