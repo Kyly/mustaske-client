@@ -1,4 +1,4 @@
-<div ng-if="!ctrl.isOwner" ng-click="ctrl.startVote()"  >
+<div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.startVote()" >
   <div layout="column" layout-align="center center">
     <p style="font-size: large">Polls</p>
     <img src="http://www.lettercult.com/alphabattleA/angie_letter_a.jpg" width="100%" height="400em">
@@ -7,19 +7,19 @@
 </div>
 
 <!--Prof Clicker-->
-<div ng-if="ctrl.isOwner">
+<div ng-if="ctrl.isRoomOwner">
   <div layout="column" layout-margin="3em">
     <H3>Polls</H3>
     <div layout="column" layout-margin="2em">
-      <div ng-hide="ctrl.isPollStarted" ng-click="ctrl.startPoll()" >
+      <div ng-hide="ctrl.poll.isPollStarted" ng-click="ctrl.startPoll()" >
         <md-icon md-font-icon="fa fa-play"><span layout-padding="5em">Start</span></md-icon>
       </div>
-      <div ng-show="ctrl.isPollStarted">{{ctrl.counter}}</div>
+      <div ng-show="ctrl.poll.isPollStarted">{{ctrl.poll.counter}}</div>
       <div ng-click="ctrl.stopPoll()">
         <md-icon md-font-icon="fa fa-stop"><span layout-padding="5em">Stop</span></md-icon>
       </div>
     </div>
-    <div layout="column" style="margin-top: -1em" ng-if="ctrl.isPollStarted">
+    <div layout="column" style="margin-top: -1em" ng-if="ctrl.poll.isPollStarted">
       <h4 layout-margin="10em">Poll Results</h4>
       <nvd3 style="margin-left: -2em" options="ctrl.graphOptions" data="ctrl.graphData"></nvd3>
     </div>

@@ -6,7 +6,8 @@
   module.controller('PollController', ['$log', '$interval', '$scope', 'ClickerService', 'UserService', PollController]);
 
   var ctrl, interval, scope, clickerService, userService, logger;
-  function PollController( $log, $interval, $scope, ClickerService, UserService)
+
+  function PollController($log, $interval, $scope, ClickerService, UserService)
   {
     interval = $interval;
     scope = $scope;
@@ -15,13 +16,7 @@
     logger = $log;
 
     ctrl = this;
-    ctrl.isOwner = userService.isRoomOwner();
     ctrl.buttons = ['A', 'B', 'C', 'D', 'E'];
-
-    ctrl.poll = {
-      counter: 0,
-      isPollStarted: clickerService.getPollStatus()
-    };
 
     //inital graph
     ctrl.graphOptions = {
@@ -74,6 +69,41 @@
         ]
       }
     ];
+
+    init();
+  }
+
+  function init()
+  {
+    ctrl.poll = {
+      counter: 0,
+      isPollStarted: false
+    };
+
+    ctrl.isRoomOwner = false;
+
+    scope.$watch(
+      function ()
+      {
+        return clickerService.getPollStatus();
+      },
+      function (value)
+      {
+        ctrl.poll.isPollStarted = value;
+      }
+    );
+
+    scope.$watch(
+      function ()
+      {
+        return userService.isRoomOwner();
+      },
+      function (value)
+      {
+        ctrl.isRoomOwner = value;
+      }
+    );
+
   }
 
   PollController.prototype.addAnswerToGraph = function (data)
@@ -90,10 +120,12 @@
   {
     logger.debug('Pull started');
     ctrl.poll.isPollStarted = true;
-    interval(function () {
-      ctrl.counter++;
-      //console.log('hello');
-    },1000);
+    interval(
+      function ()
+      {
+        ctrl.poll.counter++;
+        //console.log('hello');
+      }, 1000);
   };
 
   //------------------------------------------
