@@ -20,6 +20,8 @@
     "jade": "~1.9.2",
     "jquery": "~2.1.4",
     "marked": "~0.3.3",
+    "grunt-karma": "*",
+    "grunt-contrib-compass": "^1.0.4",
     "morgan": "~1.6.1",
     "node-uuid": "~1.4.3",
     "readable-id": "0.0.2",
@@ -62,7 +64,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node ./server/bin/www",
-    "postinstall": "bower install && grunt build"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/bin/www",
+    "postinstall": "bash ./post_install.sh"
   }
 }
