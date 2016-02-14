@@ -14,7 +14,7 @@
         <div ng-hide="ctrl.poll.isPollStarted" ng-click="ctrl.startPoll()" class="btn-no-outline medium-icon-button m-b-5">
           <md-icon md-font-icon="fa fa-play" class="p-l-5"><span layout-padding="5px">Start</span></md-icon>
         </div>
-        <div ng-show="ctrl.poll.isPollStarted" class="m-b-5 poll-timer">{{ctrl.poll.counter}}</div>
+        <div ng-show="ctrl.poll.isPollStarted" class="m-b-5 poll-timer"><ma-timer x-timer="ctrl.timer"></ma-timer></div>
         <div ng-click="ctrl.stopPoll()" class="btn-no-outline medium-icon-button">
           <md-icon md-font-icon="fa fa-stop"><span layout-padding="5px">Stop</span></md-icon>
         </div>

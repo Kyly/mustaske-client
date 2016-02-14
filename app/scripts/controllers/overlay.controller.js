@@ -29,7 +29,7 @@
     ctrl.showRoom = false;
     ctrl.overlayHide = false;
     ctrl.isLeaving = false;
-    ctrl.roomName = '';
+
     ctrl.input = {
       pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
     };
@@ -82,8 +82,8 @@
 
   function createRoomSuccess(data)
   {
-    userService.setRoomData(data);
     roomService.setRoomData(data);
+    userService.setRoomData(data);
     userService.setUserType('owner');
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
@@ -98,11 +98,5 @@
   {
     ctrl.showRoom = !(ctrl.showRoom);
   };
-
-  //function broadcastRoomName()
-  //{
-  //  rootScope.$broadcast('room name', userService.getRoomName());
-  //}
-
 
 })();

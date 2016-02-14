@@ -16,6 +16,7 @@
     logger = $log;
 
     ctrl = this;
+    ctrl.timer = {};
 
     ctrl.buttons = ['A', 'B', 'C', 'D', 'E'];
     ctrl.chart = {
@@ -42,58 +43,6 @@
         pointHighlightStroke: 'rgba(151,187,205,0.8)'
       }]
     };
-
-    //inital graph
-    //ctrl.graphOptions = {
-    //  chart: {
-    //    type: 'discreteBarChart',
-    //    height: 400,
-    //    margin: {
-    //      top: 5,
-    //      right: 20,
-    //      bottom: 50,
-    //      left: 55
-    //    },
-    //    x: function (d)
-    //    {
-    //      return d.label;
-    //    },
-    //    y: function (d)
-    //    {
-    //      return d.value;
-    //    },
-    //    showValues: false,
-    //    showYAxis: false,
-    //    duration: 500
-    //  }
-    //};
-    //ctrl.graphData = [
-    //  {
-    //    key: '',
-    //    values: [
-    //      {
-    //        'label': 'A',
-    //        'value': 0
-    //      },
-    //      {
-    //        'label': 'B',
-    //        'value': 0
-    //      },
-    //      {
-    //        'label': 'C',
-    //        'value': 0
-    //      },
-    //      {
-    //        'label': 'D',
-    //        'value': 0
-    //      },
-    //      {
-    //        'label': 'E',
-    //        'value': 0
-    //      }
-    //    ]
-    //  }
-    //];
 
     init();
   }
@@ -145,12 +94,8 @@
   {
     logger.debug('Pull started');
     ctrl.poll.isPollStarted = true;
-    interval(
-      function ()
-      {
-        ctrl.poll.counter++;
-        //console.log('hello');
-      }, 1000);
+    logger.debug(ctrl.timer);
+    ctrl.timer.start();
   };
 
   //------------------------------------------
@@ -159,6 +104,7 @@
     logger.debug('Pull stopped');
     ctrl.poll.counter = 0;
     ctrl.poll.isPollStarted = false;
+    ctrl.timer.stop();
   };
 
   //--------------------------------

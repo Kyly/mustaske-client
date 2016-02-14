@@ -10,20 +10,44 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .controller('SettingsController', ['$log', 'RoomService', 'UserService', 'SocketService', SettingsController]);
+    .controller('SettingsController', ['$log', '$scope', 'RoomService', 'UserService', 'SocketService', SettingsController]);
 
-  var ctrl, owner, roomService, userService, socket, logger;
-  function SettingsController($log, RoomService, UserService, SocketService)
+  var ctrl, owner, roomService, userService, socket, logger, scope;
+  function SettingsController($log, $scope, RoomService, UserService, SocketService)
   {
     logger = $log;
     roomService = RoomService;
     userService = UserService;
     socket = SocketService;
-    ctrl = this;
+    scope = $scope;
 
-    ctrl.roomId = roomService.getRoomId();
-    owner = userService.isRoomOwner();
-    ctrl.message = owner ? 'Delete Room' : 'Leave Room';
+    ctrl = this;
+    init();
+  }
+
+  function init()
+  {
+    scope.$watch(
+      function ()
+      {
+        return roomService.getRoomId();
+      },
+      function (value)
+      {
+        ctrl.roomId = value;
+      }
+    );
+
+    scope.$watch(
+      function ()
+      {
+        return userService.isRoomOwner();
+      },
+      function (value)
+      {
+        ctrl.message = value ? 'Delete Room' : 'Leave Room';
+      }
+    );
   }
 
   SettingsController.prototype.removeRoom = function(){
