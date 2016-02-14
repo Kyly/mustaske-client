@@ -16,59 +16,84 @@
     logger = $log;
 
     ctrl = this;
+
     ctrl.buttons = ['A', 'B', 'C', 'D', 'E'];
+    ctrl.chart = {
+      labels: ctrl.buttons,
+      data: [[4, 7, 9, 0, 12]],
+      options: {
+        scaleShowGridLines : false,
+        scaleShowHorizontalLines: false,
+        scaleShowVerticalLines: false,
+        responsive: true,
+        maintainAspectRatio: false,
+        barDatasetSpacing: 1,
+        barShowStroke: false,
+        barValueSpacing : 20,
+        scaleShowLabels: false
+
+      },
+      colours: [{
+        fillColor: '#1D3951',
+        strokeColor: '#1D3951',
+        pointColor: 'rgba(220,220,220,1)',
+        pointStrokeColor: '#fff',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(151,187,205,0.8)'
+      }]
+    };
 
     //inital graph
-    ctrl.graphOptions = {
-      chart: {
-        type: 'discreteBarChart',
-        height: 300,
-        margin: {
-          top: 5,
-          right: 20,
-          bottom: 50,
-          left: 55
-        },
-        x: function (d)
-        {
-          return d.label;
-        },
-        y: function (d)
-        {
-          return d.value;
-        },
-        showValues: false,
-        showYAxis: false,
-        duration: 500
-      }
-    };
-    ctrl.graphData = [
-      {
-        key: '',
-        values: [
-          {
-            'label': 'A',
-            'value': 0
-          },
-          {
-            'label': 'B',
-            'value': 0
-          },
-          {
-            'label': 'C',
-            'value': 0
-          },
-          {
-            'label': 'D',
-            'value': 0
-          },
-          {
-            'label': 'E',
-            'value': 0
-          }
-        ]
-      }
-    ];
+    //ctrl.graphOptions = {
+    //  chart: {
+    //    type: 'discreteBarChart',
+    //    height: 400,
+    //    margin: {
+    //      top: 5,
+    //      right: 20,
+    //      bottom: 50,
+    //      left: 55
+    //    },
+    //    x: function (d)
+    //    {
+    //      return d.label;
+    //    },
+    //    y: function (d)
+    //    {
+    //      return d.value;
+    //    },
+    //    showValues: false,
+    //    showYAxis: false,
+    //    duration: 500
+    //  }
+    //};
+    //ctrl.graphData = [
+    //  {
+    //    key: '',
+    //    values: [
+    //      {
+    //        'label': 'A',
+    //        'value': 0
+    //      },
+    //      {
+    //        'label': 'B',
+    //        'value': 0
+    //      },
+    //      {
+    //        'label': 'C',
+    //        'value': 0
+    //      },
+    //      {
+    //        'label': 'D',
+    //        'value': 0
+    //      },
+    //      {
+    //        'label': 'E',
+    //        'value': 0
+    //      }
+    //    ]
+    //  }
+    //];
 
     init();
   }

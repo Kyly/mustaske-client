@@ -21,7 +21,8 @@
       'ngMessages',
       'googlechart',
       'btford.socket-io',
-      'nvd3'
+      'nvd3',
+      'chart.js'
     ]);
 
 })();

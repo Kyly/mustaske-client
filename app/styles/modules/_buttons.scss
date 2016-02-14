@@ -43,3 +43,7 @@ md-button.btn-gray-outlined.btn-outline[disabled] {
 .btn-danger.btn-outline:hover {
   color: #fff;
 }
+
+.btn-no-outline[role="button"] {
+  outline: none;
+}
