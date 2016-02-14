@@ -2,7 +2,7 @@
   background-color: transparent;
   color: inherit;
   transition: all .5s;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 0;
 }
 
@@ -26,9 +26,14 @@
   color: #d9534f;
 }
 
+md-button.btn-gray-outlined.btn-outline[disabled] {
+  border-color: $dark-gray-blue;
+  color: $dark-gray-blue !important;
+}
+
 .btn-gray-outlined.btn-outline {
-  border-color: $gray-light;
-  color: $gray-light;
+  border-color: $light-blue-accent;
+  color: $gray-lighter;
 }
 
 .btn-primary.btn-outline:hover,
@@ -37,4 +42,8 @@
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
   color: #fff;
+}
+
+.btn-no-outline[role="button"] {
+  outline: none;
 }

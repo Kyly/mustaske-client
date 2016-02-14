@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
   <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+  <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+  <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -33,16 +35,48 @@
   <md-tabs md-stretch-tabs layout="column" flex layout-fill
            md-selected="appCtrl.selectedIndex" class="tabs-main-navigation md-primary"
            md-swipe-content="true">
-    <md-tab ng-repeat="page in appCtrl.pages">
+    <md-tab>
       <md-tab-label>
-        <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon>
+        <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="fa fa-question-circle" aria-label="fa-question-circle"></md-icon>
       </md-tab-label>
-      <md-tab-body flex layout-fill ng-view="" layout-margin="10">
-        <md-content id="content" ng-view="" flex layout-fill></md-content>
+      <md-tab-body flex layout-fill layout-margin="10">
+        <md-content flex layout-fill>
+          <recent-questions></recent-questions>
+        </md-content>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="fa fa-star" aria-label="fa-star"></md-icon>
+      </md-tab-label>
+      <md-tab-body flex layout-fill layout-margin="10">
+        <md-content flex layout-fill>
+          <top-questions></top-questions>
+        </md-content>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="fa fa-bar-chart" aria-label="fa-bar-chart"></md-icon>
+      </md-tab-label>
+      <md-tab-body flex layout-fill layout-margin="10">
+        <md-content flex layout-fill>
+          <poll></poll>
+        </md-content>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="fa fa-cog" aria-label="fa-cogs"></md-icon>
+      </md-tab-label>
+      <md-tab-body flex layout-fill layout-margin="10">
+        <md-content flex layout-fill>
+          <settings></settings>
+        </md-content>
       </md-tab-body>
     </md-tab>
   </md-tabs>
-  <question-input-fab></question-input-fab>
+  <question-input-fab ng-if="!isRoomOwner"></question-input-fab>
 </md-content>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -81,6 +115,14 @@
 <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
 <script src="bower_components/angular-socket-io/socket.js"></script>
 <script src="bower_components/angular-google-chart/ng-google-chart.js"></script>
+<script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/nvd3/build/nv.d3.js"></script>
+<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+<script src="bower_components/momentjs/moment.js"></script>
+<script src="bower_components/humanize-duration/humanize-duration.js"></script>
+<script src="bower_components/angular-timer/dist/angular-timer.js"></script>
+<script src="bower_components/Chart.js/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -99,16 +141,21 @@
 <script src="scripts/directives/question-input-fab.directive.js"></script>
 <script src="scripts/directives/topbar.directive.js"></script>
 <script src="scripts/directives/clicker-input.directive.js"></script>
+<script src="scripts/directives/top-questions.directive.js"></script>
+<script src="scripts/directives/recent-questions.directive.js"></script>
+<script src="scripts/directives/poll.directive.js"></script>
+<script src="scripts/directives/settings.directive.js"></script>
 <!-- services -->
 <script src="scripts/services/socket.service.js"></script>
 <script src="scripts/services/settings.service.js"></script>
 <script src="scripts/services/user.service.js"></script>
 <script src="scripts/services/room.service.js"></script>
+<script src="scripts/services/clicker.service.js"></script>
 <script src="scripts/factory/socket.factory.js"></script>
 <!-- controllers -->
 <script src="scripts/controllers/overlay.controller.js"></script>
 <script src="scripts/controllers/app.controller.js"></script>
-<script src="scripts/controllers/polls.controller.js"></script>
+<script src="scripts/controllers/poll.controller.js"></script>
 <script src="scripts/controllers/recent-questions.controller.js"></script>
 <script src="scripts/controllers/top-questions.controller.js"></script>
 <script src="scripts/controllers/question-input.controller.js"></script>

@@ -42,6 +42,6 @@ Poll.prototype.vote = function(data) {
   }
 
   return this.results;
-}
+};
 
 module.exports = Poll;

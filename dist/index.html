@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 <!doctype html> <html class="no-js"> <head> <meta charset="utf-8"> <title></title> <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/vendor.c117646d.css"> <link rel="stylesheet" href="styles/main.7053aa6d.css"> <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">-->  <body ng-app="mustaskeClientApp" ng-cloak> <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>
 <![endif]--> <!-- Add your site or application content here --> <md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as appCtrl" flex layout-fill> <login-overlay></login-overlay> <topbar></topbar> <md-tabs md-stretch-tabs layout="column" flex layout-fill md-selected="appCtrl.selectedIndex" class="tabs-main-navigation md-primary" md-swipe-content="true"> <md-tab ng-repeat="page in appCtrl.pages"> <md-tab-label> <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon> </md-tab-label> <md-tab-body flex layout-fill ng-view="" layout-margin="10"> <md-content id="content" ng-view="" flex layout-fill></md-content> </md-tab-body> </md-tab> </md-tabs> <question-input-fab></question-input-fab> </md-content> <!-- Google Analytics: change UA-XXXXX-X to be your site's ID --> <script>!function (A, n, g, u, l, a, r)
+=======
+<!doctype html> <html class="no-js"> <head> <meta charset="utf-8"> <title></title> <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/vendor.d5455060.css"> <link rel="stylesheet" href="styles/main.b7aa8bb6.css"> <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">-->  <body ng-app="mustaskeClientApp" ng-cloak> <!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]--> <!-- Add your site or application content here --> <md-content layout="column" class="page-layout-container" layout-align="center" ng-controller="AppController as appCtrl" flex layout-fill> <login-overlay></login-overlay> <topbar></topbar> <md-tabs md-stretch-tabs layout="column" flex layout-fill md-selected="appCtrl.selectedIndex" class="tabs-main-navigation md-primary" md-swipe-content="true"> <md-tab ng-repeat="page in appCtrl.pages"> <md-tab-label> <md-icon class="page-tab-icon md-accent md-hue-4" md-font-icon="{{page.icon}}" aria-label="fa-cogs"></md-icon> </md-tab-label> <md-tab-body flex layout-fill ng-view="" layout-margin="10"> <md-content id="content" ng-view="" flex layout-fill></md-content> </md-tab-body> </md-tab> </md-tabs> <question-input-fab ng-if="!appCtrl.isRoomOwner"></question-input-fab> </md-content> <!-- Google Analytics: change UA-XXXXX-X to be your site's ID --> <script>!function (A, n, g, u, l, a, r)
+>>>>>>> a16dd275398a6495ed7a158c044b2dacda020655
   {
     A.GoogleAnalyticsObject = l, A[l] = A[l] || function ()
       {
@@ -11,4 +18,8 @@
   }(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-XXXXX-X');
+<<<<<<< HEAD
   ga('send', 'pageview');</script> <script>localStorage.debug = '*';</script> <script src="scripts/vendor.1a11a78c.js"></script> <script src="/socket.io/socket.io.js"></script> <script src="scripts/scripts.4758d28e.js"></script>  
+=======
+  ga('send', 'pageview');</script> <script>localStorage.debug = '*';</script> <script src="scripts/vendor.b7d14258.js"></script> <script src="/socket.io/socket.io.js"></script> <script src="scripts/scripts.37083ffb.js"></script>  
+>>>>>>> a16dd275398a6495ed7a158c044b2dacda020655

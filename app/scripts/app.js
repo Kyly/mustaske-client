@@ -20,7 +20,9 @@
       'ngMaterial',
       'ngMessages',
       'googlechart',
-      'btford.socket-io'
+      'btford.socket-io',
+      'nvd3',
+      'chart.js'
     ]);
 
 })();
