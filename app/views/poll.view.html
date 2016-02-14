@@ -1,32 +1,33 @@
 <div layout="column" flex layout-padding="5">
   <span class="content-page-title">Poll</span>
-  <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.startVote()">
-    <div layout="column" layout-align="center center">
-      <img src="http://www.lettercult.com/alphabattleA/angie_letter_a.jpg" width="100%" height="400em">
-      <p>Tap anywhere to open poll</p>
+  <div layout-padding="40">
+    <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.startVote()">
+      <div layout="column" layout-align="center center">
+        <img src="http://www.lettercult.com/alphabattleA/angie_letter_a.jpg" width="100%" height="400em">
+        <p>Tap anywhere to open poll</p>
+      </div>
+    </div>
+
+    <!--Prof Clicker-->
+    <div ng-if="ctrl.isRoomOwner">
+      <div layout="column">
+        <div ng-hide="ctrl.poll.isPollStarted" ng-click="ctrl.startPoll()" class="btn-no-outline medium-icon-button m-b-5">
+          <md-icon md-font-icon="fa fa-play" class="p-l-5"><span layout-padding="5px">Start</span></md-icon>
+        </div>
+        <div ng-show="ctrl.poll.isPollStarted" class="m-b-5 poll-timer">{{ctrl.poll.counter}}</div>
+        <div ng-click="ctrl.stopPoll()" class="btn-no-outline medium-icon-button">
+          <md-icon md-font-icon="fa fa-stop"><span layout-padding="5px">Stop</span></md-icon>
+        </div>
+      </div>
+      <div class="sub-header text-lighter-gray m-t-15">Poll Results</div>
+      <div flex layout="column" layout-align="end">
+        <canvas height="300" id="bar" class="chart chart-bar"
+                chart-options="ctrl.chart.options" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-colours="ctrl.chart.colours">
+        </canvas>
+      </div>
     </div>
   </div>
 
-  <!--Prof Clicker-->
-  <div ng-if="ctrl.isRoomOwner">
-    <div layout="column">
-      <div ng-hide="ctrl.poll.isPollStarted" ng-click="ctrl.startPoll()" class="btn-no-outline">
-        <md-icon md-font-icon="fa fa-play" class="p-l-5"><span layout-padding="5px">Start</span></md-icon>
-      </div>
-      <div ng-show="ctrl.poll.isPollStarted">{{ctrl.poll.counter}}</div>
-      <div ng-click="ctrl.stopPoll()" class="btn-no-outline">
-        <md-icon md-font-icon="fa fa-stop"><span layout-padding="5px">Stop</span></md-icon>
-      </div>
-    </div>
-    <h4>Poll Results</h4>
-    <div flex layout="column" layout-align="end">
-
-      <canvas height="350" id="bar" class="chart chart-bar"
-              chart-options="ctrl.chart.options" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-colours="ctrl.chart.colours">
-      </canvas>
-      <!--<nvd3 options="ctrl.graphOptions" data="ctrl.graphData"></nvd3>-->
-    </div>
-  </div>
 
 </div>
 
