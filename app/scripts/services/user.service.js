@@ -20,7 +20,10 @@
     logger = $log;
 
     ctrl = this;
-    user = {};
+    user = {
+      answers: []
+    };
+
     room = {};
 
     ctrl.types = {
@@ -85,12 +88,12 @@
   {
     if (!user.answers)
     {
-      user.answers = [answers];
+      user.answers = [answer];
       return user.answers;
     }
 
     user.answers.push(answer);
     return user.answers;
-  }
+  };
 
 })();

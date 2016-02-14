@@ -30,7 +30,9 @@
       NEW_QUESTION: 'new question',
       UP_VOTE_QUESTION: 'upvote question',
       DOWN_VOTE_QUESTION: 'downvote question',
-      NEW_POLL: 'new poll'
+      SET_PULL_ACTIVE: 'set active poll',
+      START_PULL: 'start poll',
+      STOP_PULL: 'stop poll'
     };
   }
 
@@ -134,11 +136,30 @@
 
   };
 
-  SocketService.prototype.newPoll = function ()
+  SocketService.prototype.activatePolling = function ()
   {
     var roomId = roomService.getRoomId();
-    logger.debug('SocketService#newPoll:', roomId);
-    socket.emit(ctrl.events.NEW_POLL, {room_id: roomId, num_options: 5});
+    logger.debug('SocketService#activatePolling:', roomId);
+
+    var data = {
+      room_id: roomId,
+      active: true
+    };
+
+    socket.emit(ctrl.events.SET_PULL_ACTIVE, data);
+  };
+
+  SocketService.prototype.deactivatePolling = function ()
+  {
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#deactivatePolling:', roomId);
+
+    var data = {
+      room_id: roomId,
+      active: false
+    };
+
+    socket.emit(ctrl.events.SET_PULL_ACTIVE, data);
   };
 
   SocketService.prototype.closePoll = function ()

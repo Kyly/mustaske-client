@@ -4,26 +4,31 @@
   angular.module('mustaskeClientApp')
     .service('ClickerService', ['$mdBottomSheet', 'SocketService', ClickerService]);
 
-  var ctrl, mdbottomsheet, socketService;
+  var ctrl, mdBottomSheet, socketService;
   function ClickerService($mdBottomSheet, SocketService)
   {
     ctrl = this;
     socketService = SocketService;
-    mdbottomsheet = $mdBottomSheet;
+    mdBottomSheet = $mdBottomSheet;
 
     ctrl.answer = '';
     ctrl.isPollStarted = false;
   }
 
-  ClickerService.prototype.openVote = function ()
+  ClickerService.prototype.openClicker = function ()
   {
-    mdbottomsheet.show(
+    mdBottomSheet.show(
       {
         templateUrl: 'views/clicker-input-bottom-sheet.tpl.html',
         controller: 'ClickerInputController',
         controllerAs: 'ctrl',
         clickOutsideToClose: true
       });
+  };
+
+  ClickerService.prototype.closeClicker = function ()
+  {
+    mdBottomSheet.cancel();
   };
 
   //poll status

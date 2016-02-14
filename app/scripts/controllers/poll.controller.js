@@ -32,7 +32,7 @@
         barShowStroke: false,
         barValueSpacing: 15,
         scaleShowLabels: false,
-        tooltipTemplate: "<%= value + ' %' %>"
+        tooltipTemplate: '<%= value + " %" %>'
       },
       colours: [{
         fillColor: '#1D3951'
@@ -73,7 +73,34 @@
       }
     );
 
-    socketService.io().on(socketService.events.NEW_POLL)
+    socketService.io().on(socketService.events.START_PULL, newPollStarted);
+    socketService.io().on(socketService.events.STOP_PULL, pollStopped);
+  }
+
+  function pollStopped ()
+  {
+    logger.debug('Pull stopped');
+    ctrl.poll.isPollStarted = false;
+    if (userService.isRoomOwner())
+    {
+      ctrl.timer.stop();
+      return;
+    }
+
+    clickerService.closeClicker();
+  }
+
+  function newPollStarted (data)
+  {
+    logger.debug('Pull started', data);
+    ctrl.poll.isPollStarted = true;
+    if(userService.isRoomOwner())
+    {
+      ctrl.timer.start();
+      return;
+    }
+
+    clickerService.openClicker();
   }
 
   PollController.prototype.addAnswerToGraph = function (data)
@@ -88,20 +115,13 @@
 
   PollController.prototype.startPoll = function ()
   {
-    logger.debug('Pull started');
-    socketService.newPoll();
-    ctrl.poll.isPollStarted = true;
-    logger.debug(ctrl.timer);
-    ctrl.timer.start();
+    socketService.activatePolling();
   };
 
   //------------------------------------------
   PollController.prototype.stopPoll = function ()
   {
-    logger.debug('Pull stopped');
-    ctrl.poll.counter = 0;
-    ctrl.poll.isPollStarted = false;
-    ctrl.timer.stop();
+    socketService.deactivatePolling();
   };
 
   //--------------------------------
