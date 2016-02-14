@@ -3,10 +3,10 @@
   'use strict';
   var module = angular.module('mustaskeClientApp');
 
-  module.controller('AppController', ['$scope', '$location', '$log', '$timeout', 'SocketService', 'RoomService', 'UserService', AppController]);
+  module.controller('AppController', ['$log', 'SocketService', 'RoomService', 'UserService', AppController]);
 
   var ctrl, logger, socketService, roomService, userService;
-  function AppController($scope, $location, $log, $timeout, SocketService, RoomService, UserService)
+  function AppController($log, SocketService, RoomService, UserService)
   {
     logger = $log;
     socketService = SocketService;
@@ -16,37 +16,6 @@
     ctrl = this;
     ctrl.selectedIndex = 0;
     ctrl.isFabOpen = false;
-    ctrl.pages = [
-      {
-        label: 'Recent Questions',
-        url: '/recent-questions',
-        icon: 'fa fa-question-circle'
-      },
-      {
-        label: 'Top Questions',
-        url: '/top-questions',
-        icon: 'fa fa-star'
-      },
-      {
-        label: 'Polls',
-        url: '/polls',
-        icon: 'fa fa-bar-chart'
-      },
-      {
-        label: 'Settings',
-        url: '/settings',
-        icon: 'fa fa-cog'
-      }
-    ];
-
-    $scope.$watch('appCtrl.selectedIndex', function(current) {
-      logger.debug('Current: ', current);
-      logger.debug('Changed location too', ctrl.pages[current].url);
-      $timeout(function(){
-        $location.url(ctrl.pages[current].url);
-      });
-    });
-
     initSockets();
   }
 
