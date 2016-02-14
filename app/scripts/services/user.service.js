@@ -22,6 +22,7 @@
     ctrl = this;
     user = {};
     room = {};
+
     ctrl.types = {
       AUDIENCE: 'audience',
       OWNER: 'owner'
@@ -74,5 +75,22 @@
   {
     return room ? room.room_id : undefined;
   };
+
+  UserService.prototype.getAnswers = function ()
+  {
+    return user.answers;
+  };
+
+  UserService.prototype.addPollAnswer = function(answer)
+  {
+    if (!user.answers)
+    {
+      user.answers = [answers];
+      return user.answers;
+    }
+
+    user.answers.push(answer);
+    return user.answers;
+  }
 
 })();

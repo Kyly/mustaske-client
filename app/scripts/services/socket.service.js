@@ -29,7 +29,8 @@
       CREATE_ROOM: 'create room',
       NEW_QUESTION: 'new question',
       UP_VOTE_QUESTION: 'upvote question',
-      DOWN_VOTE_QUESTION: 'downvote question'
+      DOWN_VOTE_QUESTION: 'downvote question',
+      NEW_POLL: 'new poll'
     };
   }
 
@@ -135,7 +136,9 @@
 
   SocketService.prototype.newPoll = function ()
   {
-
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#newPoll:', roomId);
+    socket.emit(ctrl.events.NEW_POLL, {room_id: roomId, num_options: 5});
   };
 
   SocketService.prototype.closePoll = function ()

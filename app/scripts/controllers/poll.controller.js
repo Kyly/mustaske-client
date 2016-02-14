@@ -1,18 +1,19 @@
 (function ()
 {
   'use strict';
-  var module = angular.module('mustaskeClientApp');
+  angular.module('mustaskeClientApp')
+    .controller('PollController',
+                ['$log', '$interval', '$scope', 'ClickerService', 'UserService', 'SocketService', PollController]);
 
-  module.controller('PollController', ['$log', '$interval', '$scope', 'ClickerService', 'UserService', PollController]);
+  var ctrl, interval, scope, clickerService, userService, logger, socketService;
 
-  var ctrl, interval, scope, clickerService, userService, logger;
-
-  function PollController($log, $interval, $scope, ClickerService, UserService)
+  function PollController($log, $interval, $scope, ClickerService, UserService, SocketService)
   {
     interval = $interval;
     scope = $scope;
     clickerService = ClickerService;
     userService = UserService;
+    socketService = SocketService;
     logger = $log;
 
     ctrl = this;
@@ -28,19 +29,13 @@
         scaleShowVerticalLines: false,
         responsive: true,
         maintainAspectRatio: false,
-        barDatasetSpacing: 1,
         barShowStroke: false,
-        barValueSpacing: 20,
+        barValueSpacing: 15,
         scaleShowLabels: false,
         tooltipTemplate: "<%= value + ' %' %>"
       },
       colours: [{
-        fillColor: '#1D3951',
-        strokeColor: '#1D3951',
-        pointColor: 'rgba(220,220,220,1)',
-        pointStrokeColor: '#fff',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(151,187,205,0.8)'
+        fillColor: '#1D3951'
       }]
     };
 
@@ -78,6 +73,7 @@
       }
     );
 
+    socketService.io().on(socketService.events.NEW_POLL)
   }
 
   PollController.prototype.addAnswerToGraph = function (data)
@@ -93,6 +89,7 @@
   PollController.prototype.startPoll = function ()
   {
     logger.debug('Pull started');
+    socketService.newPoll();
     ctrl.poll.isPollStarted = true;
     logger.debug(ctrl.timer);
     ctrl.timer.start();

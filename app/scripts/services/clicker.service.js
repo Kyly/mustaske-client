@@ -2,21 +2,21 @@
 {
   'use strict';
   angular.module('mustaskeClientApp')
-    .service('ClickerService', ['$mdBottomSheet', ClickerService]);
-  console.log('cc start');
-  var ctrl, mdbottomsheet ;
+    .service('ClickerService', ['$mdBottomSheet', 'SocketService', ClickerService]);
 
-  function ClickerService($mdBottomSheet)
+  var ctrl, mdbottomsheet, socketService;
+  function ClickerService($mdBottomSheet, SocketService)
   {
-    ctrl=this;
-    mdbottomsheet=$mdBottomSheet;
-    ctrl.answer='';
-    ctrl.isPollStarted=false;
+    ctrl = this;
+    socketService = SocketService;
+    mdbottomsheet = $mdBottomSheet;
+
+    ctrl.answer = '';
+    ctrl.isPollStarted = false;
   }
 
   ClickerService.prototype.openVote = function ()
   {
-    console.log('hi');
     mdbottomsheet.show(
       {
         templateUrl: 'views/clicker-input-bottom-sheet.tpl.html',
@@ -24,23 +24,27 @@
         controllerAs: 'ctrl',
         clickOutsideToClose: true
       });
-
   };
+
   //poll status
-  ClickerService.prototype.getPollStatus=function (){
+  ClickerService.prototype.getPollStatus = function ()
+  {
     return ctrl.isPollStarted;
-  } ;
-
-  ClickerService.prototype.setPollStatus=function(status){
-    ctrl.isPollStarted=status;
   };
+
+  ClickerService.prototype.setPollStatus = function (status)
+  {
+    ctrl.isPollStarted = status;
+  };
+
   //answers
-  ClickerService.prototype.setAnswer=function(answer){
-    ctrl.answer=answer;
-    console.log('answer is: '+ctrl.answer);
+  ClickerService.prototype.setAnswer = function (answer)
+  {
+    ctrl.answer = answer;
   };
 
-  ClickerService.prototype.getAnswer=function(){
+  ClickerService.prototype.getAnswer = function ()
+  {
     return ctrl.answer;
   };
 
