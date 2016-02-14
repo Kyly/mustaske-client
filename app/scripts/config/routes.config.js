@@ -27,7 +27,7 @@
       .when(
         '/polls', {
           templateUrl: 'views/polls.view.html',
-          controller: 'AboutController',
+          controller: 'PollController',
           controllerAs: 'ctrl'
         })
       .when(
