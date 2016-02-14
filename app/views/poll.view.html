@@ -11,10 +11,10 @@
     <!--Prof Clicker-->
     <div ng-if="ctrl.isRoomOwner">
       <div layout="column">
-        <div ng-hide="ctrl.poll.isPollStarted" ng-click="ctrl.startPoll()" class="btn-no-outline medium-icon-button m-b-5">
+        <div ng-hide="ctrl.poll.isPollStarted" ng-click="ctrl.startPoll()" class="btn-no-outline medium-icon-button m-b-15">
           <md-icon md-font-icon="fa fa-play" class="p-l-5"><span layout-padding="5px">Start</span></md-icon>
         </div>
-        <div ng-show="ctrl.poll.isPollStarted" class="m-b-5 poll-timer"><ma-timer x-timer="ctrl.timer"></ma-timer></div>
+        <div ng-show="ctrl.poll.isPollStarted" class="m-b-15"><ma-timer class="poll-timer text-right" x-timer="ctrl.timer"></ma-timer></div>
         <div ng-click="ctrl.stopPoll()" class="btn-no-outline medium-icon-button">
           <md-icon md-font-icon="fa fa-stop"><span layout-padding="5px">Stop</span></md-icon>
         </div>

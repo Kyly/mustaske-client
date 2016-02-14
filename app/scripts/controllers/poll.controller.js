@@ -21,18 +21,18 @@
     ctrl.buttons = ['A', 'B', 'C', 'D', 'E'];
     ctrl.chart = {
       labels: ctrl.buttons,
-      data: [[4, 7, 9, 0, 12]],
+      data: [[30, 50, 5, 10, 5]],
       options: {
-        scaleShowGridLines : false,
+        scaleShowGridLines: false,
         scaleShowHorizontalLines: false,
         scaleShowVerticalLines: false,
         responsive: true,
         maintainAspectRatio: false,
         barDatasetSpacing: 1,
         barShowStroke: false,
-        barValueSpacing : 20,
-        scaleShowLabels: false
-
+        barValueSpacing: 20,
+        scaleShowLabels: false,
+        tooltipTemplate: "<%= value + ' %' %>"
       },
       colours: [{
         fillColor: '#1D3951',
