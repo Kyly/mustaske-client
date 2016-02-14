@@ -66,6 +66,7 @@
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
     rootScope.roomName = userService.getRoomName();
+    rootScope.roomId = roomService.getRoomId();
     ctrl.overlayHide = true;
   }
 
