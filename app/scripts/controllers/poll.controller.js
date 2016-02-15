@@ -108,7 +108,7 @@
 
   function addVote(pollData)
   {
-    logger.debug('Poll vote', pollData);
+    logger.debug('Poll vote-------------------', pollData);
     votes.updateVotes(pollData);
   }
 
@@ -120,6 +120,7 @@
   PollController.prototype.stopPoll = function ()
   {
     socketService.deactivatePolling();
+    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
   };
 
 
