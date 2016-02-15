@@ -122,5 +122,14 @@
     socketService.deactivatePolling();
   };
 
+
+  PollController.prototype.restartVote= function ()
+  {
+    if(ctrl.poll.isPollStarted){
+      clickerService.openClicker();
+    }
+  };
+
+
 })();
 

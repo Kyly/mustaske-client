@@ -1,10 +1,11 @@
 <div layout="column" flex layout-padding="5">
   <span class="content-page-title">Poll</span>
   <div layout-padding="40">
-    <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.startVote()">
+    <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.restartVote()">
       <div layout="column" layout-align="center center">
-        <img src="http://www.lettercult.com/alphabattleA/angie_letter_a.jpg" width="100%" height="400em">
-        <p>Tap anywhere to open poll</p>
+        <img src="http://www.lettercult.com/alphabattleA/angie_letter_a.jpg" width="100%" height="350em">
+        <p ng-if="ctrl.poll.isPollStarted">Tap anywhere to open poll</p>
+        <p ng-if="!ctrl.poll.isPollStarted">Polls are currently closed</p>
       </div>
     </div>
 
