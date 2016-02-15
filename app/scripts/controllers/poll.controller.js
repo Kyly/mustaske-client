@@ -108,7 +108,7 @@
 
   function addVote(pollData)
   {
-    logger.debug('Poll vote-------------------', pollData);
+    logger.debug('Poll vote', pollData);
     votes.updateVotes(pollData);
   }
 
