@@ -3,11 +3,11 @@
   'use strict';
   angular.module('mustaskeClientApp')
     .controller('PollController',
-                ['$log', '$interval', '$scope', 'ClickerService', 'UserService', 'SocketService', PollController]);
+                ['$log', '$interval', '$scope', 'ClickerService', 'UserService', 'SocketService', 'Votes', PollController]);
 
-  var ctrl, interval, scope, clickerService, userService, logger, socketService;
+  var ctrl, interval, scope, clickerService, userService, logger, socketService, votes;
 
-  function PollController($log, $interval, $scope, ClickerService, UserService, SocketService)
+  function PollController($log, $interval, $scope, ClickerService, UserService, SocketService, Votes)
   {
     interval = $interval;
     scope = $scope;
@@ -35,10 +35,16 @@
         tooltipTemplate: '<%= value + " %" %>'
       },
       colours: [{
-        fillColor: '#1D3951'
+        fillColor: '#1D3951',
+        strokeColor: '#1D3951',
+        pointColor: 'rgba(220,220,220,1)',
+        pointStrokeColor: '#fff',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(151,187,205,0.8)'
       }]
     };
 
+    votes = new Votes(ctrl.chart.labels, ctrl.chart.data);
     init();
   }
 
@@ -109,6 +115,7 @@
   function addVote(pollData)
   {
     logger.debug('Poll vote', pollData);
+    votes.updateVotes(pollData);
   }
 
   PollController.prototype.addAnswerToGraph = function (data)

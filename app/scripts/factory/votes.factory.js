@@ -1,38 +1,76 @@
 /**
- * @ngdoc service
- * @name mustaskeClientApp.socket
+ * @ngdoc factory
+ * @name mustaskeClientApp.votes
  * @description
- * # socket
+ * # votes
  * Factory in the mustaskeClientApp.
+ * Container for votes data
  */
 (function ()
 {
-
   'use strict';
 
-  /* jshint ignore:start */ /* This code confuses the linter :| */
-
   angular.module('mustaskeClientApp')
-    .factory('Socket', ['$log', 'socketFactory', Socket]);
+    .factory('Votes', ['$log', VotesDef]);
 
   var logger;
 
-  function Socket($log, socketFactory)
+  function VotesDef($log)
   {
     logger = $log;
-    var ioSocket = io.connect();
-
-    logger.debug('check 1', ioSocket.connected);
-    ioSocket.on('connect', function() {
-      logger.debug('check 2', ioSocket.connected);
-    });
-
-    return socketFactory(
-      {
-        ioSocket: ioSocket
-      }
-    );
-
+    return (Votes);
   }
-  /* jshint ignore:end */
+
+  var datumn, datumnMap, totalVotes;
+
+  function Votes(labels, data)
+  {
+    datumn = data;
+    datumnMap = {};
+    angular.forEach(
+      labels, function (value)
+      {
+        datumnMap[value] = 0;
+      });
+    datumn[0] = _.values(datumnMap);
+  }
+
+  Votes.prototype.updateVotes = function (data)
+  {
+    angular.forEach(
+      data, function (value, key)
+      {
+        datumnMap[key] = value;
+      });
+
+    var values = _.values(datumnMap);
+
+    totalVotes = _.foldl(
+      values, function (acc, data)
+      {
+        return acc + data;
+      }, 0);
+
+    if (totalVotes <= 0)
+    {
+      return;
+    }
+
+    datumn[0] = _.map(
+      values, function (val)
+      {
+        return (val / totalVotes) * 100;
+      });
+  };
+
+  Votes.prototype.getTotalVotes = function ()
+  {
+    return totalVotes;
+  };
+
+  Votes.prototype.getDatumn = function ()
+  {
+    return datumn;
+  };
+
 })();
