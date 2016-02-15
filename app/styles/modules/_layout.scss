@@ -38,9 +38,18 @@ md-toolbar {
 
 }
 
+md-toolbar {
+  margin-bottom: -1px;
+}
+
+md-tabs-wrapper {
+  margin-right: -1px;
+  margin-left: -1px;
+}
+
 @media only screen and (max-width: 959px) and (min-width: 0) and (orientation: portrait) {
   md-toolbar {
-    min-height: 40px;
+    height: 37px;
   }
 }
 

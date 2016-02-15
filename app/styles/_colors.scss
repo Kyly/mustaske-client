@@ -1,4 +1,4 @@
-$navy-blue: #1D3951;
+$navy-blue: rgb(29,57,81);
 $light-blue-accent: #70899E;
 $dark-gray-blue: #4A6379;
 $light-gray: #C5C5C5;
@@ -28,6 +28,10 @@ $primary-color: $navy-blue;
 
 .bg-extra-light-gray {
   background-color: $extra-light-gray;
+}
+
+.bg-primary {
+  background-color: $primary-color;
 }
 
 
