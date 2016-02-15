@@ -1,11 +1,11 @@
 <md-bottom-sheet>
-  <div layout="row" layout-align="center center">
-    <h4>You have currently selected: {{ctrl.answer}}</h4>
-  </div>
+  <!--<div layout="row" layout-align="center center">-->
+    <!--<h4>You have currently selected: {{ctrl.answer}}</h4>-->
+  <!--</div>-->
   <div>
     <md-list layout="row" layout-align="center center" layout-padding="auto">
       <md-list-item>
-        <md-button ng-repeat="button in ctrl.buttons" class="md-grid-item-content md-raised" ng-click="ctrl.submitAnswer(event,button)" style="min-width: 44px" >
+        <md-button ng-repeat="button in ctrl.buttons" class="md-grid-item-content" ng-click="ctrl.submitAnswer(button)">
           {{button}}
         </md-button>
       </md-list-item>

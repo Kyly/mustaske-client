@@ -43,3 +43,7 @@ md-toolbar {
     min-height: 40px;
   }
 }
+
+md-tabs div[md-tabs-template] {
+  @extend .layout-fill;
+}

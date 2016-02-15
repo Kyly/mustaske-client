@@ -4,16 +4,26 @@
   angular.module('mustaskeClientApp')
     .service('ClickerService', ['$mdBottomSheet', 'SocketService', ClickerService]);
 
-  var ctrl, mdBottomSheet, socketService;
+  var ctrl, mdBottomSheet, socketService, answers, buttons;
   function ClickerService($mdBottomSheet, SocketService)
   {
     ctrl = this;
     socketService = SocketService;
     mdBottomSheet = $mdBottomSheet;
 
-    ctrl.answer = '';
+    answers = {
+      current: '',
+      all: []
+    };
+
+    buttons = ['A', 'B', 'C', 'D', 'E'];
     ctrl.isPollStarted = false;
   }
+
+  ClickerService.prototype.getButtons = function ()
+  {
+    return buttons;
+  };
 
   ClickerService.prototype.openClicker = function ()
   {
@@ -43,14 +53,20 @@
   };
 
   //answers
-  ClickerService.prototype.setAnswer = function (answer)
+  ClickerService.prototype.vote = function (answer)
   {
-    ctrl.answer = answer;
+    socketService.votePoll(answer);
+    answers.current = answer;
+  };
+
+  ClickerService.prototype.saveCurrentVote = function ()
+  {
+    answers.all.push(answers.current);
   };
 
   ClickerService.prototype.getAnswer = function ()
   {
-    return ctrl.answer;
+    return answers.current;
   };
 
 })();

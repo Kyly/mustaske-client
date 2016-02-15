@@ -10,24 +10,23 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .controller('ClickerInputController', ['$mdBottomSheet', 'ClickerService','SocketService', ClickerInputController]);
+    .controller('ClickerInputController', ['$log', 'ClickerService', 'SocketService', ClickerInputController]);
 
-  var ctrl, socketService, mdBottomSheet, clickerService;
+  var ctrl, socketService, clickerService, logger;
 
-  function ClickerInputController(ClickerService, $mdBottomSheet, SocketService, RoomService)
+  function ClickerInputController($log, ClickerService, SocketService)
   {
-    ctrl = this;
     socketService = SocketService;
-    mdBottomSheet = $mdBottomSheet;
-    clickerService=ClickerService;
-    console.log('hello started clickers');
-    ctrl.buttons=['A','B','C','D','E'];
+    clickerService = ClickerService;
+    logger = $log;
+
+    ctrl = this;
+    ctrl.buttons = clickerService.getButtons();
   }
 
-  ClickerInputController.prototype.submitAnswer = function (event,button)
+  ClickerInputController.prototype.submitAnswer = function (button)
   {
-    console.log(button);
-    clickerService.setAnswer(button);
+    socketService.votePoll(button);
   };
 
 

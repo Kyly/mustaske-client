@@ -19,7 +19,7 @@
     ctrl = this;
     ctrl.timer = {};
 
-    ctrl.buttons = ['A', 'B', 'C', 'D', 'E'];
+    ctrl.buttons = clickerService.getButtons();
     ctrl.chart = {
       labels: ctrl.buttons,
       data: [[30, 50, 5, 10, 5]],
@@ -73,8 +73,8 @@
       }
     );
 
-    socketService.io().on(socketService.events.START_PULL, newPollStarted);
-    socketService.io().on(socketService.events.STOP_PULL, pollStopped);
+    socketService.io().on(socketService.events.START_POLL, newPollStarted);
+    socketService.io().on(socketService.events.STOP_POLL, pollStopped);
   }
 
   function pollStopped ()
@@ -88,6 +88,7 @@
     }
 
     clickerService.closeClicker();
+    clickerService.saveCurrentVote();
   }
 
   function newPollStarted (data)
@@ -97,10 +98,17 @@
     if(userService.isRoomOwner())
     {
       ctrl.timer.start();
+
+      socketService.io().on(socketService.events.VOTE_POLL, addVote);
       return;
     }
 
     clickerService.openClicker();
+  }
+
+  function addVote(pollData)
+  {
+    logger.debug('Poll vote', pollData);
   }
 
   PollController.prototype.addAnswerToGraph = function (data)
@@ -108,31 +116,14 @@
 
   };
 
-  PollController.prototype.setAnswer = function (button)
-  {
-    ctrl.answer = button;
-  };
-
   PollController.prototype.startPoll = function ()
   {
     socketService.activatePolling();
   };
 
-  //------------------------------------------
   PollController.prototype.stopPoll = function ()
   {
     socketService.deactivatePolling();
-  };
-
-  //--------------------------------
-  PollController.prototype.startVote = function ()
-  {
-    clickerService.openVote();
-  };
-
-  PollController.prototype.getAnswer = function ()
-  {
-    ctrl.answer = clickerService.getAnswer();
   };
 
   PollController.prototype.getAnswer = function ()

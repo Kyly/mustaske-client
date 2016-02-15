@@ -30,9 +30,10 @@
       NEW_QUESTION: 'new question',
       UP_VOTE_QUESTION: 'upvote question',
       DOWN_VOTE_QUESTION: 'downvote question',
-      SET_PULL_ACTIVE: 'set active poll',
-      START_PULL: 'start poll',
-      STOP_PULL: 'stop poll'
+      SET_POLL_ACTIVE: 'set active poll',
+      START_POLL: 'start poll',
+      STOP_POLL: 'stop poll',
+      VOTE_POLL: 'vote poll'
     };
   }
 
@@ -146,7 +147,7 @@
       active: true
     };
 
-    socket.emit(ctrl.events.SET_PULL_ACTIVE, data);
+    socket.emit(ctrl.events.SET_POLL_ACTIVE, data);
   };
 
   SocketService.prototype.deactivatePolling = function ()
@@ -159,7 +160,19 @@
       active: false
     };
 
-    socket.emit(ctrl.events.SET_PULL_ACTIVE, data);
+    socket.emit(ctrl.events.SET_POLL_ACTIVE, data);
+  };
+
+  SocketService.prototype.votePoll = function (option)
+  {
+    logger.debug('SocketService#votePoll:option:', option);
+
+    var data = {
+      room_id: roomService.getRoomId(),
+      option: option
+    };
+
+    socket.emit(ctrl.events.VOTE_POLL, data);
   };
 
   SocketService.prototype.closePoll = function ()
