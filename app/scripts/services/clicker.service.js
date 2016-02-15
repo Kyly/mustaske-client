@@ -64,9 +64,9 @@
     answers.all.push(answers.current);
   };
 
-  ClickerService.prototype.getAnswer = function ()
+  ClickerService.prototype.getAnswers = function ()
   {
-    return answers.current;
+    return answers;
   };
 
 })();

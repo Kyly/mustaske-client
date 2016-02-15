@@ -40,10 +40,8 @@
   function initSocket()
   {
     socketService.io().on('leave room', function() {
-      scope.appCtrl.selectedIndex = 0;
       ctrl.isLeaving = true;
       ctrl.roomName = '';
-      logger.debug('Leave room');
       ctrl.overlayHide = false;
     });
   }

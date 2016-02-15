@@ -21,6 +21,7 @@
     logger = $log;
 
     ctrl = this;
+    ctrl.answers = clickerService.getAnswers();
     ctrl.buttons = clickerService.getButtons();
   }
 

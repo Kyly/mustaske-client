@@ -18,7 +18,7 @@
 
     ctrl = this;
     ctrl.timer = {};
-
+    ctrl.answers = clickerService.getAnswers();
     ctrl.buttons = clickerService.getButtons();
     ctrl.chart = {
       labels: ctrl.buttons,
@@ -35,12 +35,7 @@
         tooltipTemplate: '<%= value + " %" %>'
       },
       colours: [{
-        fillColor: '#1D3951',
-        strokeColor: '#1D3951',
-        pointColor: 'rgba(220,220,220,1)',
-        pointStrokeColor: '#fff',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(151,187,205,0.8)'
+        fillColor: '#1D3951'
       }]
     };
 
@@ -104,7 +99,6 @@
     if(userService.isRoomOwner())
     {
       ctrl.timer.start();
-
       socketService.io().on(socketService.events.VOTE_POLL, addVote);
       return;
     }
@@ -118,11 +112,6 @@
     votes.updateVotes(pollData);
   }
 
-  PollController.prototype.addAnswerToGraph = function (data)
-  {
-
-  };
-
   PollController.prototype.startPoll = function ()
   {
     socketService.activatePolling();
@@ -131,11 +120,6 @@
   PollController.prototype.stopPoll = function ()
   {
     socketService.deactivatePolling();
-  };
-
-  PollController.prototype.getAnswer = function ()
-  {
-    ctrl.answer = clickerService.getAnswer();
   };
 
 })();
