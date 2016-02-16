@@ -18,6 +18,7 @@
   {
     logger = $log;
     mdBottomSheet=$mdBottomSheet;
+
     ctrl = this;
 
     room = {
