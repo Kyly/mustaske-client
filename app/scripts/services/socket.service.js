@@ -171,7 +171,6 @@
       room_id: roomService.getRoomId(),
       option: option
     };
-
     socket.emit(ctrl.events.VOTE_POLL, data);
   };
 

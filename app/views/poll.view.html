@@ -3,7 +3,7 @@
   <div layout-padding="40">
     <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.restartVote()">
       <div layout="column" layout-align="center center">
-        <img src="http://www.lettercult.com/alphabattleA/angie_letter_a.jpg" width="100%" height="350em">
+        <h1 class="md-display-5">{{ctrl.answers.current}}</h1>
         <p ng-if="ctrl.poll.isPollStarted">Tap anywhere to open poll</p>
         <p ng-if="!ctrl.poll.isPollStarted">Polls are currently closed</p>
       </div>
