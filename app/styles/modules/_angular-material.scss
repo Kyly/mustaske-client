@@ -10,6 +10,7 @@
 $font-family: Roboto, 'Helvetica Neue', sans-serif !default;
 $font-size:   10px;
 
+$display-5-font-size-base: rem(25) !default;
 $display-4-font-size-base: rem(11.20) !default;
 $display-3-font-size-base: rem(5.600) !default;
 $display-2-font-size-base: rem(4.500) !default;
@@ -460,6 +461,12 @@ ul, ol, p, h1, h2, h3, h4, h5, h6 {
 /************
  * Headings
  ************/
+.md-display-5 {
+  font-size: $display-5-font-size-base;
+  font-weight: 300;
+  letter-spacing: -0.010em;
+  line-height: $display-5-font-size-base;
+}
 .md-display-4 {
   font-size: $display-4-font-size-base;
   font-weight: 300;
@@ -1713,7 +1720,7 @@ md-bottom-sheet {
           }
         }
       }
-      
+
       @media screen and (max-width: $layout-breakpoint-sm) {
         @include grid-items-per-row(3, true);
       }
@@ -3688,7 +3695,7 @@ md-list-item {
     position: relative;
     padding: $list-item-padding-vertical $list-item-padding-horizontal;
     flex: 1 1 auto;
-    
+
     &.md-button {
       font-size: inherit;
       height: inherit;
@@ -5457,7 +5464,7 @@ md-switch {
     @include rtl(margin-left, inherit, 0);
     @include rtl(margin-right, 0, inherit);
   }
-  
+
   &[disabled] {
     cursor: default;
 

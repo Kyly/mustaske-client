@@ -87,7 +87,7 @@
       ctrl.timer.stop();
       return;
     }
-
+    ctrl.timer.stop();
     clickerService.closeClicker();
     clickerService.saveCurrentVote();
   }
@@ -102,7 +102,7 @@
       socketService.io().on(socketService.events.VOTE_POLL, addVote);
       return;
     }
-
+    ctrl.timer.start();
     clickerService.openClicker();
   }
 
@@ -120,8 +120,9 @@
   PollController.prototype.stopPoll = function ()
   {
     socketService.deactivatePolling();
+    //restart votes;
+    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
   };
-
 
   PollController.prototype.restartVote= function ()
   {

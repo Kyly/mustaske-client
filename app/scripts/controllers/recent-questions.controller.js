@@ -22,5 +22,4 @@
     logger.debug('Questions: ', ctrl.questions);
   }
 
-
 })();

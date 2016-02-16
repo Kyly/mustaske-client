@@ -2,14 +2,15 @@
 {
   'use strict';
   angular.module('mustaskeClientApp')
-    .service('ClickerService', ['$mdBottomSheet', 'SocketService', ClickerService]);
+    .service('ClickerService', ['$mdBottomSheet', 'SocketService','RoomService', ClickerService]);
 
-  var ctrl, mdBottomSheet, socketService, answers, buttons;
-  function ClickerService($mdBottomSheet, SocketService)
+  var ctrl, mdBottomSheet, socketService, answers, buttons, roomService;
+  function ClickerService($mdBottomSheet, SocketService,RoomService)
   {
     ctrl = this;
     socketService = SocketService;
     mdBottomSheet = $mdBottomSheet;
+    roomService = RoomService;
 
     answers = {
       current: '',
@@ -44,6 +45,11 @@
   //poll status
   ClickerService.prototype.getPollStatus = function ()
   {
+    if(roomService.getActivePoll()){
+      ctrl.isPollStarted=true;
+      roomService.setActivePoll(false);
+      ctrl.openClicker();
+    }
     return ctrl.isPollStarted;
   };
 
