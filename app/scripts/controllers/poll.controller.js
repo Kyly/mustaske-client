@@ -120,8 +120,9 @@
   PollController.prototype.stopPoll = function ()
   {
     socketService.deactivatePolling();
+    //restart votes;
+    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
   };
-
 
   PollController.prototype.restartVote= function ()
   {
