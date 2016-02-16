@@ -13,7 +13,7 @@
   angular.module('mustaskeClientApp')
     .service('RoomService', ['$mdBottomSheet','$log', RoomService]);
 
-  var room, logger, ctrl, mdBottomSheet;
+  var room, logger, ctrl, mdBottomSheet, pollStatus;
   function RoomService($log,$mdBottomSheet)
   {
     logger = $log;
@@ -25,16 +25,17 @@
       room_name : '',
       room_id : '',
       questions : [],
-      top_questions : []
+      top_questions : [],
+      active_poll : ''
     };
-
+    pollStatus='def';
   }
 
   RoomService.prototype.setRoomData = function (data)
   {
     room.room_name = data.room_name;
     room.room_id = data.room_id;
-    ctrl.activePoll=data.active_poll;
+    room.active_poll=data.active_poll;
     if (data.questions && data.questions.length > 0)
     {
       room.questions.push.apply(room.questions, data.questions);
@@ -44,10 +45,6 @@
     {
       room.top_questions.push.apply(room.top_questions, data.top_questions);
     }
-    if(data.active_poll){
-
-    }
-
   };
 
   RoomService.prototype.addQuestion = function (question)
@@ -73,6 +70,16 @@
   RoomService.prototype.getRoomName = function ()
   {
     return room.room_name;
+  };
+
+  RoomService.prototype.getActivePoll= function ()
+  {
+    return room.active_poll;
+  };
+
+  RoomService.prototype.setActivePoll= function (poll)
+  {
+    room.active_poll=poll;
   };
 
   RoomService.prototype.updateVote = function (questionData)
