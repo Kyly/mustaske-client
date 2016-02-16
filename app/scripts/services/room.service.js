@@ -11,12 +11,13 @@
 
   'use strict';
   angular.module('mustaskeClientApp')
-    .service('RoomService', ['$log', RoomService]);
+    .service('RoomService', ['$mdBottomSheet','$log', RoomService]);
 
-  var room, logger, ctrl;
-  function RoomService($log)
+  var room, logger, ctrl, mdBottomSheet;
+  function RoomService($log,$mdBottomSheet)
   {
     logger = $log;
+    mdBottomSheet=$mdBottomSheet;
     ctrl = this;
 
     room = {
@@ -32,6 +33,7 @@
   {
     room.room_name = data.room_name;
     room.room_id = data.room_id;
+    ctrl.activePoll=data.active_poll;
     if (data.questions && data.questions.length > 0)
     {
       room.questions.push.apply(room.questions, data.questions);
@@ -40,6 +42,9 @@
     if (data.top_questions && data.top_questions.length > 0)
     {
       room.top_questions.push.apply(room.top_questions, data.top_questions);
+    }
+    if(data.active_poll){
+
     }
 
   };
