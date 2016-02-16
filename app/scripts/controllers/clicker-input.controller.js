@@ -27,7 +27,9 @@
 
   ClickerInputController.prototype.submitAnswer = function (button)
   {
-    socketService.votePoll(button);
+    //socketService.votePoll(button);
+    //logger.debug('this is the vote',clickerService.getAnswers());
+    clickerService.vote(button);
   };
 
 
