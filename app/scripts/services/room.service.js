@@ -10,32 +10,32 @@
 {
 
   'use strict';
-  angular.module('mustaskeClientApp')
-    .service('RoomService', ['$mdBottomSheet','$log', RoomService]);
+  angular.module('mustaskeClientApp').service('RoomService', ['$mdBottomSheet', '$log', RoomService]);
 
   var room, logger, ctrl, mdBottomSheet, pollStatus;
-  function RoomService($log,$mdBottomSheet)
+
+  function RoomService($log, $mdBottomSheet)
   {
     logger = $log;
-    mdBottomSheet=$mdBottomSheet;
+    mdBottomSheet = $mdBottomSheet;
 
     ctrl = this;
 
     room = {
-      room_name : '',
-      room_id : '',
-      questions : [],
-      top_questions : [],
-      active_poll : ''
+      room_name: '',
+      room_id: '',
+      questions: [],
+      top_questions: [],
+      active_poll: ''
     };
-    pollStatus='def';
+    pollStatus = 'def';
   }
 
   RoomService.prototype.setRoomData = function (data)
   {
     room.room_name = data.room_name;
     room.room_id = data.room_id;
-    room.active_poll=data.active_poll;
+    room.active_poll = data.active_poll;
     if (data.questions && data.questions.length > 0)
     {
       room.questions.push.apply(room.questions, data.questions);
@@ -54,7 +54,8 @@
 
   RoomService.prototype.getTopQuestions = function ()
   {
-    return room.questions; /* May not really need top questions anymore, just handle this by sorting */
+    return room.questions;
+    /* May not really need top questions anymore, just handle this by sorting */
   };
 
   RoomService.prototype.getQuestions = function ()
@@ -72,19 +73,20 @@
     return room.room_name;
   };
 
-  RoomService.prototype.getActivePoll= function ()
+  RoomService.prototype.getActivePoll = function ()
   {
     return room.active_poll;
   };
 
-  RoomService.prototype.setActivePoll= function (poll)
+  RoomService.prototype.setActivePoll = function (poll)
   {
-    room.active_poll=poll;
+    room.active_poll = poll;
   };
 
   RoomService.prototype.updateVote = function (questionData)
   {
-    angular.forEach(room.questions, function(question) {
+    angular.forEach(room.questions, function (question)
+    {
       if (question.question_id === questionData.question_id)
       {
         question.question_score = questionData.question_score;
@@ -92,11 +94,10 @@
     });
   };
 
-  RoomService.prototype.dismissQuestion = function(questionId)
+  RoomService.prototype.dismissQuestion = function (questionId)
   {
     var question = room.questions.indexOf(questionId);
     room.questions.splice(question, 1);
   };
-
 
 })();
