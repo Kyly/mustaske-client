@@ -96,8 +96,15 @@
 
   RoomService.prototype.dismissQuestion = function (questionId)
   {
-    var question = room.questions.indexOf(questionId);
-    room.questions.splice(question, 1);
+   for(var index = 0; room.questions.length > index; index++)
+   {
+     if(room.questions[index].question_id === questionId)
+     {
+       room.questions.splice(index, 1);
+       return;
+     }
+   }
+
   };
 
 })();

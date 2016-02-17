@@ -132,11 +132,7 @@
   {
     var roomId = roomService.getRoomId();
     logger.debug('SocketService#dismissQuesiton:questionId:', questionId, roomId);
-
-    //roomService.dismissQuestion(questionId);
     socket.emit(ctrl.events.DISMISS_QUESTION, {room_id: roomId, question_id: questionId});
-    //return response(ctrl.events.DISMISS_QUESTION);
-
   };
 
   SocketService.prototype.warnUser = function ()
