@@ -74,6 +74,13 @@
     };
 
     scope.isRoomOwner = userService.isRoomOwner();
+
+    //Dismiss question
+    scope.dismiss = function(question)
+    {
+      socketService.dismissQuestion(question.question_id);
+    };
+
   }
 
 })();
