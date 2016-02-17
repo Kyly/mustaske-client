@@ -39,6 +39,11 @@
         roomService.updateVote(questionVoteInfo);
       });
 
+    socketService.io().on(
+      socketService.events.DISMISS_QUESTION, function (questionId)
+      {
+        roomService.dismissQuestion(questionId);
+      });
   }
 
 })();

@@ -33,7 +33,8 @@
       SET_POLL_ACTIVE: 'set active poll',
       START_POLL: 'start poll',
       STOP_POLL: 'stop poll',
-      VOTE_POLL: 'vote poll'
+      VOTE_POLL: 'vote poll',
+      DISMISS_QUESTION: 'dismiss question'
     };
   }
 
@@ -127,14 +128,23 @@
     socket.emit(ctrl.events.DOWN_VOTE_QUESTION, {room_id: roomId, question_id: questionId});
   };
 
-  SocketService.prototype.dismissQuestion = function ()
+  SocketService.prototype.dismissQuestion = function (questionId)
   {
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#dismissQuesiton:questionId:', questionId, roomId);
+
+    //roomService.dismissQuestion(questionId);
+    socket.emit(ctrl.events.DISMISS_QUESTION, {room_id: roomId, question_id: questionId});
+    //return response(ctrl.events.DISMISS_QUESTION);
 
   };
 
   SocketService.prototype.warnUser = function ()
   {
-
+    /**
+    var userWarnedImpl = function () {
+      bootbox.alert('<h3><strong>Warning!!!!</strong> Must you really ask such a question?</h3>');
+    }**/
   };
 
   SocketService.prototype.activatePolling = function ()
