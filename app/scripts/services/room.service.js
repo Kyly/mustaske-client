@@ -92,4 +92,11 @@
     });
   };
 
+  RoomService.prototype.dismissQuestion = function(questionId)
+  {
+    var question = room.questions.indexOf(questionId);
+    room.questions.splice(question, 1);
+  };
+
+
 })();
