@@ -1,4 +1,4 @@
-<div class="login-overlay container-fluid animated" layout="column" ng-class="{'slideOutUp' : ctrl.overlayHide}">
+<div class="login-overlay bg-primary container-fluid animated" layout="column" ng-class="{'slideOutUp' : ctrl.overlayHide, 'slideInDown' : !ctrl.overlayHide && ctrl.isLeaving}">
 
   <div class="text-center vcenter" layout="row" layout-margin="20" layout-align="center center">
     <div>
@@ -15,14 +15,14 @@
 
         <div>
           <p class="text-gray-lighter">Please enter the name of a room you want to join or create</p>
-          <form id="login-info">
-            <md-input-container class="login-input-container m-b-0 p-b-0" md-autofocus>
+          <form id="login-info" name="loginForm" md-no-autogrow="true" layout="column" layout-align="center center">
+            <md-input-container class="login-input-container m-b-0" md-autofocus="true" md-no-float="true" md-is-error="false">
               <label>Room Name...</label>
-              <input type="text" class="md-accent" ng-model="ctrl.roomName">
+              <input type="text" name="roomNameOrId" class="md-accent" ng-model="ctrl.roomName" required ng-pattern="ctrl.input.pattern" ng-model-options="{ allowInvalid: true }">
             </md-input-container>
-            <div class="m-t-0">
-              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.joinRoom()">Join</md-button>
-              <md-button class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.createRoom()">Create</md-button>
+            <div class="m-t-0" layout="row">
+              <md-button ng-disabled="!loginForm.roomNameOrId.$valid" class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.joinRoom()">Join</md-button>
+              <md-button ng-disabled="loginForm.roomNameOrId.$error.required" class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.createRoom()">Create</md-button>
             </div>
           </form>
         </div>

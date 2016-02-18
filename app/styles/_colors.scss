@@ -1,9 +1,39 @@
+$navy-blue: rgb(29,57,81);
+$light-blue-accent: #70899E;
+$dark-gray-blue: #4A6379;
+$light-gray: #C5C5C5;
+$lighter-gray: #CBCBCB;
+$extra-light-gray: #F5F5F5;
+$warn-hue-1: rgb(255,138,101);
+
+$primary-color: $navy-blue;
+
+.text-navy-blue {
+  color: $navy-blue;
+}
+
+.text-primary {
+  @extend .text-navy-blue;
+}
 .text-gray-light {
-  color: $gray-light;
+  color: $light-gray;
 }
 
 .text-gray-lighter {
-  color: #AFABAB;
+  color: $lighter-gray;
 }
+
+.text-gray-accent {
+  color: $light-gray;
+}
+
+.bg-extra-light-gray {
+  background-color: $extra-light-gray;
+}
+
+.bg-primary {
+  background-color: $primary-color;
+}
+
 
 

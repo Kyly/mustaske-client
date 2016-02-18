@@ -30,29 +30,57 @@
   function linkFn(scope)
   {
     scope.hide = true;
-    scope.upVoted = false;
+
+    var voteControls = {
+      isUpVoted: true
+    };
+
+    scope.voteControls = voteControls;
 
     scope.detailToggle = function()
     {
+      logger.debug(scope.hide);
       scope.hide = !scope.hide;
     };
 
-    scope.upVote = function (questionId)
+    scope.upVote = function (question)
     {
-      socketService.upVoteQuestion(questionId).then(upVoteSuccess, upVoteFailure);
+      if (!question.hasVotedUp)
+      {
+        question.hasVotedUp = true;
+        if (question.hasVotedDown)
+        {
+          question.hasVotedDown = false;
+        }
+      } else {
+        question.hasVotedUp = false;
+      }
+      socketService.upVoteQuestion(question.question_id);
+    };
+
+    scope.downVote = function (question)
+    {
+      if (!question.hasVotedDown)
+      {
+        question.hasVotedDown = true;
+        if (question.hasVotedUp)
+        {
+          question.hasVotedUp = false;
+        }
+      } else {
+        question.hasVotedDown = false;
+      }
+      socketService.downVoteQuestion(question.question_id);
     };
 
     scope.isRoomOwner = userService.isRoomOwner();
 
-    function upVoteSuccess()
+    //Dismiss question
+    scope.dismiss = function(question)
     {
-      scope.upVoted = true;
-    }
+      socketService.dismissQuestion(question.question_id);
+    };
 
-    function upVoteFailure()
-    {
-      scope.upVoted = false;
-    }
   }
 
 })();

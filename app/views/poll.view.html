@@ -1,0 +1,38 @@
+<div layout="column" flex layout-padding="5">
+  <div layout="row">
+    <span class="content-page-title">Poll</span>
+    <span class="flex"></span>
+    <ma-timer ng-if="!ctrl.isRoomOwner" class="poll-timer text-right" x-timer="ctrl.timer"></ma-timer>
+  </div>
+  <div layout-padding="40">
+    <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.restartVote()">
+      <div layout="column" layout-align="center center">
+        <h1 class="md-display-5">{{ctrl.answers.current}}</h1>
+        <p ng-if="ctrl.poll.isPollStarted">Tap anywhere to open poll</p>
+        <p ng-if="!ctrl.poll.isPollStarted">Polls are currently closed</p>
+      </div>
+    </div>
+
+    <!--Prof Clicker-->
+    <div ng-if="ctrl.isRoomOwner">
+      <div layout="column">
+        <div ng-hide="ctrl.poll.isPollStarted" ng-click="ctrl.startPoll()" class="btn-no-outline medium-icon-button m-b-15">
+          <md-icon md-font-icon="fa fa-play" class="p-l-5"><span layout-padding="5px">Start</span></md-icon>
+        </div>
+        <div ng-show="ctrl.poll.isPollStarted" class="m-b-15"><ma-timer class="poll-timer text-right" x-timer="ctrl.timer"></ma-timer></div>
+        <div ng-click="ctrl.stopPoll()" class="btn-no-outline medium-icon-button">
+          <md-icon md-font-icon="fa fa-stop"><span layout-padding="5px">Stop</span></md-icon>
+        </div>
+      </div>
+      <div class="sub-header text-lighter-gray m-t-15">Poll Results</div>
+      <div flex layout="column" layout-align="end">
+        <canvas height="300" id="bar" class="chart chart-bar"
+                chart-options="ctrl.chart.options" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-colours="ctrl.chart.colours">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

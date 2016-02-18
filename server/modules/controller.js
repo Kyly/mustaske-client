@@ -176,7 +176,7 @@ Controller.prototype.leaveRoom = function(io, socket, roomID) {
   Controller.prototype.allQuestions = function(io, socket, roomID) {
     var returnData = this.rooms.getTopVoted({room_id: roomID});
     io.sockets.in(roomID).emit('top questions', returnData);
-  }
+  };
 
   /**
    * Calls warnUser in rooms, bans user if they have already been warned
@@ -198,7 +198,7 @@ Controller.prototype.leaveRoom = function(io, socket, roomID) {
       else
         io.to(returnData.user_id).emit('warn user');
     }
-  }
+  };
 
   /**
    * Calls banUser in rooms
@@ -216,7 +216,7 @@ Controller.prototype.leaveRoom = function(io, socket, roomID) {
 
     if (returnData != false)
         io.to(returnData.user_id).emit('ban user');
-  }
+  };
 
   /**
    * This handles voting on option in the poll
@@ -229,7 +229,7 @@ Controller.prototype.leaveRoom = function(io, socket, roomID) {
 
     if (returnData != false)
       io.sockets.in(data.room_id).emit('vote poll', returnData);
-  }
+  };
 
   /**
    * This handles voting on option in the poll
@@ -247,6 +247,6 @@ Controller.prototype.leaveRoom = function(io, socket, roomID) {
         io.sockets.in(data.room_id).emit('stop poll');
 
     }
-  }
+  };
 
 module.exports = Controller;

@@ -12,13 +12,14 @@
   var module = angular.module('mustaskeClientApp');
   module.controller(
     'OverlayController',
-    ['$log', '$rootScope', 'UserService', 'SocketService', 'RoomService', OverlayController]);
+    ['$log', '$scope', '$rootScope', 'UserService', 'SocketService', 'RoomService', OverlayController]);
 
-  var ctrl, logger, userService, socketService, rootScope, roomService;
+  var ctrl, logger, userService, socketService, scope, rootScope, roomService;
 
-  function OverlayController($log, $rootScope, UserService, SocketService, RoomService)
+  function OverlayController($log, $scope, $rootScope, UserService, SocketService, RoomService)
   {
     rootScope = $rootScope;
+    scope = $scope;
     socketService = SocketService;
     userService = UserService;
     roomService = RoomService;
@@ -27,7 +28,22 @@
     ctrl = this;
     ctrl.showRoom = false;
     ctrl.overlayHide = false;
-    ctrl.roomName = '';
+    ctrl.isLeaving = false;
+
+    ctrl.input = {
+      pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
+    };
+
+    initSocket();
+  }
+
+  function initSocket()
+  {
+    socketService.io().on('leave room', function() {
+      ctrl.isLeaving = true;
+      ctrl.roomName = '';
+      ctrl.overlayHide = false;
+    });
   }
 
   OverlayController.prototype.joinRoom = function ()
@@ -48,6 +64,7 @@
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
     rootScope.roomName = userService.getRoomName();
+    rootScope.roomId = roomService.getRoomId();
     ctrl.overlayHide = true;
   }
 
@@ -63,13 +80,15 @@
 
   function createRoomSuccess(data)
   {
-    userService.setRoomData(data);
     roomService.setRoomData(data);
-
+    userService.setRoomData(data);
     userService.setUserType('owner');
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
-    rootScope.roomName = userService.getRoomName();
+
+    rootScope.isRoomOwner = userService.isRoomOwner();
+    rootScope.roomName = roomService.getRoomName();
+    rootScope.roomId = roomService.getRoomId();
     ctrl.overlayHide = true;
   }
 
@@ -77,11 +96,5 @@
   {
     ctrl.showRoom = !(ctrl.showRoom);
   };
-
-  //function broadcastRoomName()
-  //{
-  //  rootScope.$broadcast('room name', userService.getRoomName());
-  //}
-
 
 })();

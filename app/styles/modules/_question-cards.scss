@@ -2,4 +2,17 @@
   md-card-footer {
     background: $gray-lighter;
   }
+
+  .owner-question-card-toggle {
+    font-size: 1.2em;
+  }
+
+  md-card-actions {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  md-card-content {
+    padding-bottom: 8px;
+  }
 }

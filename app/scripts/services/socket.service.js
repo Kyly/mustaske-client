@@ -28,8 +28,16 @@
       JOIN_ROOM: 'join room',
       CREATE_ROOM: 'create room',
       NEW_QUESTION: 'new question',
-      UP_VOTE_QUESTION: 'upvote question'
-    }
+      UP_VOTE_QUESTION: 'upvote question',
+      DOWN_VOTE_QUESTION: 'downvote question',
+      SET_POLL_ACTIVE: 'set active poll',
+      START_POLL: 'start poll',
+      STOP_POLL: 'stop poll',
+      VOTE_POLL: 'vote poll',
+      DISMISS_QUESTION: 'dismiss question',
+      WARN_USER: 'warn user',
+      BAN_USER: 'ban user'
+    };
   }
 
   /**
@@ -111,29 +119,75 @@
   SocketService.prototype.upVoteQuestion = function (questionId)
   {
     var roomId = roomService.getRoomId();
+    logger.debug('SocketService#upVoteQuestion:questionId:', questionId, roomId);
     socket.emit(ctrl.events.UP_VOTE_QUESTION, {room_id: roomId, question_id: questionId});
-
-    return response(ctrl.events.UP_VOTE_QUESTION);
   };
 
-  SocketService.prototype.downVoteQuestion = function ()
+  SocketService.prototype.downVoteQuestion = function (questionId)
   {
-
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#upVoteQuestion:questionId:', questionId, roomId);
+    socket.emit(ctrl.events.DOWN_VOTE_QUESTION, {room_id: roomId, question_id: questionId});
   };
 
-  SocketService.prototype.dismissQuestion = function ()
+  SocketService.prototype.dismissQuestion = function (questionId)
   {
-
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#dismissQuesiton:questionId:', questionId, roomId);
+    socket.emit(ctrl.events.DISMISS_QUESTION, {room_id: roomId, question_id: questionId});
   };
 
   SocketService.prototype.warnUser = function ()
   {
-
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#warnUser:questionId:', questionId, roomId);
+    /**
+    var userWarnedImpl = function () {
+      bootbox.alert('<h3><strong>Warning!!!!</strong> Must you really ask such a question?</h3>');
+    }**/
   };
 
-  SocketService.prototype.newPoll = function ()
+  SocketService.prototype.banUser = function ()
   {
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#warnUser:questionId:', questionId, roomId);
+  };
 
+  SocketService.prototype.activatePolling = function ()
+  {
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#activatePolling:', roomId);
+
+    var data = {
+      room_id: roomId,
+      active: true
+    };
+
+    socket.emit(ctrl.events.SET_POLL_ACTIVE, data);
+  };
+
+  SocketService.prototype.deactivatePolling = function ()
+  {
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#deactivatePolling:', roomId);
+
+    var data = {
+      room_id: roomId,
+      active: false
+    };
+
+    socket.emit(ctrl.events.SET_POLL_ACTIVE, data);
+  };
+
+  SocketService.prototype.votePoll = function (option)
+  {
+    logger.debug('SocketService#votePoll:option:', option);
+
+    var data = {
+      room_id: roomService.getRoomId(),
+      option: option
+    };
+    socket.emit(ctrl.events.VOTE_POLL, data);
   };
 
   SocketService.prototype.closePoll = function ()
@@ -146,5 +200,10 @@
     return socket;
   };
 
+  SocketService.prototype.deleteRoom = function(roomId)
+  {
+    logger.debug('SocketService#deleteRoom:roomId:', roomId);
+    socket.emit('leave room', roomId);
+  };
 
 })();

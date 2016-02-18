@@ -27,7 +27,6 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  background-color: #20597F;
   visibility: visible;
   z-index: 9999;
 
@@ -36,33 +35,15 @@
   }
 }
 
-
 .login-input-container {
-  width: 85%;
-  font-size: 1em;
-  //
+  width: 100%;
+
   input[type="text"].md-input {
     color: white;
     border-color: inherit;
   }
 
   label {
-    //&.active {
-    //  color: lightgray;
-    //}
-
-    //color: $gray-lighter;
     font-size: 1.2em;
   }
 }
-
-
-
-//.login-overlay.hide-overlay {
-//  -webkit-animation: slideOutUp 1s;
-//  display: block !important;
-//}
-//
-//.login-overlay.ng-hide-remove {
-//  -webkit-animation: slideDownIn 2s;
-//}

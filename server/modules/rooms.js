@@ -93,6 +93,7 @@ Rooms.prototype.closeRoom = function (data) {
 
   return true;
 }
+
 /**
  * Checks to see if given user is owner of given room
  *

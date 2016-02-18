@@ -7,7 +7,7 @@
  */
 
 var Questions = require('./questions');
-var Poll = require('./poll')
+var Poll = require('./poll');
 
 function Room (data) {
   this.id             = data.room_id; //String

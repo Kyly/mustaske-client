@@ -20,8 +20,12 @@
     logger = $log;
 
     ctrl = this;
-    user = {};
+    user = {
+      answers: []
+    };
+
     room = {};
+
     ctrl.types = {
       AUDIENCE: 'audience',
       OWNER: 'owner'
@@ -73,6 +77,23 @@
   UserService.prototype.getRoomId = function ()
   {
     return room ? room.room_id : undefined;
+  };
+
+  UserService.prototype.getAnswers = function ()
+  {
+    return user.answers;
+  };
+
+  UserService.prototype.addPollAnswer = function(answer)
+  {
+    if (!user.answers)
+    {
+      user.answers = [answer];
+      return user.answers;
+    }
+
+    user.answers.push(answer);
+    return user.answers;
   };
 
 })();

@@ -1,3 +1,15 @@
+body, html {
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+.theRoomId{
+  height: 35px;
+  font-size: 15px;
+  background: #266a97;
+}
+
 .tabs-main-navigation md-tabs-wrapper {
   z-index: 2;
   @include md-shadow-bottom-z-1();
@@ -15,21 +27,32 @@
 }
 
 .content-page-title {
-  font-size: 20px;
+  font-size: 1.1em;
   font-weight: 500;
   letter-spacing: 0.005em;
-}
-
-md-icon.page-tab-icon {
-  font-size: 1.6em;
+  text-transform: uppercase;
+  color: $navy-blue;
 }
 
 md-toolbar {
 
 }
 
+md-toolbar {
+  margin-bottom: -1px;
+}
+
+md-tabs-wrapper {
+  margin-right: -1px;
+  margin-left: -1px;
+}
+
 @media only screen and (max-width: 959px) and (min-width: 0) and (orientation: portrait) {
   md-toolbar {
-    min-height: 40px;
+    height: 37px;
   }
+}
+
+md-tabs div[md-tabs-template] {
+  @extend .layout-fill;
 }

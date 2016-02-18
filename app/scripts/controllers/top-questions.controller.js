@@ -22,8 +22,12 @@
     ctrl.topIndex = 0;
     ctrl.topQuestions = roomService.getTopQuestions();
     logger.debug('Top Questions: ', ctrl.topQuestions);
-
   }
+
+  TopQuestionsController.prototype.zeroOrNull = function(question)
+  {
+    return question.question_score !== undefined && question.question_score > 0;
+  };
 
 
 })();
