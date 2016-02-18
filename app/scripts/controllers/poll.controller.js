@@ -20,6 +20,7 @@
     ctrl.timer = {};
     ctrl.answers = clickerService.getAnswers();
     ctrl.buttons = clickerService.getButtons();
+    ctrl.isActivePoll=clickerService.getActivePoll();
     ctrl.chart = {
       labels: ctrl.buttons,
       data: [[30, 50, 5, 10, 5]],
@@ -73,7 +74,7 @@
         ctrl.isRoomOwner = value;
       }
     );
-
+    
     socketService.io().on(socketService.events.START_POLL, newPollStarted);
     socketService.io().on(socketService.events.STOP_POLL, pollStopped);
   }
@@ -120,6 +121,7 @@
   PollController.prototype.stopPoll = function ()
   {
     socketService.deactivatePolling();
+    clickerService.setActivePoll(false);
     //restart votes;
     votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
   };

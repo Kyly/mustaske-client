@@ -3,6 +3,7 @@
     <span class="content-page-title">Poll</span>
     <span class="flex"></span>
     <ma-timer ng-if="!ctrl.isRoomOwner" class="poll-timer text-right" x-timer="ctrl.timer"></ma-timer>
+    <span ng-if="!ctrl.isRoomOwner" class="small hint text-gray-accent">{{ctrl.isActivePoll}}</span>
   </div>
   <div layout-padding="40">
     <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.restartVote()">

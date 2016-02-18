@@ -19,6 +19,7 @@
 
     buttons = ['A', 'B', 'C', 'D', 'E'];
     ctrl.isPollStarted = false;
+    ctrl.isActivePoll = false;
   }
 
   ClickerService.prototype.getButtons = function ()
@@ -48,6 +49,7 @@
     if(roomService.getActivePoll()){
       ctrl.isPollStarted=true;
       roomService.setActivePoll(false);
+      ctrl.isActivePoll=true;
       ctrl.openClicker();
     }
     return ctrl.isPollStarted;
@@ -73,6 +75,15 @@
   ClickerService.prototype.getAnswers = function ()
   {
     return answers;
+  };
+
+  ClickerService.prototype.getActivePoll= function ()
+  {
+    return ctrl.isActivePoll
+  };
+
+  ClickerService.prototype.setActivePoll= function (poll) {
+    ctrl.isActivePoll = poll;
   };
 
 })();
