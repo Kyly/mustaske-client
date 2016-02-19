@@ -19,8 +19,7 @@ module.exports = function (grunt)
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: '../public'
-    //dist: 'dist'  //TESTING
+    dist: 'dist'
   };
 
   // Define the configuration for all the tasks
