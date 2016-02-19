@@ -3,6 +3,8 @@
 #npm install phantomjs-prebuilt
 #npm install jasmine-core
 npm install grunt-contrib-compass --save-dev
+npm install fontawesome
+npm install font-awesome
 gem update --system
 gem install compass
 bower install
