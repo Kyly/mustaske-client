@@ -520,7 +520,10 @@ module.exports = function (grunt)
       'clean:dist',
       'wiredep',
       'useminPrepare',
-      'concurrent:dist',
+      //'concurrent:dist', //commented
+      'compass', //added
+      'copy:styles', //added
+      'svgmin', //added
       'autoprefixer',
       'concat',
       'ngAnnotate',
@@ -529,6 +532,9 @@ module.exports = function (grunt)
       'cssmin',
       //'imagemin',
       'uglify',
+      'mondernizer', //added
+      'copy:dist', //added
+      'rev', //added
       'filerev',
       'usemin',
       'htmlmin'
