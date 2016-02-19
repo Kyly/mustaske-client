@@ -20,6 +20,7 @@
     ctrl.timer = {};
     ctrl.answers = clickerService.getAnswers();
     ctrl.buttons = clickerService.getButtons();
+    ctrl.isActivePoll=clickerService.getActivePoll();
     ctrl.chart = {
       labels: ctrl.buttons,
       data: [[30, 50, 5, 10, 5]],
@@ -82,12 +83,14 @@
   {
     logger.debug('Pull stopped');
     ctrl.poll.isPollStarted = false;
+    ctrl.timer.stop();
+    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
     if (userService.isRoomOwner())
     {
-      ctrl.timer.stop();
       return;
     }
-    ctrl.timer.stop();
+
+    ctrl.isActivePoll=false;
     clickerService.closeClicker();
     clickerService.saveCurrentVote();
   }
@@ -96,13 +99,15 @@
   {
     logger.debug('Pull started', data);
     ctrl.poll.isPollStarted = true;
+    ctrl.timer.start();
+    socketService.io().on(socketService.events.VOTE_POLL, addVote);
     if(userService.isRoomOwner())
     {
-      ctrl.timer.start();
-      socketService.io().on(socketService.events.VOTE_POLL, addVote);
       return;
     }
-    ctrl.timer.start();
+    if(clickerService.getActivePoll()){
+      ctrl.isActivePoll=true;
+    }
     clickerService.openClicker();
   }
 
@@ -120,8 +125,7 @@
   PollController.prototype.stopPoll = function ()
   {
     socketService.deactivatePolling();
-    //restart votes;
-    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
+    clickerService.setActivePoll(false);
   };
 
   PollController.prototype.restartVote= function ()
