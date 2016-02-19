@@ -75,6 +75,17 @@
       }
     );
 
+    scope.$watch(
+      function()
+      {
+        return clickerService.getActivePoll();
+      },
+      function (value)
+      {
+        ctrl.isActivePoll = value;
+      }
+    );
+
     socketService.io().on(socketService.events.START_POLL, newPollStarted);
     socketService.io().on(socketService.events.STOP_POLL, pollStopped);
   }
@@ -83,14 +94,15 @@
   {
     logger.debug('Pull stopped');
     ctrl.poll.isPollStarted = false;
-    ctrl.timer.stop();
+    if(!ctrl.isActivePoll){
+      ctrl.timer.stop();
+    }
     votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
     if (userService.isRoomOwner())
     {
       return;
     }
 
-    ctrl.isActivePoll=false;
     clickerService.closeClicker();
     clickerService.saveCurrentVote();
   }
@@ -98,15 +110,13 @@
   function newPollStarted (data)
   {
     logger.debug('Pull started', data);
+    ctrl.isActivePoll=false;
     ctrl.poll.isPollStarted = true;
     ctrl.timer.start();
     socketService.io().on(socketService.events.VOTE_POLL, addVote);
     if(userService.isRoomOwner())
     {
       return;
-    }
-    if(clickerService.getActivePoll()){
-      ctrl.isActivePoll=true;
     }
     clickerService.openClicker();
   }

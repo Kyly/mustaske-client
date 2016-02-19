@@ -1,15 +1,34 @@
 .question-card {
   md-card-footer {
     background: $gray-lighter;
+
+    & > div:first-child {
+      border-right: 2px solid $lighter-gray;
+    }
+
+    button {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+
+      md-icon {
+        height: inherit;
+      }
+    }
   }
 
   .owner-question-card-toggle {
     font-size: 1.2em;
+    border: none;
   }
 
   md-card-actions {
     padding-top: 0;
     margin-top: 0;
+
+    &.is-shown {
+      margin-bottom: 0;
+    }
   }
 
   md-card-content {
