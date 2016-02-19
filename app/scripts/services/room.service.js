@@ -72,14 +72,18 @@
     return room.room_name;
   };
 
-  RoomService.prototype.getActivePoll= function ()
+  RoomService.prototype.getActivePoll = function ()
   {
     return room.active_poll;
   };
 
-  RoomService.prototype.setActivePoll= function (poll)
+  RoomService.prototype.setActivePoll = function (poll)
   {
     room.active_poll=poll;
+  };
+
+  RoomService.prototype.getRoomData = function () {
+    return room;
   };
 
   RoomService.prototype.updateVote = function (questionData)

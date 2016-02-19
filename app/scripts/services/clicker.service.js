@@ -79,7 +79,7 @@
 
   ClickerService.prototype.getActivePoll= function ()
   {
-    return activePoll;
+    return roomService.getRoomData();
   };
 
   ClickerService.prototype.setActivePoll= function (poll) {
