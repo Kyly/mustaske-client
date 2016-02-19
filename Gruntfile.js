@@ -533,7 +533,6 @@ module.exports = function (grunt)
       //'imagemin',
       'uglify',
       'copy:dist', //added
-      'rev', //added
       'filerev',
       'usemin',
       'htmlmin'
