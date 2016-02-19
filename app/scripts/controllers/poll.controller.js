@@ -74,7 +74,7 @@
         ctrl.isRoomOwner = value;
       }
     );
-    
+
     socketService.io().on(socketService.events.START_POLL, newPollStarted);
     socketService.io().on(socketService.events.STOP_POLL, pollStopped);
   }
@@ -83,12 +83,14 @@
   {
     logger.debug('Pull stopped');
     ctrl.poll.isPollStarted = false;
+    ctrl.timer.stop();
+    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
     if (userService.isRoomOwner())
     {
-      ctrl.timer.stop();
       return;
     }
-    ctrl.timer.stop();
+
+    ctrl.isActivePoll=false;
     clickerService.closeClicker();
     clickerService.saveCurrentVote();
   }
@@ -97,13 +99,15 @@
   {
     logger.debug('Pull started', data);
     ctrl.poll.isPollStarted = true;
+    ctrl.timer.start();
+    socketService.io().on(socketService.events.VOTE_POLL, addVote);
     if(userService.isRoomOwner())
     {
-      ctrl.timer.start();
-      socketService.io().on(socketService.events.VOTE_POLL, addVote);
       return;
     }
-    ctrl.timer.start();
+    if(clickerService.getActivePoll()){
+      ctrl.isActivePoll=true;
+    }
     clickerService.openClicker();
   }
 
@@ -122,8 +126,6 @@
   {
     socketService.deactivatePolling();
     clickerService.setActivePoll(false);
-    //restart votes;
-    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
   };
 
   PollController.prototype.restartVote= function ()
