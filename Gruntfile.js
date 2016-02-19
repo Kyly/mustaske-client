@@ -448,7 +448,7 @@ module.exports = function (grunt)
           'compass'
         ],
         dist: [
-          'compass', //:dist',
+          'compass:dist',
           'svgmin'
         ]
       },
@@ -520,10 +520,7 @@ module.exports = function (grunt)
       'clean:dist',
       'wiredep',
       'useminPrepare',
-      //'concurrent:dist', //commented
-      'compass', //added
-      'copy:styles', //added
-      'svgmin', //added
+      'concurrent:dist',
       'autoprefixer',
       'concat',
       'ngAnnotate',
@@ -532,7 +529,6 @@ module.exports = function (grunt)
       'cssmin',
       //'imagemin',
       'uglify',
-      'copy:dist', //added
       'filerev',
       'usemin',
       'htmlmin'
