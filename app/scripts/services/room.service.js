@@ -83,6 +83,10 @@
     room.active_poll = poll;
   };
 
+  RoomService.prototype.getRoomData = function () {
+    return room;
+  };
+
   RoomService.prototype.updateVote = function (questionData)
   {
     angular.forEach(room.questions, function (question)
