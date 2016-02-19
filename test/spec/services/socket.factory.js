@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Service: socket.factory', function () {
-
+/**
   // load the service's module
   beforeEach(module('mustaskeClientApp'));
 
@@ -14,5 +14,5 @@ describe('Service: socket.factory', function () {
   it('should do something', function () {
     expect(!!socket.factory).toBe(true);
   });
-
+**/
 });

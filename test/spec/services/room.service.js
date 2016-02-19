@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Service: room.service', function () {
-
+/**
   // load the service's module
   beforeEach(module('mustaskeClientApp'));
 
@@ -14,5 +14,5 @@ describe('Service: room.service', function () {
   it('should do something', function () {
     expect(!!room.service).toBe(true);
   });
-
+**/
 });

@@ -34,7 +34,9 @@
       START_POLL: 'start poll',
       STOP_POLL: 'stop poll',
       VOTE_POLL: 'vote poll',
-      DISMISS_QUESTION: 'dismiss question'
+      DISMISS_QUESTION: 'dismiss question',
+      WARN_USER: 'warn user',
+      BAN_USER: 'ban user'
     };
   }
 
@@ -137,10 +139,18 @@
 
   SocketService.prototype.warnUser = function ()
   {
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#warnUser:questionId:', questionId, roomId);
     /**
     var userWarnedImpl = function () {
       bootbox.alert('<h3><strong>Warning!!!!</strong> Must you really ask such a question?</h3>');
     }**/
+  };
+
+  SocketService.prototype.banUser = function ()
+  {
+    var roomId = roomService.getRoomId();
+    logger.debug('SocketService#warnUser:questionId:', questionId, roomId);
   };
 
   SocketService.prototype.activatePolling = function ()
