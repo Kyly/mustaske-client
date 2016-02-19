@@ -81,6 +81,12 @@
       socketService.dismissQuestion(question.question_id);
     };
 
+    //Warn User
+    scope.warn = function(question)
+    {
+      socketService.warnUser(question.question_id);
+    };
+
   }
 
 })();
