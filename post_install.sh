@@ -5,7 +5,8 @@
 npm install grunt-contrib-compass --save-dev
 gem update --system
 gem install compass
+bundle install
 ./node_modules/bower/bin/bower install
 ./node_modules/grunt-cli/bin/grunt
-bundle install
+
 
