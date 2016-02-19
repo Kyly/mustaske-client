@@ -59,3 +59,11 @@ body {
     @include animate-prefixer(animation-duration, $base-duration * 2);
   }
 }
+
+/* Remove fucking outline!!!*/
+[ng-click]:not(button) {
+  outline: none;
+  border: 0;
+}
+
+
