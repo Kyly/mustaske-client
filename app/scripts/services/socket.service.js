@@ -137,20 +137,11 @@
     socket.emit(ctrl.events.DISMISS_QUESTION, {room_id: roomId, question_id: questionId});
   };
 
-  SocketService.prototype.warnUser = function ()
+  SocketService.prototype.warnUser = function (questionId)
   {
     var roomId = roomService.getRoomId();
     logger.debug('SocketService#warnUser:questionId:', questionId, roomId);
-    /**
-    var userWarnedImpl = function () {
-      bootbox.alert('<h3><strong>Warning!!!!</strong> Must you really ask such a question?</h3>');
-    }**/
-  };
-
-  SocketService.prototype.banUser = function ()
-  {
-    var roomId = roomService.getRoomId();
-    logger.debug('SocketService#warnUser:questionId:', questionId, roomId);
+    socket.emit(ctrl.events.WARN_USER, {room_id: roomId, question_id: questionId});
   };
 
   SocketService.prototype.activatePolling = function ()
