@@ -532,7 +532,6 @@ module.exports = function (grunt)
       'cssmin',
       //'imagemin',
       'uglify',
-      'mondernizer', //added
       'copy:dist', //added
       'rev', //added
       'filerev',
