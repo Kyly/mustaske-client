@@ -12,38 +12,42 @@
   var module = angular.module('mustaskeClientApp');
   module.controller(
     'OverlayController',
-    ['$log', '$scope', '$rootScope', 'UserService', 'SocketService', 'RoomService', OverlayController]);
+    ['$log', '$scope', '$rootScope', 'UserService', 'SocketService', 'RoomService', 'AppService', OverlayController]);
 
   var ctrl, logger, userService, socketService, scope, rootScope, roomService;
 
-  function OverlayController($log, $scope, $rootScope, UserService, SocketService, RoomService)
+  function OverlayController($log, $scope, $rootScope, UserService, SocketService, RoomService, AppService)
   {
-    rootScope = $rootScope;
-    scope = $scope;
+    rootScope     = $rootScope;
+    scope         = $scope;
     socketService = SocketService;
-    userService = UserService;
-    roomService = RoomService;
-    logger = $log;
+    userService   = UserService;
+    roomService   = RoomService;
+    logger        = $log;
 
-    ctrl = this;
-    ctrl.showRoom = false;
-    ctrl.overlayHide = false;
-    ctrl.isLeaving = false;
-
+    ctrl       = this;
     ctrl.input = {
       pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
     };
 
-    initSocket();
+    init();
+
+    _.once(AppService.manageClear(ctrl.clear));
   }
 
-  function initSocket()
+  OverlayController.prototype.clear = function () {
+    init();
+  };
+
+  function init()
   {
-    socketService.io().on('leave room', function() {
-      ctrl.isLeaving = true;
-      ctrl.roomName = '';
-      ctrl.overlayHide = false;
-    });
+    ctrl.showRoom         = false;
+    ctrl.isLeaving        = false;
+    ctrl.overlayHide      = false;
+    ctrl.roomName         = '';
+    rootScope.isRoomOwner = '';
+    rootScope.roomName    = '';
+    rootScope.roomId      = '';
   }
 
   OverlayController.prototype.joinRoom = function ()
@@ -64,8 +68,8 @@
     logger.debug(userService.getType());
     logger.debug(userService.getRoomName());
     rootScope.roomName = userService.getRoomName();
-    rootScope.roomId = roomService.getRoomId();
-    ctrl.overlayHide = true;
+    rootScope.roomId   = roomService.getRoomId();
+    ctrl.overlayHide   = true;
   }
 
   OverlayController.prototype.createRoom = function ()
@@ -87,14 +91,9 @@
     logger.debug(userService.getRoomName());
 
     rootScope.isRoomOwner = userService.isRoomOwner();
-    rootScope.roomName = roomService.getRoomName();
-    rootScope.roomId = roomService.getRoomId();
-    ctrl.overlayHide = true;
+    rootScope.roomName    = roomService.getRoomName();
+    rootScope.roomId      = roomService.getRoomId();
+    ctrl.overlayHide      = true;
   }
-
-  OverlayController.prototype.toggleAlias = function ()
-  {
-    ctrl.showRoom = !(ctrl.showRoom);
-  };
 
 })();

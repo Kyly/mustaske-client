@@ -11,15 +11,15 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .service('SocketService', ['$log', '$q', 'Socket', 'RoomService', SocketService]);
+         .service('SocketService', ['$log', '$q', 'Socket', 'RoomService', SocketService]);
 
   var ctrl, socket, logger, Q, roomService;
 
   function SocketService($log, $q, Socket, RoomService)
   {
-    logger = $log;
-    socket = Socket;
-    Q = $q;
+    logger      = $log;
+    socket      = Socket;
+    Q           = $q;
     roomService = RoomService;
 
     ctrl = this;
@@ -36,7 +36,8 @@
       VOTE_POLL: 'vote poll',
       DISMISS_QUESTION: 'dismiss question',
       WARN_USER: 'warn user',
-      BAN_USER: 'ban user'
+      BAN_USER: 'ban user',
+      LEAVE_ROOM: 'leave room'
     };
   }
 
@@ -148,42 +149,20 @@
   {
     var roomId = roomService.getRoomId();
     logger.debug('SocketService#activatePolling:', roomId);
-
-    var data = {
-      room_id: roomId,
-      active: true
-    };
-
-    socket.emit(ctrl.events.SET_POLL_ACTIVE, data);
+    socket.emit(ctrl.events.SET_POLL_ACTIVE, {room_id: roomId, active: true});
   };
 
   SocketService.prototype.deactivatePolling = function ()
   {
     var roomId = roomService.getRoomId();
     logger.debug('SocketService#deactivatePolling:', roomId);
-
-    var data = {
-      room_id: roomId,
-      active: false
-    };
-
-    socket.emit(ctrl.events.SET_POLL_ACTIVE, data);
+    socket.emit(ctrl.events.SET_POLL_ACTIVE, {room_id: roomId, active: false});
   };
 
   SocketService.prototype.votePoll = function (option)
   {
     logger.debug('SocketService#votePoll:option:', option);
-
-    var data = {
-      room_id: roomService.getRoomId(),
-      option: option
-    };
-    socket.emit(ctrl.events.VOTE_POLL, data);
-  };
-
-  SocketService.prototype.closePoll = function ()
-  {
-
+    socket.emit(ctrl.events.VOTE_POLL, {room_id: roomService.getRoomId(), option: option});
   };
 
   SocketService.prototype.io = function ()
@@ -191,10 +170,10 @@
     return socket;
   };
 
-  SocketService.prototype.deleteRoom = function(roomId)
+  SocketService.prototype.deleteRoom = function (roomId)
   {
     logger.debug('SocketService#deleteRoom:roomId:', roomId);
-    socket.emit('leave room', roomId);
+    socket.emit(ctrl.events.LEAVE_ROOM, roomId);
   };
 
 })();
