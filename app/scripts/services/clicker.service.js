@@ -2,25 +2,32 @@
 {
   'use strict';
   angular.module('mustaskeClientApp')
-    .service('ClickerService', ['$mdBottomSheet', 'SocketService','RoomService', ClickerService]);
+         .service('ClickerService', ['$mdBottomSheet', 'SocketService', 'RoomService', 'AppService', ClickerService]);
 
   var ctrl, mdBottomSheet, socketService, answers, buttons, roomService, activePoll;
-  function ClickerService($mdBottomSheet, SocketService,RoomService)
+
+  function ClickerService($mdBottomSheet, SocketService, RoomService, AppService)
   {
-    ctrl = this;
+    ctrl          = this;
     socketService = SocketService;
     mdBottomSheet = $mdBottomSheet;
-    roomService = RoomService;
-
-    answers = {
-      current: '',
-      all: []
-    };
-
-    buttons = ['A', 'B', 'C', 'D', 'E'];
-    ctrl.isPollStarted = false;
-    activePoll = false;
+    roomService   = RoomService;
+    buttons       = ['A', 'B', 'C', 'D', 'E'];
+    init();
+    _.once(AppService.manageClear(ctrl.clear));
   }
+
+  function init() {
+    answers            = {current: '', all: []};
+    ctrl.isPollStarted = false;
+    activePoll         = false;
+  }
+
+  ClickerService.prototype.clear = function ()
+  {
+    init();
+    mdBottomSheet.cancel();
+  };
 
   ClickerService.prototype.getButtons = function ()
   {
@@ -46,10 +53,11 @@
   //poll status
   ClickerService.prototype.getPollStatus = function ()
   {
-    if(roomService.getActivePoll()){
-      ctrl.isPollStarted=true;
+    if (roomService.getActivePoll())
+    {
+      ctrl.isPollStarted = true;
       roomService.setActivePoll(false);
-      ctrl.isActivePoll=true;
+      ctrl.isActivePoll = true;
       ctrl.openClicker();
     }
     return ctrl.isPollStarted;
@@ -77,12 +85,12 @@
     return answers;
   };
 
-  ClickerService.prototype.getActivePoll= function ()
+  ClickerService.prototype.getActivePoll = function ()
   {
     return roomService.getRoomData();
   };
 
-  ClickerService.prototype.setActivePoll= function (poll) {
+  ClickerService.prototype.setActivePoll = function (poll) {
     activePoll = poll;
   };
 

@@ -10,11 +10,11 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .controller('QuestionInputController', ['$log', '$mdBottomSheet', 'SocketService', 'RoomService', QuestionInputController]);
+    .controller('QuestionInputController', ['$log', '$mdBottomSheet', 'SocketService', 'RoomService', 'AppService', QuestionInputController]);
 
   var ctrl, socketService, mdBottomSheet, logger, roomService;
 
-  function QuestionInputController($log, $mdBottomSheet, SocketService, RoomService)
+  function QuestionInputController($log, $mdBottomSheet, SocketService, RoomService, AppService)
   {
     ctrl = this;
     logger = $log;
@@ -23,7 +23,16 @@
     mdBottomSheet = $mdBottomSheet;
 
     ctrl.newQuestion = '';
+    init();
+    _.once(AppService.manageClear(ctrl.clear));
   }
+
+  function init() { ctrl.newQuestion = ''; }
+
+  QuestionInputController.prototype.clear = function()
+  {
+    init();
+  };
 
   QuestionInputController.prototype.submitQuestion = function (event)
   {

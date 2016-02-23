@@ -1,8 +1,8 @@
 /**
  * @ngdoc service
- * @name mustaskeClientApp.socket
+ * @name mustaskeClientApp.UserService
  * @description
- * # socket
+ * # UserService
  * Service in the mustaskeClientApp.
  */
 
@@ -11,28 +11,33 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .service('UserService', ['$log', UserService]);
+         .service('UserService', ['$log', 'AppService', UserService]);
 
   var ctrl, user, logger, room;
 
-  function UserService($log)
+  function UserService($log, AppService)
   {
     logger = $log;
-
     ctrl = this;
-    user = {
-      answers: []
-    };
-
-    room = {};
-
     ctrl.types = {
       AUDIENCE: 'audience',
       OWNER: 'owner'
     };
 
+    init();
+    _.once(AppService.manageClear(ctrl.clear));
+  }
+
+  function init() {
+    user      = {answers: []};
+    room      = {};
     user.type = ctrl.types.AUDIENCE;
   }
+
+  UserService.prototype.clear = function ()
+  {
+    init();
+  };
 
   UserService.prototype.setRoomData = function (data)
   {
@@ -84,7 +89,7 @@
     return user.answers;
   };
 
-  UserService.prototype.addPollAnswer = function(answer)
+  UserService.prototype.addPollAnswer = function (answer)
   {
     if (!user.answers)
     {
