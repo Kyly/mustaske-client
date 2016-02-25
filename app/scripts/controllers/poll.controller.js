@@ -2,26 +2,27 @@
 {
   'use strict';
   angular.module('mustaskeClientApp')
-    .controller('PollController',
-                ['$log', '$interval', '$scope', 'ClickerService', 'UserService', 'SocketService', 'Votes', PollController]);
+         .controller('PollController',
+                     ['$log', '$interval', '$scope', '$rootScope', 'ClickerService', 'UserService', 'SocketService', 'Votes', 'AppService', PollController]);
 
-  var ctrl, interval, scope, clickerService, userService, logger, socketService, votes;
+  var ctrl, interval, scope, rootScope, clickerService, userService, logger, socketService, votes;
 
-  function PollController($log, $interval, $scope, ClickerService, UserService, SocketService, Votes)
+  function PollController($log, $interval, $scope, $rootScope, ClickerService, UserService, SocketService, Votes, AppService)
   {
-    interval = $interval;
-    scope = $scope;
+    interval       = $interval;
+    scope          = $scope;
+    rootScope      = $rootScope;
     clickerService = ClickerService;
-    userService = UserService;
-    socketService = SocketService;
-    logger = $log;
+    userService    = UserService;
+    socketService  = SocketService;
+    logger         = $log;
+    ctrl           = this;
 
-    ctrl = this;
-    ctrl.timer = {};
-    ctrl.answers = clickerService.getAnswers();
-    ctrl.buttons = clickerService.getButtons();
-    ctrl.isActivePoll=clickerService.getActivePoll();
-    ctrl.chart = {
+    ctrl.timer        = {};
+    ctrl.answers      = clickerService.getAnswers();
+    ctrl.buttons      = clickerService.getButtons();
+    ctrl.isActivePoll = clickerService.getActivePoll();
+    ctrl.chart        = {
       labels: ctrl.buttons,
       data: [[30, 50, 5, 10, 5]],
       options: {
@@ -41,6 +42,7 @@
     };
 
     votes = new Votes(ctrl.chart.labels, ctrl.chart.data);
+    _.once(AppService.manageClear(ctrl.clear));
     init();
   }
 
@@ -76,7 +78,7 @@
     );
 
     scope.$watch(
-      function()
+      function ()
       {
         return clickerService.getActivePoll();
       },
@@ -86,18 +88,41 @@
       }
     );
 
+    scope.$watch(
+      function ()
+      {
+        return clickerService.getAnswers();
+      },
+      function (value)
+      {
+        ctrl.answers = value;
+      }
+    );
+
     socketService.io().on(socketService.events.START_POLL, newPollStarted);
     socketService.io().on(socketService.events.STOP_POLL, pollStopped);
+    socketService.io().on(socketService.events.VOTE_POLL, addVote);
   }
 
-  function pollStopped ()
+  PollController.prototype.clear = function () {
+    ctrl.poll = {
+      counter: 0,
+      isPollStarted: false
+    };
+
+    votes.clear();
+    ctrl.timer.stop();
+  };
+
+  function pollStopped()
   {
     logger.debug('Pull stopped');
     ctrl.poll.isPollStarted = false;
-    if(!ctrl.isActivePoll){
+    if (!ctrl.isActivePoll)
+    {
       ctrl.timer.stop();
     }
-    votes.updateVotes({'A':0,'B':0,'C':0,'D':0,'E':0});
+    votes.updateVotes({'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0});
     if (userService.isRoomOwner())
     {
       return;
@@ -107,18 +132,17 @@
     clickerService.saveCurrentVote();
   }
 
-  function newPollStarted (data)
+  function newPollStarted(data)
   {
     logger.debug('Pull started', data);
-    ctrl.isActivePoll=false;
+    ctrl.isActivePoll       = false;
     ctrl.poll.isPollStarted = true;
     ctrl.timer.start();
-    socketService.io().on(socketService.events.VOTE_POLL, addVote);
-    if(userService.isRoomOwner())
+    if (!userService.isRoomOwner())
     {
-      return;
+      clickerService.openClicker();
     }
-    clickerService.openClicker();
+
   }
 
   function addVote(pollData)
@@ -138,13 +162,13 @@
     clickerService.setActivePoll(false);
   };
 
-  PollController.prototype.restartVote= function ()
+  PollController.prototype.restartVote = function ()
   {
-    if(ctrl.poll.isPollStarted){
+    if (ctrl.poll.isPollStarted)
+    {
       clickerService.openClicker();
     }
   };
-
 
 })();
 

@@ -9,10 +9,10 @@
    * Controller of the mustaskeClientApp
    */
   angular.module('mustaskeClientApp')
-    .controller('TopQuestionsController', ['$log', 'SocketService', 'RoomService', TopQuestionsController]);
+    .controller('TopQuestionsController', ['$log', 'SocketService', 'RoomService', 'AppService', TopQuestionsController]);
 
   var ctrl, socketService, roomService, logger;
-  function TopQuestionsController($log, SocketService, RoomService)
+  function TopQuestionsController($log, SocketService, RoomService, AppService)
   {
     logger = $log;
     roomService = RoomService;
@@ -22,7 +22,15 @@
     ctrl.topIndex = 0;
     ctrl.topQuestions = roomService.getTopQuestions();
     logger.debug('Top Questions: ', ctrl.topQuestions);
+    _.once(AppService.manageClear(ctrl.clear));
   }
+
+
+  TopQuestionsController.prototype.clear = function() {
+    ctrl.topIndex = 0;
+    ctrl.topQuestions = roomService.getTopQuestions();
+    ctrl.topQuestions.lenght = 0;
+  };
 
   TopQuestionsController.prototype.zeroOrNull = function(question)
   {

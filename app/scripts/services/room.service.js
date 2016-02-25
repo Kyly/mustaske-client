@@ -10,17 +10,21 @@
 {
 
   'use strict';
-  angular.module('mustaskeClientApp').service('RoomService', ['$mdBottomSheet', '$log', RoomService]);
+  angular.module('mustaskeClientApp').service('RoomService', ['$rootScope', '$log', 'AppService', RoomService]);
 
-  var room, logger, ctrl, mdBottomSheet, pollStatus;
+  var room, logger, ctrl, rootScope;
 
-  function RoomService($log, $mdBottomSheet)
+  function RoomService($rootScope, $log, AppService)
   {
     logger = $log;
-    mdBottomSheet = $mdBottomSheet;
+    rootScope = $rootScope;
 
     ctrl = this;
+    init();
+    _.once(AppService.manageClear(ctrl.clear));
+  }
 
+  function init() {
     room = {
       room_name: '',
       room_id: '',
@@ -28,8 +32,11 @@
       top_questions: [],
       active_poll: ''
     };
-    pollStatus = 'def';
   }
+
+  RoomService.prototype.clear = function() {
+    init();
+  };
 
   RoomService.prototype.setRoomData = function (data)
   {

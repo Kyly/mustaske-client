@@ -10,21 +10,60 @@
 
   'use strict';
 
-  /* jshint ignore:start */ /* This code confuses the linter :| */
+  /* jshint ignore:start */
+  /* This code confuses the linter :| */
 
   angular.module('mustaskeClientApp')
-    .factory('Socket', ['$log', 'socketFactory', Socket]);
+         .factory('Socket', ['$log', 'socketFactory', '$rootScope', '$mdToast', Socket]);
 
   var logger;
 
-  function Socket($log, socketFactory)
+  function Socket($log, socketFactory, $rootScope, $mdToast)
   {
-    logger = $log;
-    var ioSocket = io.connect();
+    logger                   = $log;
+    var hasConnectionError   = false;
+    var connectionAttempts   = 0;
+    var ioSocket             = io.connect(undefined, {reconnectionAttempts: 5});
+    var connectionErrorToast = $mdToast
+      .simple()
+      .hideDelay(0)
+      .action('Close')
+      .highlightAction(true)
+      .textContent('Error connecting to server... Trying to reconnect.');
 
-    logger.debug('check 1', ioSocket.connected);
-    ioSocket.on('connect', function() {
-      logger.debug('check 2', ioSocket.connected);
+    var failedReconnectToast = $mdToast
+      .simple()
+      .hideDelay(0)
+      .action('Close')
+      .highlightAction(true)
+      .textContent('Unable to reconnect to server... \nTry refreshing page.');
+
+    ioSocket.on('connect', function () {
+
+      if (hasConnectionError)
+      {
+        hasConnectionError = false;
+        connectionAttempts = 0;
+        $mdToast.hide();
+      }
+
+      logger.info('connected', ioSocket.connected);
+    });
+
+    ioSocket.on('connect_error', function (data) {
+      logger.error('Error connecting to socket', data);
+
+      if (!hasConnectionError)
+      {
+        hasConnectionError = true;
+        $mdToast.show(connectionErrorToast);
+      }
+    });
+
+    ioSocket.on('reconnect_failed', function (data) {
+      logger.error('Failed to reconnecting to socket', data);
+      $mdToast.show(failedReconnectToast);
+      $rootScope.$emit('reconnect.failed');
     });
 
     return socketFactory(
@@ -34,5 +73,6 @@
     );
 
   }
+
   /* jshint ignore:end */
 })();

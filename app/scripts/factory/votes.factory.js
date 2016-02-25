@@ -11,7 +11,7 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-    .factory('Votes', ['$log', VotesDef]);
+         .factory('Votes', ['$log', VotesDef]);
 
   var logger;
 
@@ -21,12 +21,13 @@
     return (Votes);
   }
 
-  var datumn, datumnMap, totalVotes;
+  var datumn, labels, datumnMap, totalVotes;
 
-  function Votes(labels, data)
+  function Votes(buttons, data)
   {
-    datumn = data;
+    datumn    = data;
     datumnMap = {};
+    labels    = buttons;
     angular.forEach(
       labels, function (value)
       {
@@ -63,14 +64,17 @@
       });
   };
 
-  Votes.prototype.getTotalVotes = function ()
-  {
-    return totalVotes;
+  Votes.prototype.clear = function () {
+    this.init();
   };
 
-  Votes.prototype.getDatumn = function ()
-  {
-    return datumn;
+  Votes.prototype.init = function () {
+    datumnMap = {};
+    angular.forEach(
+      labels, function (value)
+      {
+        datumnMap[value] = 0;
+      });
+    datumn[0] = _.values(datumnMap);
   };
-
 })();

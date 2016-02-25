@@ -2,7 +2,7 @@
  * @ngdoc function
  * @name mustaskeClientApp.controller:ClickerInputController
  * @description
- * # RecentQuesitonsControllerCtrl
+ * # ClickerInputController
  * Controller of the mustaskeClientApp
  */
 (function ()
@@ -27,8 +27,6 @@
 
   ClickerInputController.prototype.submitAnswer = function (button)
   {
-    //socketService.votePoll(button);
-    //logger.debug('this is the vote',clickerService.getAnswers());
     clickerService.vote(button);
   };
 
