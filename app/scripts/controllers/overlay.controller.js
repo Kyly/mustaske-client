@@ -31,12 +31,16 @@
     };
 
     init();
-
     _.once(AppService.manageClear(ctrl.clear));
   }
 
   OverlayController.prototype.clear = function () {
-    init();
+    ctrl.isLeaving = true;
+    ctrl.roomName = '';
+    ctrl.overlayHide = false;
+    rootScope.isRoomOwner = '';
+    rootScope.roomName    = '';
+    rootScope.roomId      = '';
   };
 
   function init()
