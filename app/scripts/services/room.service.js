@@ -26,6 +26,7 @@
 
   function init() {
     room = {
+      has_room: false,
       room_name: '',
       room_id: '',
       questions: [],
@@ -40,6 +41,7 @@
 
   RoomService.prototype.setRoomData = function (data)
   {
+    room.has_room = true;
     room.room_name = data.room_name;
     room.room_id = data.room_id;
     room.active_poll = data.active_poll;
@@ -92,6 +94,10 @@
 
   RoomService.prototype.getRoomData = function () {
     return room;
+  };
+
+  RoomService.prototype.hasRoom = function () {
+    return room.has_room;
   };
 
   RoomService.prototype.updateVote = function (questionData)
