@@ -24,6 +24,7 @@
     };
   }
 
+
   function linkFn(scope)
   {
     scope.openOpenBottomSheet = function ()

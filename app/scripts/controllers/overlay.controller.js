@@ -12,32 +12,34 @@
   var module = angular.module('mustaskeClientApp');
   module.controller(
     'OverlayController',
-    ['$log', '$scope', '$rootScope', 'UserService', 'SocketService', 'RoomService', 'AppService', OverlayController]);
+    ['$log', '$scope', '$rootScope', '$mdDialog', 'UserService', 'SocketService', 'RoomService', 'AppService', OverlayController]);
 
-  var ctrl, logger, userService, socketService, scope, rootScope, roomService;
+  var ctrl, logger, userService, socketService, scope, rootScope, mdDialog, roomService;
 
-  function OverlayController($log, $scope, $rootScope, UserService, SocketService, RoomService, AppService)
+  function OverlayController($log, $scope, $rootScope, $mdDialog, UserService, SocketService, RoomService, AppService)
   {
     rootScope     = $rootScope;
     scope         = $scope;
+    mdDialog      = $mdDialog;
     socketService = SocketService;
     userService   = UserService;
     roomService   = RoomService;
     logger        = $log;
+    ctrl          = this;
 
-    ctrl       = this;
     ctrl.input = {
       pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
     };
 
     init();
     _.once(AppService.manageClear(ctrl.clear));
+
   }
 
   OverlayController.prototype.clear = function () {
-    ctrl.isLeaving = true;
-    ctrl.roomName = '';
-    ctrl.overlayHide = false;
+    ctrl.isLeaving        = true;
+    ctrl.roomName         = '';
+    ctrl.overlayHide      = false;
     rootScope.isRoomOwner = '';
     rootScope.roomName    = '';
     rootScope.roomId      = '';
@@ -56,7 +58,7 @@
 
   OverlayController.prototype.joinRoom = function ()
   {
-    socketService.joinRoom(ctrl.roomName).then(joinRoomSuccess, joinRoomFailure);
+    socketService.joinRoom(ctrl.roomName.toLowerCase()).then(joinRoomSuccess, joinRoomFailure);
   };
 
   function joinRoomFailure(data)
@@ -99,5 +101,34 @@
     rootScope.roomId      = roomService.getRoomId();
     ctrl.overlayHide      = true;
   }
+
+  OverlayController.prototype.firstTime = function ()
+  {
+    //var helpText =
+
+    var alert = mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title('Welcome to Mustaske')
+                        /**  .textContent('Mustaske is an application to facilitate asking questions in a group forum.  If you are a professor/creator' +
+                         ' simply put in a room name and tap create.  Once in the room give your students or audience members the room id located' +
+                         ' on the top right or in the settings menu.  If you are a student or audience member please ask your professor or room' +
+                         ' owner to give you the room id.  The room id should come in the form adjective-noun-number for example: smelly-pussycat-69')
+                         **/
+                        .ok('Aske!');
+
+    mdDialog
+      .show({
+              templateUrl: 'views/help.tpl.html',
+              clickOutsideToClose: true,
+              controller: function($scope, $mdDialog) {
+                $scope.close = function () {
+                  $mdDialog.hide();
+                }
+              }
+
+            }
+      );
+
+  };
 
 })();

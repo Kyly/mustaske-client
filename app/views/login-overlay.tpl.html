@@ -21,12 +21,11 @@
               <input type="text" name="roomNameOrId" class="md-accent" ng-model="ctrl.roomName" required ng-pattern="ctrl.input.pattern" ng-model-options="{ allowInvalid: true }">
             </md-input-container>
             <div class="m-t-0" layout="row">
-              <md-button ng-disabled="!loginForm.roomNameOrId.$valid" class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.joinRoom()">Join</md-button>
+              <md-button ng-disabled="!loginForm.roomNameOrId.$valid" class="btn-outline btn-primary btn-gray-outlined md-accent" ng-click="ctrl.joinRoom()">Join</md-button>
               <md-button ng-disabled="loginForm.roomNameOrId.$error.required" class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.createRoom()">Create</md-button>
             </div>
           </form>
         </div>
-
         <!--<div ng-hide="ctrl.showRoom">-->
           <!--<p class="text-gray-lighter">Please enter a name you would like to be known as</p>-->
           <!--<form id="alias-info">-->
@@ -41,7 +40,13 @@
           <!--</form>-->
         <!--</div>-->
 
+      <div layout="row" layout-align="center">
+        <span ng-click="ctrl.firstTime($event)" md-ink-ripple= "#333"  style="position:relative; padding-top:30px;">
+          <md-icon class="md-accent" md-font-icon="fa fa-info-circle fa-3x"></md-icon>
+        </span>
+      </div>
+      
     </div>
   </div>
-
 </div>
+

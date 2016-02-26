@@ -8,7 +8,7 @@
    * # questionCard
    */
   angular.module('mustaskeClientApp')
-    .directive('questionCard', ['$log', 'UserService', 'SocketService', QuestionCard]);
+    .directive('questionCard', ['$log', 'UserService', 'SocketService', '$timeout', QuestionCard]);
 
   var logger, userService, socketService;
   function QuestionCard($log, UserService, SocketService)
@@ -30,6 +30,7 @@
   function linkFn(scope)
   {
     scope.hide = true;
+    scope.warned = 0;
 
     var voteControls = {
       isUpVoted: true
@@ -84,6 +85,7 @@
     //Warn User
     scope.warn = function(question)
     {
+      ++scope.warned;
       socketService.warnUser(question.question_id);
     };
 
