@@ -11,16 +11,17 @@
   'use strict';
 
   angular.module('mustaskeClientApp')
-         .service('SocketService', ['$log', '$q', 'Socket', 'RoomService', SocketService]);
+         .service('SocketService', ['$log', '$q', 'Socket', 'RoomService', '$mdDialog', SocketService]);
 
-  var ctrl, socket, logger, Q, roomService;
+  var ctrl, socket, logger, Q, roomService, warnWarning, mdDialog, banWarning;
 
-  function SocketService($log, $q, Socket, RoomService)
+  function SocketService($log, $q, Socket, RoomService, $mdDialog)
   {
     logger      = $log;
     socket      = Socket;
     Q           = $q;
     roomService = RoomService;
+    mdDialog    = $mdDialog;
 
     ctrl = this;
 
@@ -39,6 +40,17 @@
       BAN_USER: 'ban user',
       LEAVE_ROOM: 'leave room'
     };
+
+    warnWarning = mdDialog.alert()
+                          .clickOutsideToClose(true)
+                          .title('You\'ve been warned')
+                          .textContent('The first time you warn a asker of a question it will do just that, "warn" the user by giving them a alert.' +
+                                       ' The second time you warn that same user is banned from the room. So yeah, be cool.')
+                          .ok('Got it!');
+
+    banWarning = _.once(function() {
+      mdDialog.show(warnWarning);
+    });
   }
 
   /**
@@ -140,6 +152,7 @@
 
   SocketService.prototype.warnUser = function (questionId)
   {
+    banWarning();
     var roomId = roomService.getRoomId();
     logger.debug('SocketService#warnUser:questionId:', questionId, roomId);
     socket.emit(ctrl.events.WARN_USER, {room_id: roomId, question_id: questionId});
