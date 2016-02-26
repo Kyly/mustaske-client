@@ -23,7 +23,7 @@
     logger                   = $log;
     var hasConnectionError   = false;
     var connectionAttempts   = 0;
-    var ioSocket             = io.connect(undefined, {reconnectionAttempts: 5});
+    var ioSocket             = io.connect(undefined, {reconnectionAttempts: 5, multiplex: false});
     var connectionErrorToast = $mdToast
       .simple()
       .hideDelay(0)

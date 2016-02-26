@@ -32,7 +32,6 @@
     };
 
     init();
-
     _.once(AppService.manageClear(ctrl.clear));
 
     //Help dialog
