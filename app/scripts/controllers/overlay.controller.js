@@ -12,14 +12,15 @@
   var module = angular.module('mustaskeClientApp');
   module.controller(
     'OverlayController',
-    ['$log', '$scope', '$rootScope', 'UserService', 'SocketService', 'RoomService', 'AppService', OverlayController]);
+    ['$log', '$scope', '$rootScope', '$mdDialog', 'UserService', 'SocketService', 'RoomService', 'AppService', OverlayController]);
 
-  var ctrl, logger, userService, socketService, scope, rootScope, roomService;
+  var ctrl, logger, userService, socketService, scope, rootScope, mdDialog, roomService;
 
-  function OverlayController($log, $scope, $rootScope, UserService, SocketService, RoomService, AppService)
+  function OverlayController($log, $scope, $rootScope, $mdDialog, UserService, SocketService, RoomService, AppService)
   {
     rootScope     = $rootScope;
     scope         = $scope;
+    mdDialog      = $mdDialog;
     socketService = SocketService;
     userService   = UserService;
     roomService   = RoomService;
@@ -33,6 +34,21 @@
     init();
 
     _.once(AppService.manageClear(ctrl.clear));
+
+    //Help dialog
+    scope.firstTime = function(event) {
+      mdDialog.show(
+        mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Welcome to Mustaske')
+          .textContent('If you are new create a room and share the given room id to others so they can join the room.' +
+            ' If you are joining an already created room ask someone near you for the room id.')
+          .ok('Aske!')
+          .targetEvent(event)
+      );
+    };
+
   }
 
   OverlayController.prototype.clear = function () {
@@ -100,5 +116,21 @@
     rootScope.roomId      = roomService.getRoomId();
     ctrl.overlayHide      = true;
   }
+  /**
+  OverlayController.prototype.firstTime = function()
+  {
 
+    mdDialog.show('You\'ve been warned bitch');
+
+    alert = mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('This is an alert title')
+      .textContent('You can specify some description text in here.')
+      .ok('Got it!');
+
+    mdDialog.show( alert );
+
+  };
+**/
 })();

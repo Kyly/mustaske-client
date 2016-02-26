@@ -66,4 +66,9 @@ body {
   border: 0;
 }
 
-
+//For bigger icons
+.#{$fa-css-prefix}-3x {
+  font-size: (3) !important;
+  line-height: (1) !important;
+  vertical-align: -15% !important;
+}
