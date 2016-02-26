@@ -38,11 +38,13 @@
     scope.firstTime = function(event) {
       mdDialog.show(
         mdDialog.alert()
-          .parent(angular.element(document.querySelector('#popupContainer')))
+          //.parent(angular.element(document.querySelector('#popupContainer')))
           .clickOutsideToClose(true)
           .title('Welcome to Mustaske')
-          .textContent('If you are new create a room and share the given room id to others so they can join the room.' +
-            ' If you are joining an already created room ask someone near you for the room id.')
+          .textContent('Mustaske is an application to facilitate asking questions in a group forum.  If you are a professor/creator' +
+            'simply put in a room name and tap create.  Once in the room give your students or audience members the room id located' +
+            'in the top right on in the settings menu.  If you are an student or audience member please ask your professor or room' +
+            'owner to give you the room id.  The room id should come in the form adjective-noun-number for example: smelly-pussycat-69')
           .ok('Aske!')
           .targetEvent(event)
       );
