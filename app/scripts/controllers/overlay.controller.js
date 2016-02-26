@@ -25,7 +25,7 @@
     userService   = UserService;
     roomService   = RoomService;
     logger        = $log;
-    ctrl       = this;
+    ctrl          = this;
 
     ctrl.input = {
       pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
@@ -37,9 +37,9 @@
   }
 
   OverlayController.prototype.clear = function () {
-    ctrl.isLeaving = true;
-    ctrl.roomName = '';
-    ctrl.overlayHide = false;
+    ctrl.isLeaving        = true;
+    ctrl.roomName         = '';
+    ctrl.overlayHide      = false;
     rootScope.isRoomOwner = '';
     rootScope.roomName    = '';
     rootScope.roomId      = '';
@@ -102,22 +102,32 @@
     ctrl.overlayHide      = true;
   }
 
-  OverlayController.prototype.firstTime = function()
+  OverlayController.prototype.firstTime = function ()
   {
     //var helpText =
 
     var alert = mdDialog.alert()
-      .clickOutsideToClose(true)
-      .title('Welcome to Mustaske')
-    /**  .textContent('Mustaske is an application to facilitate asking questions in a group forum.  If you are a professor/creator' +
-        ' simply put in a room name and tap create.  Once in the room give your students or audience members the room id located' +
-        ' on the top right or in the settings menu.  If you are a student or audience member please ask your professor or room' +
-        ' owner to give you the room id.  The room id should come in the form adjective-noun-number for example: smelly-pussycat-69')
-     **/
-      .ok('Aske!');
+                        .clickOutsideToClose(true)
+                        .title('Welcome to Mustaske')
+                        /**  .textContent('Mustaske is an application to facilitate asking questions in a group forum.  If you are a professor/creator' +
+                         ' simply put in a room name and tap create.  Once in the room give your students or audience members the room id located' +
+                         ' on the top right or in the settings menu.  If you are a student or audience member please ask your professor or room' +
+                         ' owner to give you the room id.  The room id should come in the form adjective-noun-number for example: smelly-pussycat-69')
+                         **/
+                        .ok('Aske!');
 
-    mdDialog.show()
-      .templateUrl('views/help.tpl.html');
+    mdDialog
+      .show({
+              templateUrl: 'views/help.tpl.html',
+              clickOutsideToClose: true,
+              controller: function($scope, $mdDialog) {
+                $scope.close = function () {
+                  $mdDialog.hide();
+                }
+              }
+
+            }
+      );
 
   };
 
