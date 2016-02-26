@@ -1,0 +1,15 @@
+md-bottom-sheet {
+  .special-formatting-text {
+    font-size: 0.7em;
+    padding: 0;
+    opacity: 0.2;
+    margin-top: -.9em;
+    transition-property: opacity;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+
+    &.active {
+      opacity: 0.7;
+    }
+  }
+}

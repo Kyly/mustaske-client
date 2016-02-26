@@ -18,4 +18,12 @@
       </div>
     </div>
   </form>
+  <div class="special-formatting-text" ng-class="{'active' : ctrl.newQuestion.length > 0}" layout="row" layout-align="center center" aria-hidden="true">
+    <b>**bold**</b>
+    <i>_italics_</i>
+    <code>`code`</code>
+    <code class="preformatted">```preformatted```</code>
+    <span class="quote"> &gt;quote</span>
+  </div>
+  {{ctrl.roomName.length}}
 </md-bottom-sheet>
