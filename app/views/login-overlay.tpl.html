@@ -21,7 +21,7 @@
               <input type="text" name="roomNameOrId" class="md-accent" ng-model="ctrl.roomName" required ng-pattern="ctrl.input.pattern" ng-model-options="{ allowInvalid: true }">
             </md-input-container>
             <div class="m-t-0" layout="row">
-              <md-button ng-disabled="!loginForm.roomNameOrId.$valid" class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.joinRoom()">Join</md-button>
+              <md-button ng-disabled="!loginForm.roomNameOrId.$valid" class="btn-outline btn-primary btn-gray-outlined md-accent" ng-click="ctrl.joinRoom()">Join</md-button>
               <md-button ng-disabled="loginForm.roomNameOrId.$error.required" class="btn-outline btn-primary btn-gray-outlined" ng-click="ctrl.createRoom()">Create</md-button>
             </div>
           </form>
@@ -40,10 +40,10 @@
           <!--</form>-->
         <!--</div>-->
 
-      <div layout="row">
-        <md-button>
-          <md-icon class="md-accent" md-font-icon="fa fa-question fa-3x" ng-click="firstTime($event)"></md-icon>
-        </md-button>
+      <div layout="row" layout-align="center">
+        <span ng-click="ctrl.firstTime($event)" md-ink-ripple= "#333"  style="position:relative; padding-top:30px;">
+          <md-icon class="md-accent" md-font-icon="fa fa-info-circle fa-3x"></md-icon>
+        </span>
       </div>
 
     </div>
