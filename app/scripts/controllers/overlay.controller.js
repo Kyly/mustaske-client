@@ -25,8 +25,8 @@
     userService   = UserService;
     roomService   = RoomService;
     logger        = $log;
-
     ctrl       = this;
+
     ctrl.input = {
       pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
     };
@@ -58,7 +58,7 @@
 
   OverlayController.prototype.joinRoom = function ()
   {
-    socketService.joinRoom(ctrl.roomName).then(joinRoomSuccess, joinRoomFailure);
+    socketService.joinRoom(ctrl.roomName.toLowerCase()).then(joinRoomSuccess, joinRoomFailure);
   };
 
   function joinRoomFailure(data)

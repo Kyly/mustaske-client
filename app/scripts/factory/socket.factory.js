@@ -14,15 +14,16 @@
   /* This code confuses the linter :| */
 
   angular.module('mustaskeClientApp')
-         .factory('Socket', ['$log', 'socketFactory', '$rootScope', '$mdToast', Socket]);
+         .factory('Socket', ['$log', 'socketFactory', '$rootScope', '$mdToast', 'RoomService', Socket]);
 
   var logger;
 
-  function Socket($log, socketFactory, $rootScope, $mdToast)
+  function Socket($log, socketFactory, $rootScope, $mdToast, RoomService)
   {
     logger                   = $log;
     var hasConnectionError   = false;
     var connectionAttempts   = 0;
+    var createdConnection    = true;
     var ioSocket             = io.connect(undefined, {reconnectionAttempts: 5, multiplex: false});
     var connectionErrorToast = $mdToast
       .simple()
@@ -37,6 +38,13 @@
       .action('Close')
       .highlightAction(true)
       .textContent('Unable to reconnect to server... \nTry refreshing page.');
+
+    var disconnectedToast = $mdToast
+      .simple()
+      .hideDelay(0)
+      .action('Close')
+      .highlightAction(true)
+      .textContent('You have tragically been disconnected. Refresh the page to reconnect to create/rejoin room.');
 
     ioSocket.on('connect', function () {
 
@@ -60,10 +68,23 @@
       }
     });
 
+    //ioSocket.on('disconnect', function () {
+    //  logger.error('Disconnected from socket');
+    //
+    //  if (!hasConnectionError)
+    //  {
+    //    hasConnectionError = true;
+    //    $mdToast.show(disconnectedToast);
+    //  }
+    //});
+
     ioSocket.on('reconnect_failed', function (data) {
       logger.error('Failed to reconnecting to socket', data);
       $mdToast.show(failedReconnectToast);
-      $rootScope.$emit('reconnect.failed');
+
+      if (RoomService.hasRoom()) {
+        $rootScope.$emit('reconnect.failed');
+      }
     });
 
     return socketFactory(
