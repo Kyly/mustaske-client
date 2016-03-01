@@ -12,11 +12,12 @@
   var module = angular.module('mustaskeClientApp');
   module.controller(
     'OverlayController',
-    ['$log', '$scope', '$rootScope', '$mdDialog', 'UserService', 'SocketService', 'RoomService', 'AppService', OverlayController]);
+    ['$log', '$scope', '$rootScope', '$mdDialog', '$mdToast',
+     'UserService', 'SocketService', 'RoomService', 'AppService', OverlayController]);
 
-  var ctrl, logger, userService, socketService, scope, rootScope, mdDialog, roomService;
+  var ctrl, logger, userService, socketService, scope, rootScope, mdDialog, roomService, mdToast, joinError;
 
-  function OverlayController($log, $scope, $rootScope, $mdDialog, UserService, SocketService, RoomService, AppService)
+  function OverlayController($log, $scope, $rootScope, $mdDialog, $mdToast, UserService, SocketService, RoomService, AppService)
   {
     rootScope     = $rootScope;
     scope         = $scope;
@@ -25,7 +26,14 @@
     userService   = UserService;
     roomService   = RoomService;
     logger        = $log;
+    mdToast       = $mdToast;
     ctrl          = this;
+
+    joinError = $mdToast
+      .simple()
+      .action('Close')
+      .highlightAction(true)
+      .textContent('Error joining room. Double check your room id (Ex. fluffy-beaver-82).');
 
     ctrl.input = {
       pattern: /^[A-Za-z]+-[A-Za-z]+-\d+$/
@@ -64,6 +72,7 @@
   function joinRoomFailure(data)
   {
     logger.debug('Failed to join room: ', data);
+    mdToast.show(joinError);
   }
 
   function joinRoomSuccess(data)
@@ -102,29 +111,17 @@
     ctrl.overlayHide      = true;
   }
 
-  OverlayController.prototype.firstTime = function ()
+  OverlayController.prototype.help = function ()
   {
-    //var helpText =
-
-    var alert = mdDialog.alert()
-                        .clickOutsideToClose(true)
-                        .title('Welcome to Mustaske')
-                        /**  .textContent('Mustaske is an application to facilitate asking questions in a group forum.  If you are a professor/creator' +
-                         ' simply put in a room name and tap create.  Once in the room give your students or audience members the room id located' +
-                         ' on the top right or in the settings menu.  If you are a student or audience member please ask your professor or room' +
-                         ' owner to give you the room id.  The room id should come in the form adjective-noun-number for example: smelly-pussycat-69')
-                         **/
-                        .ok('Aske!');
-
     mdDialog
       .show({
               templateUrl: 'views/help.tpl.html',
               clickOutsideToClose: true,
-              controller: function($scope, $mdDialog) {
+              controller: ['$scope', '$mdDialog', function ($scope, $mdDialog) {
                 $scope.close = function () {
                   $mdDialog.hide();
-                }
-              }
+                };
+              }]
 
             }
       );

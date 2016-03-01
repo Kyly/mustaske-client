@@ -85,6 +85,9 @@
     //Warn User
     scope.warn = function(question)
     {
+      /* jshint ignore:start */
+      ga('send','event', 'Question','WarnUser');
+      /* jshint ignore:end */
       ++scope.warned;
       socketService.warnUser(question.question_id);
     };
