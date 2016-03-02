@@ -14,6 +14,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+console.log('ENV', app.get('env'));
 if (app.get('env') === 'development') {
   app.use('/tmp', gzippo.staticGzip(__dirname + '/../.tmp'));
     app.use(
