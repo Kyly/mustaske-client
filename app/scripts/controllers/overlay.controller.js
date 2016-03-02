@@ -118,6 +118,7 @@
               templateUrl: 'views/help.tpl.html',
               clickOutsideToClose: true,
               controller: ['$scope', '$mdDialog', function ($scope, $mdDialog) {
+                ga('send','event', 'Help','HelpOpened');
                 $scope.close = function () {
                   $mdDialog.hide();
                 };
