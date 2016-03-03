@@ -13,3 +13,33 @@ md-bottom-sheet {
     }
   }
 }
+
+.btn-clicker-options {
+  margin: -8px -16px;
+  span {
+    height: 15vh;
+    outline: none;
+    font-size: 3em;
+    color: rgba($warn-hue, 0.70);
+    text-transform: none;
+    font-weight: 400;
+
+    &.middle, &.left {
+      border-radius: 0;
+      border-right: 1px solid rgba($light-gray, 0.96);
+    }
+
+    &:hover {
+      background-color: rgba($warn-hue, 0.45);
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    &.selected {
+      background-color: rgba($light-gray, 0.65);
+      color: #fff;
+      transition: 0.3s;
+    }
+  }
+}
+
