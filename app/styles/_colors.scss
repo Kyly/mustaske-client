@@ -6,6 +6,7 @@ $lighter-gray: #CBCBCB;
 $extra-light-gray: #F5F5F5;
 $warn-hue-1: rgba(255,138,101, .7);
 $warn-hue: rgb(255,87,34);
+$yellow: #B1AB04;
 
 $primary-color: $navy-blue;
 
@@ -19,6 +20,10 @@ $primary-color: $navy-blue;
 
 .text-warn {
   color: $warn-hue;
+}
+
+.text-light-blue-accent {
+  color: $light-blue-accent;
 }
 
 .text-primary {

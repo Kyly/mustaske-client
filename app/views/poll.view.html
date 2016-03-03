@@ -6,11 +6,11 @@
   </div>
 
   <div layout-padding="40">
-    <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.restartVote()" class="btn-no-border">
+    <div ng-if="!ctrl.isRoomOwner" ng-click="ctrl.restartVote()" class="btn-no-border text-center">
       <div layout="column" layout-align="center center">
         <div ng-if="ctrl.poll.isPollStarted">
-          <h1 class="md-display-5 text-gray-accent">{{ctrl.answers.current}}</h1>
-          <p class="poll-text">Tap anywhere to open poll</p>
+          <h1 class="md-display-5 text-light-blue-accent">{{ctrl.answers.current}}</h1>
+          <p class="poll-text">tap anywhere to re-vote</p>
         </div>
         <div ng-if="!ctrl.poll.isPollStarted">
           <div flex layout="column" layout-align="end" ng-hide="ctrl.isActivePoll">
@@ -18,7 +18,7 @@
                   chart-options="ctrl.chart.options" chart-data="ctrl.chart.data" chart-labels="ctrl.chart.labels" chart-colours="ctrl.chart.colours">
             </canvas>
           </div>
-          <p class="poll-text">Polls are currently closed</p>
+          <p class="poll-text">polls are currently closed</p>
         </div>
       </div>
     </div>

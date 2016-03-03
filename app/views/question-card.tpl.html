@@ -50,7 +50,7 @@
   <md-card-footer layout="row" ng-hide="hide">
     <div flex="50" class="text-center" ng-click="warn(question)">
       <md-button>
-        <md-icon md-font-icon="fa fa-user-times" ng-class="{'text-warn-hue-1': warned === 1, 'text-warn': warned > 1}">&nbsp;Warn User</md-icon>
+        <md-icon md-font-icon="fa fa-user-times" ng-class="{'is-warned': warned === 1, 'is-banned': warned > 1}">&nbsp;Ban User</md-icon>
       </md-button>
     </div>
     <div flex="50" class="text-center" ng-click="dismiss(question)">

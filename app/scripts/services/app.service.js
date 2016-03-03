@@ -12,7 +12,7 @@
   'use strict';
   angular.module('mustaskeClientApp').service('AppService', ['$log', AppService]);
 
-  var logger, ctrl, clearFunctions;
+  var logger, clearFunctions;
 
   function AppService($log)
   {

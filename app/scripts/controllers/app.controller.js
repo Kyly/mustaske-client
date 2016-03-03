@@ -3,12 +3,12 @@
   'use strict';
   var module = angular.module('mustaskeClientApp');
 
-  module.controller('AppController', ['$log', '$rootScope', '$scope','$mdToast', 'SocketService',
+  module.controller('AppController', ['$log', '$rootScope', '$scope', '$mdToast', 'SocketService',
                                       'RoomService', 'UserService', 'AppService', AppController]);
 
   var ctrl, logger, socketService, roomService, userService, mdToast, appService, rootScope, scope;
 
-  function AppController($log, $scope, $rootScope, $mdToast,SocketService, RoomService, UserService, AppService)
+  function AppController($log, $scope, $rootScope, $mdToast, SocketService, RoomService, UserService, AppService)
   {
     logger        = $log;
     socketService = SocketService;
@@ -19,28 +19,29 @@
     rootScope     = $rootScope;
     scope         = $scope;
 
-    logger.debug('$scope is: ',$scope);
-    logger.debug('$rootScope is: ',$rootScope);
+    logger.debug('$scope is: ', $scope);
+    logger.debug('$rootScope is: ', $rootScope);
 
     ctrl               = this;
     ctrl.selectedIndex = 0;
     ctrl.isFabOpen     = false;
 
-    $rootScope.$watch('appCtrl.selectedIndex', function(current) {
+    $rootScope.$watch('appCtrl.selectedIndex', function (current) {
       logger.debug('index change');
       /* jshint ignore:start */
-      switch(current) {
+      switch (current)
+      {
         case 0:
-          ga('send','event', 'Tabs','RecentQuestions');
+          ga('send', 'event', 'Tabs', 'RecentQuestions');
           break;
         case 1:
-          ga('send','event', 'Tabs','TopQuestions');
+          ga('send', 'event', 'Tabs', 'TopQuestions');
           break;
         case 2:
-          ga('send','event', 'Tabs','Polls');
+          ga('send', 'event', 'Tabs', 'Polls');
           break;
         case 3:
-          ga('send','event', 'Tabs','Settings');
+          ga('send', 'event', 'Tabs', 'Settings');
           break;
       }
       /* jshint ignore:end */
@@ -79,7 +80,12 @@
     io.on(
       socketService.events.WARN_USER, function (questionId)
       {
-        mdToast.show(mdToast.simple().textContent('You\'ve been warned bitch'));
+        mdToast.show(
+          mdToast.simple().textContent(
+            'You\'ve been issued a warning by the room owner. If you are warned again you will be banned from the room.'
+          )
+        );
+
       });
 
     io.on(

@@ -1,8 +1,8 @@
 /**
  * @ngdoc service
- * @name mustaskeClientApp.socket
+ * @name mustaskeClientApp.settings
  * @description
- * # socket
+ * # settings
  * Service in the mustaskeClientApp.
  */
 
