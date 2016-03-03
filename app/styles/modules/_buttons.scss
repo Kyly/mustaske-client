@@ -52,32 +52,3 @@ md-button.btn-gray-outlined.btn-outline[disabled] {
   font-size: 1.3em;
 }
 
-.btn-clicker-options {
-  margin: -8px -16px;
-  span {
-    height: 15vh;
-    outline: none;
-    font-size: 1.2em;
-    color: $light-gray;
-    text-transform: none;
-    font-weight: 400;
-
-    &.middle, &.left {
-      border-radius: 0;
-      border-right: 1px solid rgba($light-gray, 0.96);
-    }
-
-    &:hover {
-      background-color: rgba($warn-hue-1, 0.32);
-      color: #fff;
-      transition: 0.3s;
-    }
-
-    &.selected {
-      background-color: rgba($light-gray, 0.32);
-      color: #fff;
-      transition: 0.3s;
-    }
-  }
-}
-

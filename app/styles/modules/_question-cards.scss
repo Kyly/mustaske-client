@@ -29,9 +29,18 @@
     &.is-shown {
       margin-bottom: 0;
     }
+
   }
 
   md-card-content {
     padding-bottom: 8px;
   }
+}
+
+.is-warned {
+  color: $yellow;
+}
+
+.is-banned {
+  color: $warn-hue;
 }
